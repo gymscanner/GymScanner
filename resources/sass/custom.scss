@@ -1,0 +1,237 @@
+
+
+/*commoncss*/
+body
+{
+  background-color: #FAFBFE;
+  color: #6C757D;
+  padding: 0 !important;
+}
+.text-muted
+{
+  color: #98a6ad!important;
+}
+a
+{
+  color:#6C757D;
+}
+a:hover
+{
+  text-decoration: none;
+}
+
+.form-control
+{
+  border-radius: 0;
+  box-shadow: none;
+}
+.form-control:focus
+{
+  box-shadow: none;
+  border:1px solid #c1c9d0;
+}
+.mt-3rem
+{
+  margin-top: 3rem;
+}
+.typography .card
+{
+  padding: 1.5rem;
+
+}
+.card
+{
+  border: 0;
+  border-radius: 9px;
+  box-shadow: 0 5px 15px 0 hsla(0,0%,0%,0.15);
+
+}
+
+
+.icon
+{
+  font-size: 16px;
+}
+
+.content-header h1
+{
+  padding-left: 35px;
+}
+/*header css*/
+.icon-set
+{
+  position: relative;
+  top: -3px;
+}
+/*header css end*/
+
+/*header*/
+#menu .navigation a span:nth-child(2)
+{
+  float: right;
+  height: 30px;
+  width: 30px;
+  text-align:center;
+  border:1px solid transparent;
+}
+#menu .navigation li a
+{
+  border:1px solid transparent;
+}
+#menu .navigation a span:nth-child(2)
+{
+  position:relative;
+  top:-5px;
+}
+#menu .navigation a:hover span:nth-child(2),#menu .navigation li.active a span:nth-child(2)
+{
+  //border:1px solid #727CF5;
+  position:relative;
+  top:-5px;
+}
+#menu .navigation a:hover i
+{
+  color:#727CF5;
+}
+#menu .navigation a i
+{
+  margin-top: 6px;
+  position: relative;
+  top:5px;
+}
+/*endheader*/
+
+.menu-dropdown a span:nth-child(3)
+{
+  font-size: 11px;
+  float:right;
+  margin-right:20px;
+  margin-top: 3px;
+  transition: all 0.3s linear;
+  text-stroke: 1px;
+   -webkit-text-stroke: 1px !important;
+}
+
+
+header .navbar .navbar-brand
+{
+  margin-left: -175px;
+  transition: margin-left 0.3s linear;
+}
+.navbrand
+{
+  text-align: right;
+  margin-right: 10px;
+}
+#menu .close-icon
+{
+  position: relative;
+  left: 17px;
+}
+
+
+//breadcrumb css
+ol.breadcrumb .breadcrumb-item + .breadcrumb-item::before
+{
+  content: "|" !important;
+  color:#6C757D;
+}
+.breadcrumb-item.active
+{
+  color:#727CF5;
+}
+.card-breadcrumb
+{
+  display: flex;
+}
+.card-breadcrumb ol
+{
+  padding: 3px 11px;
+}
+.breadcrumb-item a:hover
+{
+  color:#6C757D;
+}
+.imarrow
+{
+  transform: rotate(90deg);
+}
+.clickable
+{
+  cursor:pointer;
+}
+.imstroke
+{
+  -webkit-text-stroke: 0.4px;
+  text-stroke:0.4px;
+}
+
+
+//media queries
+@media (min-width: 768px) and (max-width: 991px){
+  .right-aside
+  {
+    max-width: 640px !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .right-aside
+  {
+    max-width: 540px !important;
+  }
+}
+@media (min-width: 320px) and (max-width: 767px){
+ .sidebar-res
+  {
+    margin-left: -240px !important;
+  }
+  .navbar a:first-child
+  {
+    margin-left: 15px !important;
+  }
+
+}
+
+@media (min-width: 320px) and (max-width: 992px){
+  .card-res
+  {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 575px){
+  .right-aside .content-header h1
+  {
+    font-size: 18px;
+  }
+  .right-aside
+  {
+    max-width: 320px;
+  }
+}
+@media (min-width: 320px) and (max-width: 575px){
+  .sizing .input-group
+  {
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 320px) and (max-width: 575px){
+  .content
+  {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .breadcrumb-item.active
+  {
+    font-size:12px;
+  }
+
+}
+.img-size
+{
+  width: 50px;
+  height: 50px;
+}
+
+

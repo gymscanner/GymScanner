@@ -1,0 +1,50 @@
+/*register page css*/
+#sign-up .card
+{
+  background:none;
+}
+#sign-up
+{
+  overflow-y: scroll !important;
+}
+.register3
+{
+  overflow-y: scroll !important;
+}
+.signup-header-text
+{
+  margin-bottom:2rem;
+}
+.signup-header-text a:nth-child(2)
+{
+  margin-left: 10px;
+}
+
+.bg-reg
+{
+  background-image: url("../img/images/register.svg");
+  background-repeat: no-repeat;
+  background-position: bottom right -80px;
+  background-size: auto 90%;
+  border-right: 1px solid #dee2e6;
+}
+
+#sign-up .card-align
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
+  margin: auto;
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  #sign-up .bg-reg
+  {
+    background-size: auto 63%;
+  }
+}
+
+#sign-up .card{
+  position: initial;
+}

@@ -1,0 +1,41 @@
+.card-bg {
+    background-image: url("../img/images/card-pic1.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.card.card-bg,
+.card.card-bg1 {
+    position: relative;
+}
+.card.card-bg .card-header {
+    padding-bottom: 3rem;
+    z-index: 9;
+}
+.card-bg .card-footer,
+.card.card-bg1 .card-title {
+    z-index: 9;
+    border-top: 0;
+    background: none;
+    padding: 0;
+}
+.card.card-bg .overlay,
+.card.card-bg1 .overlay {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+.card-footer .image-set img,
+.image-set {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+}
+.card .photo-set {
+    background-color: #fff;
+    padding: 4px 9px;
+}

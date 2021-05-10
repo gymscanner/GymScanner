@@ -1,0 +1,28 @@
+@extends('layouts.default')
+
+{{-- Page title --}}
+@section('title')
+$MODEL_NAME_PLURAL_HUMAN$ @parent
+@stop
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div aria-label="breadcrumb" class="card-breadcrumb">
+        <h1>@lang('models/$MODEL_NAME_PLURAL_CAMEL$.singular')</h1>
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+</section>
+<div class="content">
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="row" style="padding-left: 20px">
+                @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.show_fields')
+                <a href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index') }}" class="btn btn-default">
+                    @lang('crud.back')
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

@@ -1,0 +1,64 @@
+.card {
+  margin-bottom :25px;
+  border: 1px solid #E5E5E5;
+}
+.card-header {
+  padding: 10px 15px;
+  background: none;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.card-title {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+.card-header.bg-primary .card-title {
+  border-color: #2283BF;
+  color: $white;
+}
+.card-header.bg-success .card-title{
+  border-color: #75D1A3;
+  color: $white;
+}
+.card-header.bg-warning .card-title{
+  border-color: #FFCE56;
+  color: $white;
+}
+.card-header.bg-danger .card-title{
+  border-color: #FF7A7A;
+  color: $white;
+}
+.card-header.bg-info .card-title{
+  border-color: #7EC4E7;
+  color: $white;
+}
+.card-header.bg-default .card-title{
+  border-color: #E5E5E5;
+  color: $white;
+}
+.panel-primary .panel-title,
+.panel-success .panel-title,
+.panel-warning .panel-title,
+.panel-danger .panel-title,
+.panel-info .panel-title {
+  color : #FFF;
+}
+
+.card-header .border-bottom{
+  border-bottom: 1px solid red;
+}
+.stroke
+{
+  -webkit-text-stroke: 0.2px #50a1ff;
+}
+.card-img
+{
+  height: 100%;
+  border-radius: 0;
+}
+.card.card-bg1 .card-img-overlay
+{
+  z-index: 9;
+}

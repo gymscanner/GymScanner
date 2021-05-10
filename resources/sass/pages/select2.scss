@@ -1,0 +1,44 @@
+.card-box-w .card-box-header:after {
+    content: "";
+    background-color: #727CF5;
+    width: 32px;
+    height: 7px;
+    border-radius: 2px;
+    display: block;
+    position: absolute;
+    top: 39px;
+    left: 16px;
+}
+.card-box-w .card-box-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+    position: relative;
+    margin-bottom:1rem;
+    z-index: 1;
+}
+.select2-container--bootstrap4 .select2-results__option--highlighted, .select2-container--bootstrap4 .select2-results__option--highlighted.select2-results__option[aria-selected=true],.select2-container--bootstrap4 .select2-selection__clear
+
+{
+      background-color: #727CF5 !important;
+}
+.select2-results__option span img
+{
+    height:20px;
+    width:20px;
+}
+.select-flag>.select2-container:first-child
+{
+    display:none !important;
+}
+.select-flag .select2-container--default .select2-selection--single .select2-selection__arrow
+{
+    top:5px;
+}
+.select-flag .select2-container .select2-selection--single
+{
+    height:35px;
+}
+.select-flag .select2-container--default .select2-selection--single .select2-selection__rendered
+{
+    padding-top:4px;
+}

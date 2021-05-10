@@ -1,0 +1,244 @@
+/*
+Created by: Jyostna Designs
+
+[TABLE OF CONTENTS]
+
+1.  RESET STYLES
+2.  HEADER STYLES
+    2.1 HEADER LEFT
+    2.2 HEADER RIGHT SIDE DROPDOWNS
+3. LEFT SIDE BAR
+4. MAIN WRAPPER STYLES
+5. LEFT MENU COLLAPSE STYLES
+6. CUSTOM STYLES
+7. MEDIA QUERIES
+
+*/
+/*****  1.RESET STYLES  *****/
+html {
+  background: none repeat scroll 0 0 #EEE;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: all .25s ease-out;
+
+}
+body {
+   -webkit-font-smoothing: antialiased;
+  transition: all .25s ease-out;
+  background-color: #fafbfe;
+  overflow-x: hidden;
+}
+
+/******  2.HEADER STYLES   ******/
+body > .header .navbar {
+  margin-bottom: 0;
+  background-color: #fff;
+  box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
+  border-width: 0;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 13px 15px 14px 15px;
+}
+.navbar-right .navbar-nav .dropdown-menu.show {
+  left: auto;
+  right: 0;
+}
+@media (min-width: 320px) and (max-width: 992px)
+{
+  .navbar-nav
+  {
+    flex-direction: row;
+  }
+}
+
+/* Define 2 column template */
+.right-aside,
+.left-aside {
+  padding: 0;
+  display: table-cell;
+}
+/******* 2.1 HEADER LEFT ******/
+/*side bar nav */
+.left-aside .sidebar {
+  display: block;
+  width: 235px;
+  margin-left: 0px!important;
+  transition: margin-left 0.3s linear;
+}
+.left-aside .sidebar:hover
+{
+  margin-left: 0;
+  transition: margin-left 0.3s linear;
+}
+
+.content {
+  display: block;
+  width: 100%;
+  padding: 0 25px;
+}
+
+/****** 3.LEFT SIDEBAR ******/
+.left-aside {
+  width: 240px;
+  background: #313131;
+  border-right: 5px solid #EEE; }
+
+.content-header h1 {
+  color: #6c757d;
+  font-size: 20px;
+  line-height: 1.5; }
+
+.badge {
+  font-weight: 400;
+  float: right; }
+
+#menu li.active > a {
+  padding: 11px 20px 11px 17px;
+  color: #727CF5;
+  border-left: 3px solid #727CF5;
+  transition: none; }
+
+#menu li > a:hover {
+  color: #f59672;
+}
+#menu li.active > a i {
+  color: #f59672;
+  font-weight: 700;
+}
+#menu li > a i
+{
+  font-weight: 700;
+}
+
+#menu .menu-dropdown > ul,
+#menu .menu-dropdown-open-ul {
+  background: #f1f3fa; }
+
+#menu .navigation .menu-icon {
+  display: inline-block;
+  margin-right: 5px;
+  line-height: 20px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+  }
+
+#menu .navigation {
+  padding: 0 0 15px 0; }
+
+#menu .navigation a {
+  font-size: 13px;
+  text-align: left;
+  position: relative;
+  display: block;
+  line-height: 20px;
+  padding: 11px 20px;
+  transition: none; }
+
+#menu .navigation a i {
+  color: #ffffff;
+}
+#menu .fa.arrow:before {
+  content: "\f105"; }
+
+#menu .active > a > .fa.arrow:before {
+  content: "\f107"; }
+
+/******* END LEFT SIDEBAR *****/
+
+/****** wrapper RIGHT SIDE  *******/
+.right-aside {
+  padding: 0 10px 10px 10px;
+  width: 100%;
+}
+.right-aside > .content-header {
+  margin: 24px -10px 24px -10px;
+  height: 65px;
+}
+.left-aside {
+  position: relative;
+  top: -110px;
+  z-index: 9999;
+}
+
+
+
+
+
+
+
+/*Give content full width on xs screens*/
+
+
+@media screen and (max-width: 991px) {
+
+  .right-aside, .left-aside
+  {
+    display: table-cell !important;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  body {
+    width: 100%;
+    margin: 0 auto; }
+
+}
+
+
+@media screen and (max-width: 560px) {
+  .right-aside {
+    padding: 0 10px 10px 10px; } }
+
+
+
+.navbar-nav .dropdown-menu
+{
+  position: absolute !important;
+}
+/******************** fixed header ***********************/
+body > .header .navbar_fixed_top{
+  position: fixed;
+  width: 90%;
+}
+@media(min-width:320px) and (max-width:767px){
+  body > .header .navbar_fixed_top{
+    width: 100%;
+  }
+}
+.rounded {
+  border-radius: 20px;
+  padding: 7px 20px;
+}
+
+.general-components .text-setting
+{
+  vertical-align: text-bottom;
+}
+.right-content
+{
+  padding: 0 25px;
+}
+.card-header
+{
+  border-bottom: 0;
+}
+.cursor
+{
+  cursor: pointer;
+}
+
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+:-moz-placeholder {
+   font-style: italic;  
+}
+::-moz-placeholder {
+   font-style: italic;  
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+}

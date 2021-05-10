@@ -1,0 +1,62 @@
+.blockquote-acc
+{
+  border-left: 3px solid rgb(114, 124, 245);
+  padding-left: 15px;
+}
+.accordion .card .card-header
+{
+  box-shadow: 0px 2px 7px 0px rgba(154, 161, 171, 0.15);
+
+}
+.accordion .card .card-header .icon-acc
+{
+  text-stoke:1px;
+  -webkit-text-stroke: 1px;
+}
+.accordion i
+{
+  font-weight: unset;
+  font-size: 20px;
+  -webkit-text-stroke: 1px;
+}
+.iconarrow-acc
+{
+  transform: rotate(180deg);
+  transition: all 1s;
+}
+#accordion .card
+{
+  padding: 0.25rem;
+
+}
+.accordion.accordion-bordered .card .card-header {
+
+  box-shadow: none;
+  border-radius: 0;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+}
+.accordion > .card .card-header
+{
+  margin-bottom: -1px !important;
+}
+
+.accordion.accordion-solid-content .card .card-body {
+  padding: 2rem;
+  background: #29c0b1;
+  color: #ffffff;
+}
+.accordion.accordion-solid-header .card .card-header a[aria-expanded="true"] {
+  background: #727CF5;
+  color: #ffffff;
+}
+.accordion.accordion-solid-header .card .card-header a {
+  padding: 2rem 2rem 2rem 2rem;
+  display: block;
+}
+.acc-text
+{
+  position: relative;
+  top: 3px;
+}

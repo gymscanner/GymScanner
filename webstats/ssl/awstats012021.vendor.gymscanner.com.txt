@@ -1,0 +1,526 @@
+AWSTATS DATA FILE 7.4 (build 20140726)
+# If you remove this file, all statistics for date 202101 will be lost/reset.
+# Last config file used to build this data file was /home/wa7ash23/tmp/awstats/ssl/awstats.vendor.gymscanner.com.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 28
+POS_GENERAL 2022                
+POS_TIME 2681                
+POS_VISITOR 9726                
+POS_DAY 13262               
+POS_DOMAIN 3590                
+POS_LOGIN 3979                
+POS_ROBOT 4134                
+POS_WORMS 4445                
+POS_EMAILSENDER 4576                
+POS_EMAILRECEIVER 4719                
+POS_SESSION 14002               
+POS_SIDER 14213               
+POS_FILETYPES 4854                
+POS_DOWNLOADS 5145                
+POS_OS 5274                
+POS_BROWSER 5460                
+POS_SCREENSIZE 5952                
+POS_UNKNOWNREFERER 6026                
+POS_UNKNOWNREFERERBROWSER 6213                
+POS_ORIGIN 6395                
+POS_SEREFERRALS 6535                
+POS_PAGEREFS 6701                
+POS_SEARCHWORDS 6880                
+POS_KEYWORDS 7032                
+POS_MISC 2344                
+POS_ERRORS 7091                
+POS_CLUSTER 3835                
+POS_SIDER_404 7281                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20210201005853 1 0 9112212873728
+FirstTime 0
+LastTime 20210130163303
+LastUpdate 20210201014433 1 0 0 0 0
+TotalVisits 195                 
+TotalUnique 70                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 75                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+FlashSupport 0 0 0
+AddToFavourites 0 21 0
+DirectorSupport 0 0 0
+TotalMisc 0 0 0
+QuickTimeSupport 0 0 0
+RealPlayerSupport 0 0 0
+JavaEnabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+JavascriptDisabled 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 45 60 2435768 26 27 776795
+1 3 3 107716 4 5 16443
+2 0 0 0 1 1 8790
+3 0 0 0 0 0 0
+4 34 66 11417593 46 51 1233265
+5 79 165 20214617 104 119 5149490
+6 194 324 42980712 170 188 6130852
+7 137 186 22158254 111 128 7663439
+8 66 104 12808257 67 90 2100518
+9 126 163 9585312 144 167 1367822
+10 140 215 25487710 121 153 5137810
+11 202 273 22445071 519 634 18613751
+12 187 294 20839569 855 876 6592850
+13 157 180 9129829 68 78 5068101
+14 141 249 22435473 62 71 2437407
+15 207 523 40991172 126 170 12481448
+16 208 424 44487506 224 265 10959071
+17 139 274 18828376 89 125 4361399
+18 75 125 12374715 130 145 534922
+19 137 192 22865055 182 210 390847
+20 161 273 34845544 179 199 5827990
+21 211 438 59158448 174 189 7615651
+22 530 974 85093425 370 435 11024608
+23 133 276 38200804 98 112 4116580
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 10
+ru 2384 3660 311334804
+ip 498 1112 88893753
+in 329 661 98406462
+ua 29 106 17196000
+us 25 41 6045888
+kw 21 112 24703335
+rs 14 56 24347237
+de 6 6 0
+pk 4 20 5998208
+gb 2 7 1965239
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 5
+crawl 18 8607191 20210124155919 1
+bot[\s_+:,\.\;\/\\-] 16 163788 20210131230130 6
+unknown 7 168 20210123174716 7
+spider 1 8706 20210108011733 0
+no_user_agent 1 0 20210106211819 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 11
+woff2 33 2620460 0 0
+css 213 2223743 0 0
+jpeg 3 144249 0 0
+Unknown 2880 233560068 0 0
+jpg 100 124177659 0 0
+png 186 135662980 0 0
+html 383 19519314 0 0
+woff 15 17662260 0 0
+js 1966 43290397 0 0
+json 1 2069 0 0
+pdf 1 27727 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 1
+/upload/documents/1609796391268Documento%20sin%20t%C3%ADtulo%20(4).pdf 1 0 27727
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS ID - Hits - Pages 9
+Unknown 48 45
+linuxandroid 175 46
+winnt 5163 3041
+win8.1 106 29
+win7 264 138
+macosx 14 5
+linux 8 6
+macosx6 2 2
+winxp 1 0
+END_OS
+
+# Browser ID - Hits - Pages
+BEGIN_BROWSER 20
+chrome88.0.4324.93 16 1
+chrome84.0.4147.105 1 1
+Unknown 48 45
+firefox84.0 799 314
+firefox11.0 1 0
+chrome87.0.4280.101 49 8
+chrome84.0.4147.135 100 16
+chrome70.0.3538.102 18 2
+chrome78.0.3904.70 2 2
+chrome56.0.2924.87 8 6
+safari13.1.3 12 3
+chrome87.0.4280.88 474 357
+chrome40.0.2214.85 12 12
+chrome62.0.3202.84 11 5
+chrome88.0.4324.104 15 2
+chrome85.0.4183.83 42 6
+safari5.1 2 2
+firefox78.0 22 3
+chrome87.0.4280.141 4146 2525
+netscape5.0 3 2
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 3
+Go_http_package 20210118182326
+WhatsApp/2.21.1.13_A 20210124164440
+ManicTime/4.4.9.1 20210122072343
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 3
+ManicTime/4.4.9.1 20210122072343
+WhatsApp/2.21.1.13_A 20210124164440
+Go_http_package 20210118182326
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 683 692
+From1 0 0
+From2 8 8
+From3 2 2
+From4 2619 5079
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 2
+yandex 1 1
+google 7 7
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 1
+https://www.freelancer.com 2 2
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 8
+302 2909 1122259
+403 5 209909
+444 57 0
+419 29 830928
+405 11 6178405
+404 1085 39445311
+500 269 63041687
+301 6 1497
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referrer
+BEGIN_SIDER_404 45
+/upload/avatar/1608539144.jpg 37 https://vendor.gymscanner.com/admin/edit/49
+/profile/company 15 https://vendor.gymscanner.com/myprofile
+/ 1 -
+/document 1 -
+/public/img/images/logo.png 1 https://vendor.gymscanner.com/thankyou
+/email/captcha/contact.js 176 https://vendor.gymscanner.com/email/verify
+/bank 4 -
+/login 7 -
+/.env 5 -
+/css/metisMenu.css.map 135 -
+/admin/edit/profile/reset 8 https://vendor.gymscanner.com/admin/edit/62
+/home 1 -
+/login-pic.png 4 https://vendor.gymscanner.com/email/verify
+/form1 2 https://vendor.gymscanner.com/thankyou
+/home1 1 -
+/img/images/register_back3.jpg 1 https://vendor.gymscanner.com/register
+/admin/edit/upload/1611092365603910318.jpg 7 https://vendor.gymscanner.com/admin/edit/125
+/vendors/perfect-scrollbar/js/perfect-scrollbar.js.map 133 -
+/thanksyou 2 -
+/logut 1 -
+/upload/avatar/1608465251.jpg 1 https://vendor.gymscanner.com/admin/edit/48
+/admin/update_gym 1 https://vendor.gymscanner.com/admin/edit/156
+/admin/edit/upload/1611349394378avatar-4.png 2 https://vendor.gymscanner.com/admin/edit/163
+/css/custom1.css 3 https://vendor.gymscanner.com/myprofile
+/admin/edit/upload/16084652313891605315441.jpeg 1 https://vendor.gymscanner.com/admin/edit/48
+/myprofile/document 1 -
+/upload/avatar/1611345495.png5 1 https://vendor.gymscanner.com/admin/edit/162
+/admin/captcha/contact.js 95 https://vendor.gymscanner.com/admin/verify
+/gymprofile 1 -
+/admin/edit/upload/16084652034821605315346.jpeg 1 https://vendor.gymscanner.com/admin/edit/48
+/email/captcha/validator.js 114 https://vendor.gymscanner.com/email/verify
+/js/metisMenu.js.map 228 -
+/login-pic2.png 5 https://vendor.gymscanner.com/login
+/wp-admin/admin-ajax.php 1 -
+/legal/privacy 2 https://vendor.gymscanner.com/register
+/profile 2 -
+/legal/terms 2 https://vendor.gymscanner.com/register
+/public/images/logo.png 5 -
+/upload_document 3 -
+/vendors/datatables/js/pdfmake.min.js.map 5 -
+/admin/captcha/validator.js 60 https://vendor.gymscanner.com/admin/verify
+/css/app1.css 2 https://vendor.gymscanner.com/myprofile
+/thankyou 5 -
+/personal_myprofile3 1 -
+/admin/edit/profile/banner/delete/50 1 https://vendor.gymscanner.com/admin/edit/163
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 75
+188.43.136.32 2376 3622 296004292 20210129171257
+27.58.99.23 308 540 61356569 20210121094052
+2a00:1851:8004:3d54:34d2:ed1a:ccfb:5fe8 89 112 8392445 20210121154727
+2a00:1851:1:ec8b:a9b7:cf52:c85c:3365 79 225 10087508 20210116182528
+2a00:1851:8004:3d54:f939:7143:2bcb:6476 67 158 12479824 20210122172443
+2a00:1851:8004:3d54:843d:4fb:2226:7b43 53 95 9073716 20210124155950
+2a00:1851:8001:1212:8810:904a:df58:df2 38 57 4291488 20210119225823
+2a00:1851:8003:81e2:3d6e:19ba:9072:b5d6 29 85 8313247 20210106230551
+195.189.226.94 26 94 15253928 20210121230345
+2a00:1851:8003:8fdd:c02b:adbd:c94e:e2ce 25 43 704016 20210118192602
+2a00:1851:8004:3d54:6047:5f21:1a0b:c173 24 71 13210756 20210121230421
+2a00:1851:1:ec8b:6466:f5fa:44e6:fdad 17 48 3446680 20210113001351
+2a00:1851:3:e39d:517a:a20d:e41e:91f7 17 23 473290 20210103223014
+2a00:1851:1:ec8b:1cbc:1460:12af:9fbd 13 34 4082850 20210114102938
+2a00:1851:8004:3d54:951:b0ca:b6ee:79b6 11 29 2133284 20210123131712
+2a00:1851:8004:3d54:3455:7f86:d6f3:ad29 7 19 1417332 20210120093930
+2a00:1851:8004:3d54:6c3c:327b:bd31:4ebe 7 32 535025 20210124170328
+87.116.180.115 6 21 5425872 20210118155931
+138.246.253.24 6 6 0 20210130113532
+2001:4ca0:108:42::24 6 6 0 20210130163303
+2a00:1851:8004:3d54:a981:649:b4d:8675 6 12 740802 20210120121058
+92.38.148.53 5 26 9656143 20210122154707
+87.116.179.253 5 17 9465327 20210121103117
+188.71.247.14 5 19 295800 20210105151441
+188.71.209.81 5 11 849292 20210119194517
+2a00:1851:8004:3d54:b5dd:97a5:769d:8bea 3 3 179430 20210122211901
+37.231.210.227 3 18 5919441 20210118235415
+66.249.82.142 0 1 31400 
+51.195.103.56 2 7 1965239 20210120203225
+66.249.88.30 1 2 1774885 20210120075114
+209.17.96.250 1 1 8581 20210103090403
+178.222.15.42 3 18 9456038 20210121234700
+209.17.96.66 1 1 8581 20210103094929
+40.94.31.76 0 11 2445773 
+52.12.39.41 1 1 8706 20210108182033
+66.249.83.60 1 1 46175 20210121101742
+183.82.15.103 3 23 9544522 20210121060655
+52.114.75.71 1 2 48754 20210122151831
+66.249.88.28 0 1 31400 
+34.68.251.86 2 2 88069 20210122124909
+2a00:1851:1:ec8b:b1c4:8733:238c:80d 2 13 2485175 20210116205019
+66.249.83.51 1 1 46369 20210120121016
+209.17.96.154 1 1 8706 20210110145946
+209.17.96.106 2 2 17412 20210112190053
+52.114.77.26 1 1 72003 20210120213318
+34.219.105.70 1 1 8706 20210117014739
+195.189.226.105 3 12 1942072 20210120210313
+2a00:1851:3:e39d:ac8c:ef6a:efc9:fe52 2 14 215186 20210105155922
+49.44.80.196 3 3 542411 20210120082931
+188.70.36.179 2 2 294131 20210122075342
+209.17.96.50 1 1 8581 20210103085444
+5.166.0.230 3 12 5674369 20210123164110
+209.17.96.130 1 1 8581 20210103151601
+66.249.88.24 1 1 46173 20210121091221
+45.115.55.4 3 23 6004511 20210120125322
+40.94.31.78 0 1 1172899 
+40.94.31.8 2 2 10605 20210106211835
+209.17.97.18 1 1 8820 20210118182326
+188.71.213.154 3 9 643775 20210123143017
+111.119.178.148 4 20 5998208 20210119234204
+94.128.66.249 1 16 4004728 20210105184440
+49.44.80.71 3 19 7783055 20210121050115
+49.44.78.38 3 20 6518886 20210121064437
+34.221.3.79 1 1 8706 20210112012940
+2a00:1851:8002:f19e:a181:793f:fe19:d55a 2 18 2757898 20210112181609
+66.249.88.31 1 1 46362 20210120101231
+49.44.78.4 3 17 2924971 20210120103732
+37.231.134.37 1 16 8598377 20210124164524
+209.17.96.234 1 1 8706 20210110100616
+94.129.129.69 1 21 4097791 20210116115244
+202.88.157.198 3 16 3731537 20210121065729
+209.17.97.90 1 1 8706 20210116070936
+2a0b:f4c1:2::240 0 7 3402982 
+66.249.88.29 1 1 72229 20210121060737
+2405:8100:8000:5ca1::20f:69ee 1 8 470819 20210120203231
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 27
+20210103 152 202 12194226 11
+20210104 63 82 5328248 4
+20210105 88 137 6818853 9
+20210106 73 178 19417697 6
+20210107 10 10 282431 4
+20210108 1 1 8706 1
+20210110 2 2 17412 2
+20210111 4 7 2575465 1
+20210112 34 92 11803340 8
+20210113 43 81 5494936 5
+20210114 25 25 583194 5
+20210115 7 7 143184 3
+20210116 142 351 21528509 10
+20210117 111 124 5105799 3
+20210118 532 743 41916499 13
+20210119 186 240 22239360 12
+20210120 457 853 115378040 24
+20210121 781 1645 186690702 21
+20210122 336 557 60029771 14
+20210123 80 121 24797874 12
+20210124 135 259 30931273 6
+20210125 13 13 160155 5
+20210126 3 3 26370 3
+20210127 2 3 48980 2
+20210128 24 24 468067 4
+20210129 4 17 4901835 4
+20210130 4 4 0 3
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 7
+30s-2mn 19
+0s-30s 92
+2mn-5mn 5
+5mn-15mn 12
+30mn-1h 19
+15mn-30mn 14
+1h+ 34
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 82
+/login 590 13766347 90 60
+/ 383 19519314 65 47
+/myprofile 383 46967110 9 15
+/register 252 16824839 7 11
+/_debugbar/assets/javascript 196 71756972 1 21
+/_debugbar/assets/stylesheets 176 22425920 0 2
+/admin/users 127 7072460 5 6
+/membership 125 3781181 3 4
+/myprofile/sumbit_admin 117 5138501 1 1
+/email/verify 100 3231844 0 2
+/thank-you 89 4304676 10 1
+/admin 69 3003432 0 2
+/myprofile/document 62 1760525 0 2
+/personal_myprofile 55 4219826 0 1
+/myprofile/touristpass 55 1759494 0 1
+/admin/verify 54 1091632 0 0
+/myprofile/bank 45 1791343 0 2
+/verify 36 1705907 0 0
+/password/reset 32 947021 2 1
+/_debugbar/open 27 820177 0 0
+/myprofile/changepass 23 785045 1 1
+/Login 22 1209882 0 1
+/admin/edit/125 21 2948260 0 0
+/admin/edit/143 17 2558588 0 0
+/webfonts/fa-solid-900.woff2 17 1365100 0 1
+/admin/edit/62 1 92150 0 1
+/admin/membership_edit/49 1 19876 0 0
+/admin/membership 9 539809 0 0
+/admin/tourist_edit/48 1 18549 0 0
+/admin/save_pass 3 36 0 0
+/admin/tourist_edit/156 1 72728 0 0
+/admin/document_edit/84 1 63749 0 0
+/admin/bank_edit/127 1 66049 0 0
+/admin/document 4 267908 0 0
+/admin/edit/138 2 306144 0 0
+/_ignition/health-check 10 290 0 2
+/admin/edit/158 2 298727 0 0
+/admin/edit/70 1 93346 0 0
+/myprofile/document_delete%29 2 84 0 0
+/thankyou 15 700105 0 0
+/admin/bank_edit/125 1 66033 0 0
+/admin/edit/68 1 92030 0 1
+/admin/edit/54 1 62420 0 0
+/admin/tourist 9 546749 0 0
+/admin/edit/156 10 1517331 0 0
+/admin/edit/52 2 185625 0 0
+/admin/tourist_edit/84 1 65712 0 0
+/myprofile/save_pass%29 1 12 0 0
+/admin/edit/159 1 149270 0 0
+/admin/membership_edit/127 1 65149 0 0
+/fonts/iconsmind.woff 15 17662260 0 1
+/admin/edit/161 2 307935 0 0
+/password/reset/37738a1439a489772927c10cc02be6ed29704f24f6b99c6a57978879cd95f4f1 1 48411 0 0
+/admin/edit/49 16 1486156 0 0
+/admin/membership_edit/84 2 134130 0 0
+/password/reset/7521f3e1821729e8eae7b1e29e88e6a96e384d9ffece33a00dd4dc4374d3877b 3 15918 1 1
+/admin/document_edit/156 1 67927 0 0
+/admin/change_pass/66 1 20208 0 0
+/upload/documents/1610921153991composer.json 1 2069 0 0
+/admin/edit/84 1 146107 0 0
+/admin/bank 6 359084 0 1
+/admin/change_pass/49 3 60633 0 0
+/admin/edit/48 1 93973 0 0
+/personal_profile/changepass 6 137477 0 0
+/admin/edit/148 1 153109 0 0
+/profile/company 11 106044 0 1
+/personal_profile/bank 12 263331 0 0
+/admin/edit/75 2 185588 0 1
+/admin/edit/139 5 702373 0 1
+/admin/change_pass/54 1 20217 0 0
+/webfonts/fa-brands-400.woff2 16 1255360 0 1
+/admin/edit/50 1 62410 0 0
+/admin/membership_edit/125 1 67405 0 0
+/admin/edit/163 10 1539244 0 0
+/admin/tourist_edit/70 1 18549 0 0
+/admin/edit/160 1 122724 0 0
+/admin/edit/128 3 392950 0 1
+/admin/edit/162 12 1457340 0 0
+/delete 2 61 0 0
+/admin/bank_edit/156 1 73375 0 0
+/password/reset/5bd6251e2bc066adc3f308039a08f6fbbae2a04d2965ab229b39c3f430dc5c1d 1 5320 0 0
+/personal_membership 17 351206 0 1
+END_SIDER

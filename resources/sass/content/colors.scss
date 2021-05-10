@@ -1,0 +1,25 @@
+.w-140px {
+  width: 140px !important;
+}
+
+.w-230px {
+  width: 230px !important;
+}
+
+// Hover color on hover
+//
+//@each $name, $color in $colors {
+//  .hover-#{$name} {
+//    @include link-colors-important($color);
+//  }
+//}
+//.hover-primary       { @include link-colors-important(#fff); }
+//.hover-secondary     { @include link-colors-important($color-text-secondary); }
+//.hover-success       { @include link-colors-important($color-text-light); }
+//.hover-danger     { @include link-colors-important($color-text-disable); }
+//.hover-warning       { @include link-colors-important($color-alpha-dark-text-light); }
+//.hover-info         { @include link-colors-important(transparent); }
+//.hover-dark          { @include link-colors-important(transparent); }
+//.hover-light     { @include link-colors-important(transparent); }
+
+

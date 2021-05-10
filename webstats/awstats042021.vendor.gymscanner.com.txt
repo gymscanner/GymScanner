@@ -1,0 +1,700 @@
+AWSTATS DATA FILE 7.7 (build 20161204)
+# If you remove this file, all statistics for date 202104 will be lost/reset.
+# Last config file used to build this data file was /etc/awstats/awstats.vendor.gymscanner.com.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 28
+POS_GENERAL 2004                
+POS_TIME 2687                
+POS_VISITOR 11547               
+POS_DAY 18909               
+POS_DOMAIN 3640                
+POS_LOGIN 4257                
+POS_ROBOT 4412                
+POS_WORMS 4962                
+POS_EMAILSENDER 5093                
+POS_EMAILRECEIVER 5236                
+POS_SESSION 19622               
+POS_SIDER 19835               
+POS_FILETYPES 5371                
+POS_DOWNLOADS 5737                
+POS_OS 5883                
+POS_BROWSER 6108                
+POS_SCREENSIZE 7213                
+POS_UNKNOWNREFERER 7287                
+POS_UNKNOWNREFERERBROWSER 7543                
+POS_ORIGIN 7691                
+POS_SEREFERRALS 7832                
+POS_PAGEREFS 8032                
+POS_SEARCHWORDS 8238                
+POS_KEYWORDS 8390                
+POS_MISC 2350                
+POS_ERRORS 8449                
+POS_CLUSTER 4113                
+POS_SIDER_404 8652                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20210427034245 14611 4915996 0
+FirstTime 20210401034615
+LastTime 20210426230814
+LastUpdate 20210427043515 14611 12103 2178 0 330
+TotalVisits 206                 
+TotalUnique 147                 
+MonthHostsKnown 0                   
+MonthHostsUnknown 150                 
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 29 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 101 190 29510627 37 100 4628541
+1 39 94 15401636 25 26 1811023
+2 123 245 35910554 111 121 5398342
+3 316 440 22828816 228 248 10099478
+4 371 421 30842923 232 249 12206493
+5 478 547 34071181 370 380 35346593
+6 398 434 25043626 271 281 11750924
+7 364 424 18859965 281 299 14750798
+8 498 556 37639399 325 348 21223655
+9 469 516 41221898 291 343 12500967
+10 316 337 16138449 286 291 8300041
+11 353 389 47489487 364 397 8253055
+12 250 341 26507688 164 177 9540136
+13 194 264 24378826 93 99 2680031
+14 84 181 16824199 51 55 1807426
+15 232 334 30346100 207 224 2781592
+16 152 153 7948025 126 141 16490884
+17 120 145 13935280 74 77 11269802
+18 144 150 4262582 100 107 2314257
+19 69 73 6602810 34 35 3747210
+20 33 34 2240838 51 56 5491764
+21 42 96 11824496 30 33 2603795
+22 41 53 15017262 29 36 987803
+23 49 70 10027292 22 26 1490858
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 10 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 27
+unknown 2275 2741 239571918
+pk 1852 2372 173950574
+nl 775 824 39423438
+ru 105 172 22064856
+us 78 93 1599578
+id 37 115 32642470
+lu 19 19 2033
+de 18 18 535
+jp 15 15 1605
+se 10 10 1070
+bd 4 11 4107315
+rs 2 2 66
+gr 1 1 17356
+pa 1 1 5583
+fr 3 3 38461
+au 5 5 535
+in 6 23 8781272
+gb 1 1 5580
+sg 5 14 843260
+eu 0 1 31400
+bg 3 4 314631
+hk 3 4 41048
+ie 5 5 535
+br 5 5 535
+kw 3 14 595578
+ar 2 2 11159
+ng 3 12 821568
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 10 first Hits must be first (order not required for others)
+BEGIN_ROBOT 11
+bingbot/ 49 1129323 20210427015724 6
+Googlebot/ 35 626443 20210425213040 4
+YandexBot/ 16 199981 20210425165318 4
+custo 12 160531 20210427034245 0
+bingpreview 9 384567 20210423090427 0
+facebookexternalhit/ 7 115525 20210421091804 0
+unknown 5 275 20210424123537 5
+(firefox/)([0-9]\.|[0-1][0]\.) 4 65347 20210415230756 0
+python 2 32847 20210401184051 0
+spider 2 32876 20210421142206 0
+no_user_agent 1 0 20210421162309 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 16
+css 398 2692621 0 0
+ttf 1 40348 0 0
+woff 3 54504 0 0
+woff2 17 252756 0 0
+php 56 5992 0 0
+html 477 6199846 0 0
+xml 66 7062 0 0
+jpg 147 216164053 0 0
+png 198 53449107 0 0
+env 3 321 0 0
+pdf 1 5235582 0 0
+docx 1 2260 0 0
+js 482 10692600 0 0
+jpeg 20 3523582 0 0
+Unknown 4613 225686821 0 0
+gif 4 866504 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 2
+/upload/documents/1617007277659highline%20brochure.pdf 1 0 5235582
+/upload/FueLayer.docx 1 0 2260
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS ID - Hits - Pages 12
+linuxandroid 267 73
+winxp 17 15
+unix 10 1
+linux 70 45
+winvista 5 5
+win7 595 448
+macosx 34 15
+macosx10 1 1
+win8 15 15
+macosx9 5 5
+win10 5458 4603
+Unknown 10 10
+END_OS
+
+# Browser ID - Hits - Pages
+BEGIN_BROWSER 48
+chrome41.0.2225.0 5 5
+chrome88.0.4240.193 38 38
+chrome84.0.4147.125 2 1
+edge12 1 0
+chrome90.0.4430.82 116 47
+chrome28.0.1468.0 5 5
+chrome35.0.3319.102 5 5
+firefox85.0 63 12
+chrome77.0.3865.120 4 3
+chrome42.0.2311.90 1 1
+chrome90.0.4430.72 172 72
+chrome84.0.4147.135 48 28
+chrome89.0.4389.114 633 483
+chrome27.0.1453.93 10 10
+chrome76.0.3809.71 3 3
+chrome90.0.4430.66 104 19
+chrome85.0.4183.83 10 10
+chrome29.0.1547.66 4 4
+Unknown 2 2
+firefox11.0 2 0
+chrome90.0.4430.85 3027 2713
+chrome32.0.1667.0 5 5
+chrome41.0.2224.3 5 5
+edge18 4 3
+firefox17.0 1 1
+chrome72.0.3626.81 1 1
+chrome89.0.4389.128 1511 1251
+firefox77.0 6 6
+chrome78.0.3904.108 40 40
+firefox58.0 2 2
+chrome74.0.3729.136 12 3
+chrome32.0.1664.3 5 5
+chrome89.0.4389.105 41 12
+mozilla 9 8
+netscape5.0 5 4
+firefox88.0 39 35
+chrome89.0.4389.90 154 132
+firefox86.0 94 75
+chrome28.0.1464.0 5 5
+chrome89.0.4389.116 10 1
+chrome88.0.4324.146 25 25
+firefox87.0 213 127
+chrome31.0.1650.16 5 5
+chrome33.0.1750.517 10 10
+safari8.0.3 1 1
+chrome29.0.1547.2 5 5
+chrome79.0.3945.147 22 6
+chrome83.0.4103.116 2 2
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 3
+Mozilla/5.0_(compatible;_Let's_Encrypt_validation_server;__https://www.letsencrypt.org) 20210415224226
+WhatsApp/2.2108.9_N 20210407100631
+Go_http_package 20210426172116
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 2
+WhatsApp/2.2108.9_N 20210407100631
+Go_http_package 20210426172116
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 889 903
+From1 2 2
+From2 9 10
+From3 3 3
+From4 4333 5569
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 3
+www_google_com_hk 1 1
+google_com 0 1
+www_google_com 8 8
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 10 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 2
+https://www.freelancer.com 2 2
+http://104.26.9.127:80 1 1
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 9
+403 2 35096
+400 1 74933
+302 898 373406
+419 15 915993
+444 6 0
+500 301 159845398
+405 27 12356247
+404 2405 31074007
+301 323 52673
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referrer
+BEGIN_SIDER_404 62
+/login/captcha/contact.js 1 -
+/sitemap.xml 3 -
+/clear-all 3 -
+/clear-cache 1 -
+/public/upload/brands 3 -
+/./images/gymscanner+logo.png 3 -
+/thankyou 1 https://vendor.gymscanner.com/verify
+/admin/captcha/contact.js 65 https://vendor.gymscanner.com/admin/verify
+/profile 1 -
+/clear=all 1 -
+/sitemap.txt 3 -
+/personal_myprofile/assets/img/1280x857.jpg 43 https://vendor.gymscanner.com/personal_myprofile/my_branding
+/js/metisMenu.js.map 1 -
+/admin/captcha/validator.js 61 https://vendor.gymscanner.com/admin/verify
+/admin/index.php 3 -
+/mytemp/bootstrap/css/bootstrap.min.css.map 649 -
+/app/.env 3 -
+/.env 10 -
+/public/16083112047141605315346.jpeg 1 https://vendor.gymscanner.com/mybrand
+/img/images/card-pic3.jpg 7 https://vendor.gymscanner.com/personal_myprofile/my_branding
+/vendors/bootstrapvalidator/js/bootstrapvalidator.min.js 1 -
+/[object%20Event] 6 -
+/upload/avatar/1617173443.png%20 54 -
+/home/customer/www/vendor.gymscanner.com/public/upload/FueLayer.docx 1 -
+/public/upload/brands/1619424264775IMG_0311.heic 11 https://vendor.gymscanner.com/mybrand
+/images/gymscanner+logo.png 3 -
+/sitemaps.xml 3 -
+/mytemp/bootstrap/js/bootstrap.min.js.map 647 -
+/register/captcha/validator.js 1 -
+/adminer.php 1 -
+/src= 1 https://vendor.gymscanner.com/mybrand
+/ads.txt 2 -
+/trainer 1 -
+/wp-content 4 -
+/+path_html+ 2 https://vendor.gymscanner.com/mybrand
+/img/images/cup.jpg 1 https://vendor.gymscanner.com/personal_myprofile/my_branding
+/email/captcha/contact.js 6 https://vendor.gymscanner.com/email/verify
+/personal_myprofile/assets/img/90x90.jpg 33 https://vendor.gymscanner.com/personal_myprofile/my_branding
+/public/uploads/brands/1619424264775IMG_0311.heic 2 https://vendor.gymscanner.com/mybrand
+/login/captcha/validator.js 1 -
+/user_view 6 -
+/myprofile/save_brand_info 1 -
+/mytemp/plugins/font-icons/feather/feather.min.js.map 701 -
+/email/captcha/validator.js 6 https://vendor.gymscanner.com/email/verify
+/admin/user_view 8 -
+/sitemap_index.xml 4 -
+/admin/user_vie 1 -
+/personal_membership.index 3 https://vendor.gymscanner.com/myprofile/sumbit_admin
+/sdgdsg 2 https://vendor.gymscanner.com/mybrand
+/register/captcha/contact.js 1 -
+/public/upload/16083112047141605315346.jpeg 2 -
+/atom.xml 4 -
+/ROU 1 -
+/public/upload/brands/1619432694776Home-page-bottom-left-junk%20(1).jpeg 5 https://vendor.gymscanner.com/mybrand
+/sitemap.xml.gz 3 -
+/public/.env 3 -
+/core/.env 3 -
+/my_branding 1 -
+/upload/brands/16083112047141605315346.jpeg 1 https://vendor.gymscanner.com/mybrand
+/mytemp/assets/img/romania.png 1 -
+/admin/user_personal_view 1 -
+/uploads/brands/1619424264775IMG_0311.heic 3 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 150
+2400:adc3:118:3b00:347d:8314:9976:615a 437 442 38378465 20210424162646
+198.16.70.53 396 407 11982830 20210426113640
+39.38.36.90 319 338 17576997 20210414085116
+2400:adc3:118:3b00:3900:60c0:48bf:816 311 316 20730291 20210426111844
+39.38.54.230 294 379 28102068 20210423100917
+39.38.14.17 291 350 17579997 20210422124655
+180.178.145.200 203 262 23012061 20210426202615
+2400:adc3:118:3b00:6460:dbc9:989f:d6c2 183 231 22272802 20210426062742
+2400:adc3:118:3b00:fcd8:a963:a270:9867 148 148 8938394 20210416061720
+39.38.45.43 136 140 6452454 20210422073741
+103.15.42.201 1 7 3818724 20210418174428
+110.50.80.196 3 8 4032343 20210417004604
+103.228.159.118 8 8 20711 20210422095655
+2a00:1851:6:17ea:f5aa:c3fe:35a3:6bb0 7 7 340170 20210414090448
+39.38.55.177 71 133 14060607 20210415054144
+2a00:1851:8000:7903:c9:a97e:fc8c:f494 11 11 230445 20210416065238
+182.1.86.201 7 23 6362344 20210417041042
+181.15.96.68 1 1 5580 20210422100910
+2400:adc3:118:3b00:7dc4:2a33:ab31:e 44 44 4176579 20210424090823
+2a00:1851:8000:7903:94aa:774b:960f:ccf8 10 10 509169 20210421162436
+39.38.3.37 16 68 10453972 20210420145036
+111.88.113.92 7 27 9389665 20210424233617
+129.126.232.213 4 13 837680 20210416135245
+96.91.45.20 1 10 545105 20210418003151
+50.7.93.27 30 30 904250 20210422113310
+2a00:1851:8000:7903:edfc:1480:99d5:89fe 3 12 821864 20210417004215
+39.38.8.34 97 100 2961679 20210426102149
+212.83.146.233 1 1 16433 20210416061945
+2400:adc3:118:3b00:5081:d38e:7497:b177 3 3 289018 20210426064248
+36.65.63.238 15 32 6959494 20210417103406
+2400:adc3:118:3b00:f194:40c2:acbf:9584 119 138 4082751 20210420044624
+198.16.76.68 26 40 5016851 20210425062445
+18.183.146.232 19 19 2033 20210406151511
+2400:adc3:118:3b00:d6e:da32:593d:db37 59 60 1036175 20210419093206
+3.8.68.2 5 5 535 20210404183722
+66.249.91.23 0 1 31400 
+18.184.155.204 5 5 535 20210417092831
+202.141.239.100 1 2 720020 20210422095228
+39.38.19.225 4 4 288314 20210419083753
+2a00:1851:8001:6af0:31bf:6e57:2d3a:70a5 12 63 10294141 20210409094108
+40.94.20.94 4 4 291165 20210421162328
+2a00:1851:8000:7903:f131:2dfb:b74f:21f6 21 25 6440313 20210426230814
+2400:adc3:118:3b00:e596:c1b9:3bd0:67a9 53 57 9364885 20210423114840
+2400:adc3:118:3b00:c421:f06:1814:1fdf 83 83 2908453 20210420070959
+54.176.188.51 5 5 535 20210418144008
+198.204.240.246 1 1 5581 20210419071051
+115.186.77.215 33 33 854207 20210424171921
+195.154.63.222 1 1 16446 20210416073604
+197.210.61.90 3 12 821568 20210405101232
+2a00:1851:8000:7903:d46e:22f:2eb2:525a 1 1 17395 20210415145747
+63.117.14.10 3 7 405926 20210426060534
+50.7.142.180 15 26 10596398 20210413050812
+195.206.165.135 1 1 5580 20210417061955
+2a00:1851:8000:7903:212a:e697:9748:940b 3 3 32187 20210421204902
+114.125.108.47 2 2 11164 20210419092351
+50.7.93.29 76 76 1843986 20210424174513
+18.221.206.247 5 5 535 20210408123658
+2400:adc3:118:3b00:f107:ac0c:aa19:8724 12 13 458713 20210422024338
+2a00:1851:8000:7903:ac78:1865:277b:3d03 11 13 590295 20210423232604
+198.16.74.43 17 18 437656 20210425160407
+110.93.194.6 2 2 265282 20210420144951
+195.121.71.9 3 3 277533 20210422070634
+2a00:1851:8000:7903:c51b:7d1c:d1dc:3189 8 8 60928 20210418091330
+92.118.160.1 1 1 17356 20210426172116
+52.64.20.252 5 5 535 20210416170835
+54.178.182.46 15 15 1605 20210421101720
+2400:adc3:118:3b00:f12a:b2e8:19c0:aaf 105 127 9595901 20210421081825
+119.153.111.196 4 5 315930 20210426060444
+39.38.5.50 10 10 863636 20210407112731
+103.136.205.33 13 13 145607 20210417101052
+109.93.183.120 2 2 66 20210421192155
+39.38.63.127 13 14 287265 20210424164051
+2400:adc3:118:3b00:8918:d748:d1db:2157 2 2 11164 20210419081001
+103.17.203.229 3 3 279430 20210426043441
+2001:4ca0:108:42::24 12 12 0 20210424142621
+2001:1670:d:64c7:b020:6895:1d85:98d9 3 12 821512 20210407032152
+39.38.21.193 59 60 625663 20210401111351
+2400:adc3:118:3b00:4dd5:382a:9306:dabd 87 89 2730657 20210422045105
+2400:adc3:118:3b00:dc9c:edb8:bea2:802e 35 45 2470276 20210417053153
+2001:569:fac5:c900:a0a9:24ea:811:7e74 5 7 705920 20210408060220
+45.87.214.110 20 20 2140 20210406011144
+2a00:1851:1:9ca9:55b6:e0dd:99bf:805c 25 29 11780269 20210415124439
+2a02:587:4108:d500:c15b:36a:27aa:72c7 4 5 327467 20210420180917
+5.53.201.76 3 4 314631 20210423103024
+111.92.162.134 3 3 278103 20210417004632
+39.38.39.157 12 64 11418469 20210422023307
+2a00:1851:8000:7903:25e8:c6d0:7a6:df6c 5 29 338170 20210418162613
+40.80.149.4 20 20 2140 20210402092731
+2400:adc3:118:3b00:849d:d3c3:6c48:ac93 4 4 297275 20210420053126
+2a00:1851:8001:efb:a9a7:8f7b:babf:7f6e 4 13 839447 20210409161748
+2a00:1851:8000:7903:900a:e09f:cf50:33a9 7 7 142621 20210424083111
+58.27.225.6 4 8 394104 20210423032538
+205.169.39.32 3 3 282046 20210416020823
+39.38.57.18 11 12 266051 20210424232550
+2a00:1851:6:17ea:8d92:cc2:e76:3853 22 25 6956114 20210414100339
+50.7.93.84 78 81 2760511 20210426061512
+103.149.241.18 14 23 4909984 20210417092626
+50.7.93.28 67 67 1356667 20210426005727
+195.121.71.72 3 3 278094 20210422044217
+39.38.26.110 49 49 4147866 20210421093128
+2a00:1851:8000:7903:3888:57d3:37f9:2d0f 6 17 345653 20210416171346
+2a00:1851:8000:7903:3014:c02e:c1ca:d99a 10 68 15839918 20210418145233
+37.231.144.224 2 13 589996 20210422164720
+103.136.205.47 64 122 17807230 20210424211338
+2a00:1851:8000:7903:a037:a91e:43de:854 1 1 6681 20210422160657
+3.8.12.221 5 5 535 20210423122815
+66.102.9.195 0 1 31400 
+92.38.162.124 19 19 2033 20210425231125
+78.193.77.102 1 1 5582 20210417102131
+2a05:d014:3ad:701:d969:e08f:1bb9:62bd 2 2 174 20210415224226
+39.38.6.17 10 10 628746 20210420053123
+103.105.27.127 4 44 14716974 20210418014903
+52.114.14.71 1 1 5580 20210419080947
+103.232.127.18 6 23 8781272 20210406111331
+111.119.183.25 2 2 53513 20210424173843
+34.217.253.81 1 1 0 20210404192054
+110.50.81.198 3 3 282048 20210417004500
+2a00:1851:6:17ea:e5f6:d504:1f7b:1687 5 5 204876 20210413170314
+137.59.222.189 7 11 670873 20210424105646
+181.15.96.137 1 1 5579 20210422100913
+52.30.16.188 5 5 535 20210420143050
+107.180.104.134 6 6 642 20210418185638
+2400:adc3:118:3b00:8049:1223:fc5:be05 3 3 26908 20210422051730
+188.71.213.55 1 1 5582 20210418180953
+2a00:1851:8000:7903:4d2d:a73a:3997:8b66 11 26 647429 20210417011518
+103.9.112.133 3 4 288591 20210423214816
+195.121.70.234 3 3 277511 20210422033422
+2600:3000:2710:200::1f 2 2 174 20210415224226
+66.249.93.138 0 1 31400 
+188.43.136.32 105 172 22064856 20210421194453
+198.16.66.99 50 59 3243261 20210401072758
+138.246.253.24 13 13 0 20210423181848
+190.102.57.197 1 1 5583 20210422100910
+52.114.7.6 3 4 41048 20210424173735
+198.16.66.125 8 8 170376 20210425154328
+103.17.203.233 3 3 278114 20210422022145
+2a00:1851:8000:7903:55b7:5052:531d:3976 59 77 6683151 20210422191439
+39.38.16.183 42 92 11088243 20210413115404
+39.38.32.250 116 122 4711747 20210426083538
+2400:adc3:118:3b00:24a7:f3d4:670b:d8df 103 104 9413257 20210423130408
+2a00:1851:8000:7903:d596:60f2:d7e8:861 1 1 5578 20210418225401
+195.121.71.69 3 3 277514 20210422110543
+13.53.208.18 10 10 1070 20210417175648
+111.88.114.228 25 61 6182890 20210425132905
+2400:adc3:118:3b00:dae:aba:df44:97b7 63 111 11063875 20210424134832
+2001:1670:d:64c7:8834:d9df:aba:4251 3 12 821526 20210410065009
+2600:1f16:269:da01:367:cea2:153a:d5c8 2 2 174 20210415224226
+18.231.94.162 5 5 535 20210416082249
+2600:1f14:804:fd01:fe4e:58be:b99:bad8 2 2 174 20210415224226
+2400:adc3:118:3b00:2897:938b:6d8a:2560 32 36 2657183 20210423103706
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 25
+20210401 138 163 13782119 8
+20210402 21 21 2140 2
+20210403 12 20 8548919 3
+20210404 6 6 535 2
+20210405 3 12 821568 1
+20210406 50 67 8785980 4
+20210407 22 48 10990869 4
+20210408 17 19 706990 5
+20210409 27 123 12856974 6
+20210410 4 13 821526 2
+20210411 3 3 0 1
+20210413 58 110 13266770 5
+20210414 348 370 24873281 3
+20210415 106 172 25858967 10
+20210416 188 208 10668381 12
+20210417 130 211 26964044 21
+20210418 58 203 42160159 13
+20210419 69 70 1357978 7
+20210420 244 316 18976539 10
+20210421 237 260 15418082 9
+20210422 666 815 49324804 28
+20210423 541 692 61840704 14
+20210424 780 861 69364280 16
+20210425 95 146 11809806 5
+20210426 1413 1558 95672544 15
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 7
+1h+ 31
+5mn-15mn 10
+2mn-5mn 13
+15mn-30mn 15
+30s-2mn 16
+0s-30s 104
+30mn-1h 17
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 104
+/_debugbar/assets/stylesheets 611 81308905 2 19
+/_debugbar/assets/javascript 601 79456407 2 16
+/personal_myprofile/my_branding 542 12962571 2 8
+/personal_myprofile 530 14589279 7 18
+/ 474 6199525 148 63
+/personal_membership 330 7180130 1 3
+/login 290 3311043 6 15
+/myprofile/sumbit_admin 187 3794225 1 2
+/myprofile 154 3063945 3 6
+/mybrand 149 3480725 2 0
+/mytemp/plugins/font-icons/fontawesome/webfonts/fa-regular-400.ttf 1 40348 0 0
+/myprofile/delete_brand_photos%29 6 21751 0 0
+/myprofile/document_delete%29 10 580 0 0
+/membership 31 510216 0 0
+/personal_membership/update_personal_membership 4 80526 0 0
+/contact_us 141 2917331 0 7
+/admin/edit/205 14 354149 0 0
+/personal_membership/edit/22 2 38129 0 0
+/admin/user_view/165 5 27750 0 0
+/password/reset/27e0dca22077f9743e403573be529f7d542c61c68d7f6e04c5a50574bffe9d3f 2 26697 0 0
+/personal_membership/edit/33 11 236895 0 0
+/admin/update_personal 1 11135 0 0
+/myprofile/upload_brand_photos%29 2 22326 0 0
+//wp1/wp-includes/wlwmanifest.xml 4 428 0 0
+/wordpress/wp-login.php 13 1391 0 0
+//news/wp-includes/wlwmanifest.xml 4 428 0 0
+/admin/edit/143 4 129047 0 0
+/myprofile/brand_photos_delete%29 2 114 0 0
+/myprofile/touristpass 21 374231 0 1
+/wp-content/ 3 321 0 3
+/myprofile/bank 23 362778 0 0
+/admin/verify 38 295014 0 1
+//shop/wp-includes/wlwmanifest.xml 4 428 0 0
+/Login 1 16024 0 0
+//media/wp-includes/wlwmanifest.xml 2 214 0 0
+/password/reset 33 392912 1 1
+/admin/users 7 147661 0 0
+/mytemp/plugins/font-icons/fontawesome/webfonts/fa-regular-400.woff 3 54504 0 0
+/thank-you 38 408403 12 5
+/register 39 543814 0 0
+//2018/wp-includes/wlwmanifest.xml 2 214 0 0
+/personal_membership/edit/19 6 123409 0 0
+/admin/membership 2 45496 0 0
+//blog/wp-includes/wlwmanifest.xml 4 428 0 0
+/password/reset/474f288925bca93d55da4adb6b9c2a2578db2459cec5d0b4d0cb53d4a6115009 1 13345 0 0
+/.well-known/acme-challenge/a9zwI4gNXmyIxLwYTumQmrfXfYP1BlkuJ8qThKFnZrg 4 348 4 0
+/admin/edit/206 1 6928 0 0
+/myprofile/getBrandingData%29 95 20593 0 3
+//site/wp-includes/wlwmanifest.xml 4 428 0 0
+/myprofile/save_pass%29 2 86 0 0
+//sito/wp-includes/wlwmanifest.xml 4 428 0 4
+/blog/wp-login.php 13 1391 0 0
+/.well-known/acme-challenge/_GwZfaMNyfinmaJ2O_0_q1ddukH5_SFvTlSYwzTxgH4 4 348 0 4
+/password/reset/a02575f7f0ff1802d3d3dfa51fbb633adff1c43fd5a9ea28d3f8f04853926e37 6 79306 1 0
+//website/wp-includes/wlwmanifest.xml 4 428 0 0
+/wp-login.php 13 1391 0 0
+/personal_profile/bank 71 1353357 1 1
+/profile/send_notification_admin 5 190 0 0
+/profile/membership/edit/40 1 18807 0 0
+/password/reset/2e54ce1e7d1cf86c2e99b6c476da9b746cd712c49acb95c9a6b2f63dd1b1e464 2 25594 1 0
+/personal_profile/avatar 2 11782 0 0
+//2019/wp-includes/wlwmanifest.xml 4 428 0 0
+/personal_membership/edit/23 10 214141 0 0
+//web/wp-includes/wlwmanifest.xml 4 428 0 0
+/admin/user_personal_view/165 19 367988 0 1
+/profile/approve_complete_profile 4 10573 0 0
+/password/reset/808e7112bbc2334f410134a926e66d71ae86ca84d3a62d04d3ffbf898e3414a9 1 13352 0 0
+/personal_profile/membership 15 669839 0 0
+/admin/user_view/125 3 20175 0 0
+/admin/edit/158 5 120337 0 0
+/password/reset/14cfa2d538b417dd95537cdfb5511e29033a9564d5c1fa89effbe8783363b5d7 2 2524 1 1
+/admin/user_personal_view/195 1 6725 0 0
+//cms/wp-includes/wlwmanifest.xml 4 428 0 0
+//wp-includes/wlwmanifest.xml 4 428 0 0
+/.env 3 321 3 0
+/_debugbar/open 62 370644 1 3
+/profile/membership_update 1 19830 0 0
+/admin/user_personal_view/201 6 40647 0 0
+//wp2/wp-includes/wlwmanifest.xml 4 428 0 0
+/admin/user_view/201 27 394218 0 1
+/route-cache 108 866537 2 1
+/wp/wp-login.php 13 1391 0 13
+/personal_membership/edit/36 1 23568 0 0
+//2020/wp-includes/wlwmanifest.xml 2 214 0 0
+//wp/wp-includes/wlwmanifest.xml 4 428 0 0
+/admin/user_view/205 12 51033 0 0
+/admin 32 539150 0 1
+//test/wp-includes/wlwmanifest.xml 4 428 0 0
+/myprofile/changepass 2 27493 0 0
+/email/verify 4 57581 0 0
+/password/reset/75670ca3504c3de54dbc95e6cf921f978741ceb867ea2750d91db054a50f1381 2 24835 1 0
+/myprofile/document 126 2024307 0 0
+/password/reset/318c88ffa670de1513d979a9868487d1d77433becf017819707ec2d157f84ee8 1 13729 0 0
+/admin/edit/165 18 518894 0 0
+/myprofile/save_brand_info%29 1 10712 0 0
+//xmlrpc.php 4 428 0 0
+/mytemp/plugins/font-icons/fontawesome/webfonts/fa-regular-400.woff2 17 252756 0 1
+/_ignition/health-check 37 2220 0 0
+/personal_profile/changepass 3 34054 0 0
+/personal_membership/edit/24 1 6071 0 0
+/password/reset/f67aef79b89a8e1073ff59807cd543e74cdaa63129471a525774fbdba2f2ed2d 1 1263 0 0
+/verify 75 1444535 3 4
+//wordpress/wp-includes/wlwmanifest.xml 4 428 0 0
+/password/reset/faaf303a827854a31215f930a4acdfe941aac81b67f949ff4a5efbc3da4a7ddc 2 25544 1 0
+END_SIDER

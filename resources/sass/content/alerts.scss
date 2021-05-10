@@ -1,0 +1,47 @@
+/*general components css*/
+.alert .close
+{
+  outline: none;
+}
+.color1
+{
+  width: 25px;
+  height: 25px;
+  margin-right: 2px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+
+}
+
+.general-components .alert-text
+{
+  position: relative;
+  top:-2px;
+}
+.general-components .im-icon-Yes:before
+{
+  position: relative;
+  left: 6px;
+  color: #fff;
+  top: 3px;
+  -webkit-text-stroke: 1px #fff;
+
+}
+.general-components .color1.bg-secondary .im-icon-Yes:before,.general-components .color1.bg-light .im-icon-Yes:before
+{
+  color: #757575 !important;
+  -webkit-text-stroke: 1px #757575;
+}
+.general-components .active i
+{
+  position: relative;
+  left: -2px;
+  top: -2px;
+  opacity: 1 !important;
+}
+.color1 i
+{
+  opacity: 0;
+}
+/*general compoent end*/

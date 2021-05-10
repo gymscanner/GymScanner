@@ -1,0 +1,96 @@
+#sign-in2 {
+    position: fixed;
+    width: 100%;
+    right: 0;
+    background-image: url("../img/images/couple-955926.jpg");
+    background-repeat: no-repeat;
+    //background-position:top  right;
+    background-size: cover;
+    //overflow-y: hidden;
+    height: 100%;
+}
+html,
+body {
+    height: 100%;
+}
+
+.signin-form {
+    background: #fff;
+    height: 100vh;
+}
+
+.signin-form2 {
+    background: none;
+    height: 100vh;
+}
+
+#sign-in2 .container-fluid {
+    background-color: rgba(49, 58, 70, 0.3);
+}
+#sign-up .card {
+    box-shadow: none;
+}
+
+.signin-form .active::after,
+.signup-form .active::after {
+    content: "";
+    border-bottom: 3px solid #727cf5;
+    width: 17px;
+    height: 4px;
+    background-color: #727cf5;
+    display: block;
+    border-radius: 50px;
+}
+#sign-in2 .custom-control {
+    padding-left: 12px;
+}
+.card-login-bg {
+    background-image: url("../img/images/login3.jpg");
+    background-size: cover;
+    background-position: center;
+    margin-right: 0;
+    position: relative;
+}
+.overlay {
+    position: absolute;
+    background-color: #0f1561;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+}
+.card-box {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+    background: #fff;
+    height: 478px;
+}
+.login2-text {
+    position: relative;
+    top: 30%;
+}
+.signin-form2 .social-buttons .btn {
+    font-size: 13px;
+    padding: 10px;
+}
+#sign-in3 .has-error .form-control:focus,
+#sign-in3 .has-error .form-control,
+#sign-in3 .has-success .form-control:focus,
+#sign-in3 .has-success .form-control {
+    border-top: 0;
+    box-shadow: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #bfc5ca !important;
+}
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}

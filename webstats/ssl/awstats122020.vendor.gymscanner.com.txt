@@ -1,0 +1,357 @@
+AWSTATS DATA FILE 7.4 (build 20140726)
+# If you remove this file, all statistics for date 202012 will be lost/reset.
+# Last config file used to build this data file was /home/wa7ash23/tmp/awstats/ssl/awstats.vendor.gymscanner.com.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 28
+POS_GENERAL 2022                
+POS_TIME 2681                
+POS_VISITOR 7601                
+POS_DAY 8910                
+POS_DOMAIN 3531                
+POS_LOGIN 3881                
+POS_ROBOT 4036                
+POS_WORMS 4278                
+POS_EMAILSENDER 4409                
+POS_EMAILRECEIVER 4552                
+POS_SESSION 9311                
+POS_SIDER 9519                
+POS_FILETYPES 4687                
+POS_DOWNLOADS 5000                
+POS_OS 5171                
+POS_BROWSER 5333                
+POS_SCREENSIZE 5560                
+POS_UNKNOWNREFERER 5634                
+POS_UNKNOWNREFERERBROWSER 5832                
+POS_ORIGIN 6025                
+POS_SEREFERRALS 6165                
+POS_PAGEREFS 6309                
+POS_SEARCHWORDS 6457                
+POS_KEYWORDS 6609                
+POS_MISC 2344                
+POS_ERRORS 6668                
+POS_CLUSTER 3737                
+POS_SIDER_404 6824                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20210101045440 1 0 9929277408817
+FirstTime 0
+LastTime 20201231210439
+LastUpdate 20210101054128 1 0 0 0 0
+TotalVisits 91                  
+TotalUnique 24                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 24                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+RealPlayerSupport 0 0 0
+FlashSupport 0 0 0
+DirectorSupport 0 0 0
+JavascriptDisabled 0 0 0
+JavaEnabled 0 0 0
+TotalMisc 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+QuickTimeSupport 0 0 0
+AddToFavourites 0 15 0
+PDFSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 59 66 2872578 65 69 284488
+1 54 60 2013140 107 112 449816
+2 94 138 12610105 260 261 1269614
+3 9 17 511628 3 3 1174
+4 15 19 1394608 13 15 29868
+5 7 13 698015 13 15 60787
+6 13 39 5886966 14 16 30833
+7 18 33 4705354 20 22 75921
+8 88 100 7031723 79 79 270638
+9 16 23 1698107 24 26 136171
+10 4 4 217958 7 7 20525
+11 34 82 14201396 21 26 7820
+12 44 79 9852458 32 38 18384
+13 114 161 13445047 81 86 181104
+14 90 157 10017187 76 82 141704
+15 90 132 14298265 117 123 428830
+16 100 136 10644785 232 235 1242530
+17 53 55 2177108 88 93 450415
+18 39 56 5210771 68 71 243275
+19 14 19 1265622 38 39 212864
+20 26 34 3838533 38 40 101374
+21 103 133 5800229 106 112 401925
+22 211 286 20938371 260 270 931315
+23 62 101 7261765 95 97 410279
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 8
+ru 1188 1457 88161408
+ip 112 206 24745221
+kw 37 177 22342693
+rs 13 39 5939984
+us 4 38 10695352
+nl 1 1 7559
+bg 1 13 3994155
+ua 1 12 2705347
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 3
+unknown 4 96 20201227061400 4
+bot[\s_+:,\.\;\/\\-] 3 15157 20201231091451 1
+googlebot 2 7583 20201230092938 1
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 13
+txt 2 4928 0 0
+png 94 71637587 0 0
+woff 11 11879120 0 0
+jpg 47 10565923 0 0
+Unknown 1314 44435299 0 0
+ttf 1 1177408 0 0
+html 11 77497 0 0
+psd 3 4820241 0 0
+map 3 0 0 0
+js 299 6618387 0 0
+woff2 17 1352220 0 0
+css 123 1355686 0 0
+jpeg 18 4667423 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 3
+/upload/avatar/1608524744.txt 2 0 4928
+/upload/avatar/1608301566.psd 2 0 3213494
+/upload/avatar/1608301603.psd 1 0 1606747
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS ID - Hits - Pages 7
+linuxandroid 291 149
+winnt 1537 1160
+linux 12 2
+win8.1 12 1
+Unknown 32 30
+win7 46 14
+macosx 13 1
+END_OS
+
+# Browser ID - Hits - Pages
+BEGIN_BROWSER 8
+chrome87.0.4280.88 1662 1279
+chrome87.0.4280.86 13 1
+chrome76.0.3809.71 26 2
+chrome84.0.4147.135 7 1
+firefox84.0 42 13
+chrome87.0.4280.101 149 29
+Unknown 32 30
+firefox83.0 12 2
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 3
+Python/3.7_aiohttp/3.7.3 20201217141716
+WhatsApp/2.20.199.14_A 20201218145718
+ManicTime/4.4.9.1 20201231073918
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 3
+WhatsApp/2.20.199.14_A 20201218145718
+Python/3.7_aiohttp/3.7.3 20201217141716
+ManicTime/4.4.9.1 20201231073918
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 198 202
+From1 0 0
+From2 0 0
+From3 0 0
+From4 1159 1741
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 0
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 0
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 6
+419 6 39510
+302 750 294992
+405 1 825
+504 10 2470
+500 154 922362
+404 950 6118659
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referrer
+BEGIN_SIDER_404 12
+/ 7 https://vendor.gymscanner.com/myprofile/bank
+/profile/bank 1 -
+/css/metisMenu.css.map 249 -
+/upload/avatar/1608539144.jpg 16 https://vendor.gymscanner.com/myprofile
+/vendors/perfect-scrollbar/js/perfect-scrollbar.js.map 247 -
+/%E3%85%A1%E3%85%9Bprofile/bank 1 -
+/personal_profile 3 -
+/js/metisMenu.js.map 390 -
+/exam 15 -
+/profile/company 9 https://vendor.gymscanner.com/myprofile
+/.git/config 11 -
+/img/circles.png 1 https://vendor.gymscanner.com/myprofile/bank
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 24
+188.43.136.32 1187 1456 88153849 20201231082219
+2a00:1851:3:e39d:69fa:68be:9117:7cdb 30 32 745507 20201224125024
+188.70.35.188 27 137 14443182 20201223231315
+2a00:1851:3:e39d:8982:377:1854:d632 19 19 779879 20201222233109
+2a00:1851:3:e39d:4d4e:22c6:bebb:46ae 17 20 4144309 20201220160134
+178.222.107.59 13 39 5939984 20201227143935
+2a00:1851:3:e39d:d8e3:ecb7:7157:9709 11 31 6803732 20201218201759
+2a00:1851:3:e39d:b9b3:ae8f:4dc0:78b1 10 24 1792573 20201228110810
+2a00:1851:3:e39d:8096:998:a1a6:ae8d 8 20 545089 20201225003542
+2a00:1851:3:e39d:e0e8:2641:f09a:3666 7 9 275313 20201221172743
+2a00:1851:3:e39d:65d5:5852:4980:dd70 6 20 1673610 20201223120724
+188.71.247.14 5 7 147226 20201222211450
+188.70.11.210 3 13 244043 20201226010145
+2a00:1851:3:e39d:30e8:f4ac:6c6f:f157 3 18 3991067 20201231210439
+129.126.232.213 2 12 2707068 20201217130005
+5.53.201.76 1 13 3994155 20201217110932
+94.128.65.53 1 13 3994142 20201218224844
+205.169.39.28 1 13 3994142 20201221230702
+195.189.226.94 1 12 2705347 20201223132250
+65.154.226.165 1 13 3994142 20201217120219
+94.129.254.11 1 7 3514100 20201224225102
+82.217.243.244 1 1 7559 20201217141716
+2a00:1851:3:1fd0:b44a:efea:eef2:57dc 1 13 3994142 20201217110856
+92.38.148.53 1 1 7559 20201227195842
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 13
+20201217 35 107 20707469 7
+20201218 215 295 30994464 8
+20201220 289 354 24643507 8
+20201221 156 199 11369483 12
+20201222 140 174 12856316 13
+20201223 216 356 22363412 16
+20201224 160 188 9215935 5
+20201225 33 43 1118748 5
+20201226 4 21 4117917 2
+20201227 29 71 7872949 7
+20201228 29 43 2499419 5
+20201230 8 9 327793 1
+20201231 43 83 10504307 2
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 7
+30s-2mn 9
+2mn-5mn 9
+1h+ 17
+15mn-30mn 3
+30mn-1h 6
+5mn-15mn 10
+0s-30s 37
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 30
+/login 308 2328172 70 31
+/myprofile 298 24736191 7 17
+/password/reset 149 846290 2 5
+/register 119 3853114 7 13
+/personal_myprofile 113 6912264 1 5
+/myprofile/bank 82 1620160 0 4
+/personal_membership 72 1423947 1 3
+/membership 49 981036 0 6
+/personal_profile/bank 43 858985 0 1
+/profile/company 20 334732 0 0
+/myprofile/changepass 15 337695 0 2
+/myprofile/save_pass%29 12 146 0 1
+/delete 12 344 0 1
+/ 11 77497 0 0
+/webfonts/fa-solid-900.woff2 10 803000 0 0
+/fonts/iconsmind.woff 10 11774840 0 0
+/webfonts/fa-brands-400.woff2 7 549220 0 0
+/personal_profile/changepass 6 133242 0 0
+/password/reset/b03703a65afd152b35670d009836ffa4d86a2073546b4b1bcdc9908811047ba1 5 26223 0 0
+/password/reset/106482c5119f6a9ee71e5965fc9cbda78731d281aa5e9b53457056ecedee38f9 3 15684 0 0
+/password/reset/7d6c908209b0b341fcb37170b7d140c0326709f8c9bf17604c08e381bc6cf2ab 2 11100 0 0
+/password/email 2 30 0 0
+/password/reset/65d6bc5572612168a5d49bd138ee6243ba24ab91d53d2cafdf3688b4902088ca 2 10624 1 1
+/webfonts/fa-solid-900.woff 1 104280 0 0
+/password/reset/761bb1b5c2ff9b0744dcabdc2bff27798f71cd789963cffcdaf437f1a3d32f58 1 5320 1 1
+/vendors/perfect-scrollbar/js/perfect-scrollbar.js.map 1 0 0 0
+/fonts/iconsmind.ttf 1 1177408 0 0
+/css/metisMenu.css.map 1 0 0 0
+/js/metisMenu.js.map 1 0 0 0
+/logout 1 0 1 0
+END_SIDER

@@ -1,0 +1,31 @@
+//custom css
+@import "../custom";
+// Content
+//
+
+@import "../../../node_modules/bootstrap/scss/functions";
+
+@import "variables";
+@import "../content/typography";
+@import "../content/alerts";
+@import "../content/buttons";
+@import "../content/colors";
+@import "../content/card";
+@import "../content/dropdown";
+@import "../content/forms";
+@import "../content/progress";
+@import "../content/accordion";
+@import "../content/icon";
+@import "../content/table";
+@import "../content/dashboard";
+@import "../content/advanced_table";
+
+//pages
+
+@import "../pages/select2";
+@import "../pages/toastr";
+@import "../pages/custom_sweetalert";
+
+//extra pages
+@import "../login";
+@import "../register";

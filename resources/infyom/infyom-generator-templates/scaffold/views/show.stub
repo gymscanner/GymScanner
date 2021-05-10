@@ -1,0 +1,34 @@
+@extends('layouts.default')
+
+{{-- Page title --}}
+@section('title')
+$MODEL_NAME_PLURAL_HUMAN$ @parent
+@stop
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div aria-label="breadcrumb" class="card-breadcrumb">
+        <h1>$MODEL_NAME_HUMAN$</h1>
+    </div>
+    <div class="separator-breadcrumb border-top"></div>
+</section>
+
+<div class="content">
+    <div class="clearfix"></div>
+
+    @include('flash::message')
+
+    <div class="clearfix"></div>
+    <div class="card">
+        <div class="table-responsive">
+        <table class="table table-default">
+            @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.show_fields')
+
+            </table>
+        </div>
+    </div>
+    <a href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index') }}"
+                class="btn btn-primary">Back</a>
+</div>
+@endsection

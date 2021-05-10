@@ -1,0 +1,279 @@
+AWSTATS DATA FILE 7.4 (build 20140726)
+# If you remove this file, all statistics for date 202102 will be lost/reset.
+# Last config file used to build this data file was /home/wa7ash23/tmp/awstats/ssl/awstats.vendor.gymscanner.com.conf.
+
+# Position (offset in bytes) in this file for beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 28
+POS_GENERAL 2022                
+POS_TIME 2687                
+POS_VISITOR 6613                
+POS_DAY 6956                
+POS_DOMAIN 3260                
+POS_LOGIN 3545                
+POS_ROBOT 3700                
+POS_WORMS 3916                
+POS_EMAILSENDER 4047                
+POS_EMAILRECEIVER 4190                
+POS_SESSION 7113                
+POS_SIDER 7290                
+POS_FILETYPES 4325                
+POS_DOWNLOADS 4543                
+POS_OS 4591                
+POS_BROWSER 4703                
+POS_SCREENSIZE 4889                
+POS_UNKNOWNREFERER 4963                
+POS_UNKNOWNREFERERBROWSER 5221                
+POS_ORIGIN 5474                
+POS_SEREFERRALS 5609                
+POS_PAGEREFS 5753                
+POS_SEARCHWORDS 5901                
+POS_KEYWORDS 6053                
+POS_MISC 2351                
+POS_ERRORS 6112                
+POS_CLUSTER 3401                
+POS_SIDER_404 6237                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20210205232429 21 4399 15992958323777
+FirstTime 0
+LastTime 20210205232427
+LastUpdate 20210205234150 21 0 21 0 0
+TotalVisits 10                  
+TotalUnique 6                   
+MonthHostsKnown 0                   
+MonthHostsUnknown 6                   
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+RealPlayerSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+PDFSupport 0 0 0
+JavascriptDisabled 0 0 0
+JavaEnabled 0 0 0
+TotalMisc 0 0 0
+AddToFavourites 0 3 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 0 0 0 1 2 8829
+1 0 0 0 0 0 0
+2 0 0 0 0 0 0
+3 2 26 10710252 3 6 22791
+4 0 0 0 0 0 0
+5 0 0 0 0 0 0
+6 9 39 10282213 11 12 1760113
+7 5 5 618063 4 4 2510481
+8 0 0 0 0 0 0
+9 0 0 0 1 1 8790
+10 1 1 0 2 2 7404
+11 2 3 23405 3 4 16194
+12 0 0 0 0 0 0
+13 1 1 0 0 0 0
+14 0 0 0 1 1 8790
+15 0 0 0 0 0 0
+16 0 0 0 2 2 15369
+17 0 0 0 0 0 0
+18 0 0 0 1 1 8790
+19 0 0 0 1 10 138004
+20 12 36 8724229 2 2 9192
+21 0 0 0 1 1 8790
+22 0 0 0 0 0 0
+23 13 18 2067697 2 3 764
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 5
+ru 30 61 10847526
+ua 10 39 10859291
+bg 2 26 10710252
+de 2 2 0
+gr 1 1 8790
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 2
+bot[\s_+:,\.\;\/\\-] 11 79188 20210205090826 2
+googlebot 10 138004 20210201195528 1
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 8
+jpg 12 24186405 0 0
+css 21 207113 0 0
+js 36 637576 0 0
+woff2 6 476280 0 0
+png 15 1918849 0 0
+Unknown 21 1352914 0 0
+html 15 114270 0 0
+woff 3 3532452 0 0
+END_FILETYPES
+
+# Downloads - Hits - Bandwidth
+BEGIN_DOWNLOADS 0
+END_DOWNLOADS
+
+# OS ID - Hits
+BEGIN_OS ID - Hits - Pages 4
+win8.1 39 10
+Unknown 7 5
+winnt 69 27
+win7 14 3
+END_OS
+
+# Browser ID - Hits - Pages
+BEGIN_BROWSER 6
+chrome88.0.4324.104 79 25
+Unknown 7 5
+chrome40.0.2214.85 2 2
+chrome84.0.4147.125 14 1
+chrome29.0.1547.66 12 1
+chrome88.0.4324.150 15 11
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 2
+ManicTime/4.4.9.1 20210205232352
+NetSystemsResearch_studies_the_availability_of_various_services_across_the_internet._Our_website_is_netsystemsresearch.com 20210205200319
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 2
+NetSystemsResearch_studies_the_availability_of_various_services_across_the_internet._Our_website_is_netsystemsresearch.com 20210205200319
+ManicTime/4.4.9.1 20210205232352
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 16 18
+From1 0 0
+From2 0 0
+From3 0 0
+From4 29 111
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 0
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 0
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 4
+404 5 32895
+500 14 4270192
+405 2 1650
+302 6 2372
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referrer
+BEGIN_SIDER_404 2
+/.env 3 -
+/login-pic.png 2 https://vendor.gymscanner.com/thank-you
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 6
+188.43.136.32 30 61 10847526 20210205232427 20210205232311 /register
+195.189.226.94 10 39 10859291 20210202070441
+138.246.253.24 2 2 0 20210205131603
+212.39.86.105 1 12 3850476 20210204032628
+92.118.160.17 1 1 8790 20210205200319
+185.4.81.104 1 14 6859776 20210204032628
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 4
+20210201 11 35 8715439 1
+20210202 16 47 10923681 3
+20210204 2 26 10710252 2
+20210205 16 21 2076487 4
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 4
+5mn-15mn 1
+0s-30s 6
+30s-2mn 1
+2mn-5mn 1
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 13
+/ 15 114270 8 5
+/myprofile 9 670788 0 2
+/webfonts/fa-brands-400.woff2 3 235380 0 0
+/fonts/iconsmind.woff 3 3532452 0 0
+/webfonts/fa-solid-900.woff2 3 240900 0 0
+/myprofile/bank 3 64107 0 0
+/thank-you 2 9084 2 2
+/myprofile/sumbit_admin 2 38700 0 0
+/_debugbar/assets/stylesheets 1 127420 0 0
+/myprofile/touristpass 1 18979 0 0
+/register 1 34910 0 0
+/_debugbar/assets/javascript 1 366107 0 0
+/myprofile/changepass 1 22819 0 0
+END_SIDER
