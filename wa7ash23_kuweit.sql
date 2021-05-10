@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 27, 2021 at 03:57 PM
+-- Generation Time: May 10, 2021 at 03:09 PM
 -- Server version: 5.7.32-35-log
 -- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -44,7 +43,8 @@ INSERT INTO `avatars` (`id`, `user_id`, `avatar`, `created_at`, `updated_at`) VA
 (20, '156', 'upload/avatar/1611292116.png', '2021-01-21 20:04:23', '2021-01-22 04:08:36'),
 (21, '163', 'upload/avatar/1615998695.png', '2021-03-17 15:31:35', '2021-03-17 15:31:35'),
 (23, '201', 'upload/avatar/1617103480.png', '2021-03-30 04:59:02', '2021-03-30 09:24:40'),
-(24, '288', 'upload/avatar/1619080315.png', '2021-04-22 06:31:55', '2021-04-22 06:31:55');
+(24, '288', 'upload/avatar/1619080315.png', '2021-04-22 06:31:55', '2021-04-22 06:31:55'),
+(25, '304', 'upload/avatar/1620241763.png', '2021-05-05 17:09:23', '2021-05-05 17:09:23');
 
 -- --------------------------------------------------------
 
@@ -203,7 +203,8 @@ INSERT INTO `brands_social_data` (`id`, `user_id`, `name`, `certificate_date`, `
 (3, 282, 'https://www.youtube.com/embed/-2G2NLKCQG8', NULL, 'youtube', '2021-04-26 00:45:19', NULL),
 (8, 282, '300px-x-300px-Android.png', NULL, 'image', '2021-04-27 07:46:02', NULL),
 (9, 282, 'certificate1', '2021-04-29', 'certificate', '2021-04-27 08:17:13', NULL),
-(10, 282, 'Name', NULL, 'name', '2021-04-27 08:25:24', NULL);
+(10, 282, 'Name', NULL, 'name', '2021-04-27 08:25:24', NULL),
+(12, 304, 'download - Copy.jpg', NULL, 'image', '2021-05-05 01:31:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -331,9 +332,12 @@ CREATE TABLE `memberships` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `service` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `perk` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `duration` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `featured` enum('featured','none') COLLATE utf8mb4_unicode_ci NOT NULL,
   `app` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -344,16 +348,8 @@ CREATE TABLE `memberships` (
 -- Dumping data for table `memberships`
 --
 
-INSERT INTO `memberships` (`id`, `user_id`, `price`, `service`, `perk`, `duration`, `app`, `remember_token`, `created_at`, `updated_at`) VALUES
-(36, '156', 'US$ 50', 'Women\'s Only Class', '- Free Wifi\r\n- Valet Parking', '1 Month', 'computer', NULL, '2021-01-21 10:29:39', '2021-01-21 10:29:39'),
-(37, '156', 'US$ 100', 'Men\'s MMA', 'Free Nutrition', '2 months', 'app', NULL, '2021-01-21 10:32:15', '2021-01-21 10:32:15'),
-(38, '156', '250', 'Men\'s Championship MMA', 'Free Locker', '5 months', 'computer', NULL, '2021-01-21 10:32:51', '2021-01-21 10:32:51'),
-(39, '156', '350', 'Kids classes', 'Free Valet\r\nFree Wifi\r\nFree food', '12 months', 'computer', NULL, '2021-01-21 10:36:42', '2021-01-21 10:36:42'),
-(40, '201', '214', 'SADFGSDF', 'SDG', 'Fa', 'computer', NULL, '2021-03-26 05:27:08', '2021-03-31 05:15:33'),
-(41, '204', '43', '345', '345', '345', 'computer', NULL, '2021-04-09 13:05:40', '2021-04-09 13:05:40'),
-(42, '288', 'Monthly', 'Any', 'None', '1 Month', 'computer', NULL, '2021-04-22 06:38:27', '2021-04-22 06:38:27'),
-(43, '288', 'PKR 3500', 'All', 'None', 'Bi-Monthly', 'computer', NULL, '2021-04-22 06:42:03', '2021-04-22 06:42:03'),
-(44, '296', 'sdf', 'dsf', 'dfs', 'dsf', 'app', NULL, '2021-04-22 08:33:29', '2021-04-22 08:33:29');
+INSERT INTO `memberships` (`id`, `user_id`, `price`, `currency`, `service`, `perk`, `duration`, `discount`, `featured`, `app`, `remember_token`, `created_at`, `updated_at`) VALUES
+(49, '304', '200', 'US $', 'Regular Membership', '[\"2 weeks free\\r\",\"Full Access\"]', '1 Month', NULL, 'none', 'computer', NULL, '2021-05-05 17:40:12', '2021-05-05 17:40:12');
 
 -- --------------------------------------------------------
 
@@ -641,7 +637,51 @@ INSERT INTO `notifications` (`id`, `user_id`, `show_to`, `name`, `value`, `is_ac
 (243, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-27 14:07:41'),
 (244, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-27 14:07:41'),
 (245, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-27 14:35:30'),
-(246, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-27 14:35:30');
+(246, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-27 14:35:30'),
+(247, 303, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-28 07:29:19'),
+(248, 303, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-28 07:29:19'),
+(249, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-29 17:53:45'),
+(250, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-29 17:53:45'),
+(251, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 17:13:15'),
+(252, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 17:13:15'),
+(253, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 17:15:40'),
+(254, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 17:15:40'),
+(255, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 17:40:09'),
+(256, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 17:40:09'),
+(257, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 18:58:36'),
+(258, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 18:58:36'),
+(259, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 18:58:51'),
+(260, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 18:58:51'),
+(261, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 18:59:46'),
+(262, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 18:59:46'),
+(263, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 19:02:33'),
+(264, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 19:02:33'),
+(265, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 20:25:39'),
+(266, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-04-30 20:25:39'),
+(267, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 20:26:32'),
+(268, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 20:26:32'),
+(269, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 20:33:14'),
+(270, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-04-30 20:33:14'),
+(271, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-01 05:28:30'),
+(272, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-01 05:28:30'),
+(273, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-05-01 05:28:52'),
+(274, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-05-01 05:28:52'),
+(275, 282, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-02 12:19:00'),
+(276, 282, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-02 12:19:00'),
+(277, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-04 19:39:48'),
+(278, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-04 19:39:48'),
+(279, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-04 19:46:47'),
+(280, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-04 19:46:47'),
+(281, 164, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-05-04 19:47:27'),
+(282, 164, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-05-04 19:47:27'),
+(283, 164, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-05 15:39:49'),
+(284, 164, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-05 15:39:49'),
+(285, 304, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-05 15:54:15'),
+(286, 304, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-05 15:54:15'),
+(287, 304, 60, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-05-05 15:55:10'),
+(288, 304, 289, 'UPDATE_MEMBERSHIP', 'has updated a membership plan', 1, '2021-05-05 15:55:10'),
+(289, 304, 60, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-05 19:40:12'),
+(290, 304, 289, 'NEW_MEMBERSHIP', 'has submitted new membership plan', 1, '2021-05-05 19:40:12');
 
 -- --------------------------------------------------------
 
@@ -723,28 +763,8 @@ CREATE TABLE `personal__memberships` (
 --
 
 INSERT INTO `personal__memberships` (`id`, `user_id`, `price`, `currency`, `service`, `perk`, `duration`, `discount`, `featured`, `app`, `remember_token`, `created_at`, `updated_at`) VALUES
-(9, '12', NULL, '', NULL, '[\"\"]', NULL, NULL, 'none', 'computer', NULL, '2020-12-16 20:12:10', '2020-12-16 20:12:10'),
-(10, '12', NULL, '', NULL, '[\"\"]', NULL, NULL, 'featured', 'computer', NULL, '2020-12-16 20:12:12', '2020-12-16 20:12:12'),
-(11, '12', NULL, '', NULL, '[\"\"]', NULL, NULL, 'featured', 'computer', NULL, '2020-12-16 20:12:16', '2020-12-16 20:12:16'),
-(15, '54', '3 months', '', '25', '[\"\"]', '150', NULL, 'featured', 'computer', NULL, '2020-12-23 20:55:59', '2020-12-23 20:55:59'),
-(17, '166', '5', '', '567', '[\"\"]', '567', NULL, 'featured', 'app', NULL, '2021-03-18 20:38:44', '2021-03-18 20:38:44'),
-(19, '165', 'safa', 'USD $', 'safsa111', '[\"\"]', 'sdafas', NULL, 'none', 'app', NULL, '2021-03-31 05:27:04', '2021-04-26 07:47:44'),
-(23, '282', 'Monthly1', 'USD $', 'PKR 3001', '[\"testing\\r\",\"testing\\r\",\"testing\"]', 'PKR 15001', '1', 'none', 'app', NULL, '2021-04-22 01:15:16', '2021-04-27 08:37:17'),
-(24, '282', 'Monthly', '', 'PKR 300', '[\"\"]', 'PKR 1500', NULL, 'featured', 'computer', NULL, '2021-04-22 03:43:12', '2021-04-22 03:43:12'),
-(25, '282', 'Tri-monthly', '', 'PKR 400', '[\"\"]', 'PKR 4200', NULL, 'featured', 'computer', NULL, '2021-04-22 03:46:15', '2021-04-22 03:46:15'),
-(26, '286', 'asf', '', 'asf', '[\"\"]', 'asf', NULL, 'featured', 'app', NULL, '2021-04-22 04:43:47', '2021-04-22 04:43:47'),
-(27, '286', 'asfa', '', 'asf', '[\"\"]', 'asf', NULL, 'featured', 'app', NULL, '2021-04-22 04:43:56', '2021-04-22 04:43:56'),
-(28, '286', '213', '', 'asfas', '[\"\"]', 'asfas', NULL, 'featured', 'app', NULL, '2021-04-22 04:56:55', '2021-04-22 04:56:55'),
-(29, '286', 'asf', '', 'asfas', '[\"\"]', 'asf', NULL, 'featured', 'computer', NULL, '2021-04-22 04:57:04', '2021-04-22 04:57:04'),
-(30, '282', 'Bi-Monthly', '', 'PKR 300', '[\"\"]', 'PKR 2800', NULL, 'featured', 'computer', NULL, '2021-04-22 05:37:27', '2021-04-22 05:37:27'),
-(31, '282', 'Weekly', '', 'PKR 0', '[\"\"]', 'PKR 300', NULL, 'featured', 'computer', NULL, '2021-04-22 06:04:59', '2021-04-22 06:04:59'),
-(32, '165', NULL, '', NULL, '[\"\"]', NULL, NULL, 'featured', 'computer', NULL, '2021-04-24 14:41:23', '2021-04-24 14:41:23'),
-(33, '282', '3', 'EURO €', '1', '[\"\"]', '2', '4', 'featured', 'app', NULL, '2021-04-26 02:19:20', '2021-04-26 07:01:35'),
-(34, '282', 'asfasf', 'EURO €', 'asf', '[\"\"]', 'asfas', NULL, 'none', 'computer', NULL, '2021-04-26 07:28:40', '2021-04-26 07:28:40'),
-(35, '282', 'qwrwqrq', 'USD $', 'wqrqw', '[\"dasfdsa\\r\",\"f\\r\",\"asf\\r\",\"asf\\r\",\"as\"]', 'wqrqwr', NULL, 'none', 'computer', NULL, '2021-04-26 07:34:59', '2021-04-26 07:34:59'),
-(36, '165', '100', 'USD $', '16 SESSION', '[\"dummy line 1\\r\",\"dummy line 2\\r\",\"dummy line 3\\r\",\"dummy line 4\"]', '90 Days', '10', 'none', 'computer', NULL, '2021-04-26 07:57:41', '2021-04-26 07:59:18'),
-(37, '164', '75', 'USD $', '8 Sessions', '[\"\"]', '14days', '10', 'none', 'computer', NULL, '2021-04-27 12:07:41', '2021-04-27 12:07:41'),
-(38, '164', '50', 'USD $', '12', '[\"1\"]', '30', '10', 'none', 'computer', NULL, '2021-04-27 12:35:30', '2021-04-27 12:35:30');
+(53, '164', '150', 'KWD', '58 sessions', '[\"online booking\\r\",\"belgrade\"]', '40 days', '12', 'featured', 'app', NULL, '2021-05-04 17:46:47', '2021-05-04 17:47:27'),
+(54, '164', '56', 'EURO €', '45 sessions', '[\"Nemanja\\r\",\"Serbia\"]', '25 days', '5', 'none', 'computer', NULL, '2021-05-05 13:39:49', '2021-05-05 13:39:49');
 
 -- --------------------------------------------------------
 
@@ -875,10 +895,10 @@ INSERT INTO `users` (`id`, `external_id`, `name`, `last_name`, `website`, `email
 (207, 'i-100207', 'Dimas', 'Ariyanto', 'dimashttps://dimasariyanto12.github.io/', 'dimasariyanto890@gmail.com', NULL, '2021-04-16 22:46:21', 'id', '$2y$10$X3xrUHX8UDr0cL6dY7oue.DHtUTO1BK8EcTYiQcvVyaozRlPwOzrq', 2, NULL, '2021-04-16 22:45:59', '2021-04-16 22:46:21'),
 (208, 'i-100208', 'Imran', 'Iman', NULL, 'imranislamimon@gmail.com', NULL, '2021-04-18 15:44:12', 'bd', '$2y$10$vlxG5UmLsMEgxkGBLW8yKeiIP5ad0c1JltuDdk3173JcIXY0SkY8.', 2, 'pif1hksvF5XJRfogVA2klspy152aug1OKcc8mFU6wf5nR47qEA3YYat04oVX', '2021-04-18 15:43:28', '2021-04-23 19:35:22'),
 (281, 'i-100281', 'Radwan', 'Ali', NULL, 'radwan007@hotmail.com', NULL, '2021-04-21 14:23:09', 'au', '$2y$10$foZN/NwfI3o/XMJuTfnEyu1yb8xLqje.W7GtxBMJplBskmVp484qG', 2, NULL, '2021-04-21 14:22:10', '2021-04-21 14:23:09'),
-(282, 'i-100282', 'Arfa', 'Memon', NULL, 'arfamemon1997@gmail.com', NULL, '2021-04-22 00:21:33', 'pk', '$2y$10$0fjhg/r.fGf1kV5eq.A.teUX./VWJ9MMYy6pvAlYxKlLdUEvqW2Xu', 3, 'BD06pDIoU3uHAFLNw0W6zPFuAtDg0tmgGykw8lTR2OGdDijvYZaiuB2p0SCg', '2021-04-22 00:20:53', '2021-04-23 01:25:45'),
+(282, 'i-100282', 'Arfa', 'Memon', NULL, 'arfamemon1997@gmail.com', NULL, '2021-04-22 00:21:33', 'pk', '$2y$10$0fjhg/r.fGf1kV5eq.A.teUX./VWJ9MMYy6pvAlYxKlLdUEvqW2Xu', 3, 'H6kpEUJXLEiJbiZX7J6U2RMagIThsRBkFAo8bMEzOYmGwlngjSmaOmVJ5XmL', '2021-04-22 00:20:53', '2021-04-23 01:25:45'),
 (287, 'i-100287', 'shahzaib', 'qureshi', 'ss', 'shahzaibqureshi7890@gmail.com', NULL, '2021-04-22 02:42:01', 'not', '$2y$10$AtUfyY7cF2ixlgbM3YXl6ubaokCT1dU.73CcBuhNkvgYfr8.CXtFG', 2, NULL, '2021-04-22 02:40:53', '2021-04-22 02:42:01'),
 (288, 'i-100288', 'Arfa', 'Memon', 'http://gbsinn.com/', 'hafsamemon@outlook.com', NULL, '2021-04-22 06:31:07', 'pk', '$2y$10$gJpfbEA74IKxAOIpQBuz/eihQ2c9gMYnPitF7jIswQ6jJGQkE4VK2', 2, 'pLwDMkpGpPfnPdILE8nvXE7lnmFM6wRMmDrZia3FidXINdQS0LT2XYKf1WRq', '2021-04-22 06:27:11', '2021-04-23 01:42:28'),
-(289, 'i-100289', 'fardeen', 'fardeen', 'p', 'zeechashk@gmail.com', '148773', NULL, 'al', '$2y$10$kRMSdqsy8yVqPh4uzYvKoO5VcdO4/iT7esouFmxGAXjdk.xu7c086', 1, NULL, '2021-04-22 07:04:19', '2021-04-23 01:13:00'),
+(289, 'i-100289', 'fardeen', 'fardeen', 'p', 'zeechashk@gmail.com', '614812', NULL, 'al', '$2y$10$kRMSdqsy8yVqPh4uzYvKoO5VcdO4/iT7esouFmxGAXjdk.xu7c086', 1, NULL, '2021-04-22 07:04:19', '2021-05-01 01:29:44'),
 (296, 'i-100296', 'aaa', 'fardeen', 'p', 'fardeenkhan7337@gmail.com', NULL, '2021-04-22 08:30:28', 'az', '$2y$10$oyjzvezQby8ZJ1qC8NAmVentowBwMZQ0zP8x6.FlncFf/CVvC3bya', 2, 'uhsdUpE9PgwGfQP2C10VTrObdNPjXJm0BEHic3KjapkzZzYPCdkIdUfuxkwh', '2021-04-22 08:29:31', '2021-04-22 09:05:43'),
 (297, 'i-100297', 'Ali', 'Shan', 'www.alishansolangi.com', 'alishansolangi.as@gmail.com', NULL, '2021-04-26 04:05:46', 'pk', '$2y$10$toIa5uRqHbQhOC0ZY/b2r.BI4Z4jQipivXWfysjceD35qwMQYhf8u', 2, NULL, '2021-04-26 04:05:08', '2021-04-26 04:05:46'),
 (298, 'i-100298', 'a', 'asd', 'sdf', 'adilgha1ni@hotmail.com1', NULL, NULL, 'az', '$2y$10$yWP76fPs1Ku09MPSDN3.Qep4BN/DOCd9lEAlKJiIegb1G/dHU5Eii', 2, NULL, '2021-04-26 04:07:31', '2021-04-26 04:07:31'),
@@ -886,7 +906,9 @@ INSERT INTO `users` (`id`, `external_id`, `name`, `last_name`, `website`, `email
 (300, 'i-100300', 'Marah', 'Mcpherson', 'https://www.dewopeqyqavusug.com', 'pozonecu@mailinator.com', NULL, NULL, 'vn', '$2y$10$eonYgrelXbuh93TtaSw8ium94cXN4qlmFmXqp30dC527wZQf/efmi', 3, NULL, '2021-04-26 04:10:43', '2021-04-26 04:10:43'),
 (301, 'i-100301', 'asd', 'asd', 'asd', 'asdasd@asd.com', NULL, NULL, 'ax', '$2y$10$5tcIDRXysmDKZEH/kCMwC.rzmx5gpVMx.j/DBYdfZZooMTaweus2.', 2, NULL, '2021-04-26 05:59:00', '2021-04-26 05:59:00'),
 (302, 'i-100302', 'asd', 'asd', 'asd', 'asd@asd.com', NULL, NULL, 'au', '$2y$10$V6NCc.OBsSbH94PKGguDV.XOxQ7jCMo5W/SNTHKIwQwP0jaxF4WvK', 2, NULL, '2021-04-26 06:17:14', '2021-04-26 06:17:14'),
-(303, 'i-100303', 'adil', 'ghani', NULL, 'iamadilghani@gmail.com', NULL, '2021-04-27 13:18:58', 'pk', '$2y$10$XYJPLc2AUmMpmXpQyAaEQOCltiu6YDk6w2RNJRNJ84QKNLQ4O.vk2', 3, NULL, '2021-04-27 13:18:32', '2021-04-27 13:18:58');
+(303, 'i-100303', 'adil', 'ghani', NULL, 'iamadilghani@gmail.com', NULL, '2021-04-27 13:18:58', 'pk', '$2y$10$XYJPLc2AUmMpmXpQyAaEQOCltiu6YDk6w2RNJRNJ84QKNLQ4O.vk2', 3, NULL, '2021-04-27 13:18:32', '2021-04-27 13:18:58'),
+(304, 'i-100304', 'Muntaser', 'Muttaqi', 'https://iammuttaqi.github.io/muttaqi.com/', 'muntasermuttaqi@gmail.com', NULL, '2021-04-30 15:23:58', 'bd', '$2y$10$TWDkP003yJTG/KzA5r2m7e9N2lEjHwExfy/UNoKZUAf3UTCCV0E82', 2, NULL, '2021-04-29 20:15:08', '2021-05-03 11:51:09'),
+(305, 'i-100305', 'Muntaser', 'Ali', NULL, 'info@foodimporters.com', NULL, NULL, 'ar', '$2y$10$Uq74ZPE72yQny37kz2obpO.4pzVTa5h8iBlgNhSuqFNzvledT/dWu', 2, NULL, '2021-04-30 15:18:13', '2021-04-30 15:18:13');
 
 --
 -- Indexes for dumped tables
@@ -1015,7 +1037,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `avatars`
 --
 ALTER TABLE `avatars`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `banks`
@@ -1039,7 +1061,7 @@ ALTER TABLE `bbanks`
 -- AUTO_INCREMENT for table `brands_images`
 --
 ALTER TABLE `brands_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `brands_info`
@@ -1051,7 +1073,7 @@ ALTER TABLE `brands_info`
 -- AUTO_INCREMENT for table `brands_social_data`
 --
 ALTER TABLE `brands_social_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -1075,7 +1097,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `memberships`
 --
 ALTER TABLE `memberships`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1087,7 +1109,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=291;
 
 --
 -- AUTO_INCREMENT for table `personal_avatars`
@@ -1099,7 +1121,7 @@ ALTER TABLE `personal_avatars`
 -- AUTO_INCREMENT for table `personal__memberships`
 --
 ALTER TABLE `personal__memberships`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `touristpasses`
@@ -1117,7 +1139,7 @@ ALTER TABLE `trainers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
