@@ -34,6 +34,7 @@ class ProfileController extends Controller
 {
     // public function __invoke(User $user)
     //     {
+    //         dd("check log(arg)");
     //         return $user;
     //     }
 
@@ -1401,11 +1402,11 @@ $first_notification = DB::table('notifications')
 	   return view('home');
 	
 	}
-	public function logout()
-	{
 	
-	  auth()->logout();
-	  return redirect('/login');
+    public function logout()
+	{
+	   auth()->logout();
+	   return redirect('/login');
 	
 	}
 

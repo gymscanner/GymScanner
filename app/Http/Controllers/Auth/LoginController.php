@@ -40,7 +40,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // $this->middleware('guest')->except('logout');
     }
 
     public function login(Request $request)
@@ -51,7 +51,6 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        
         if(auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password']))){
             if (auth()->user()->role == 1) {
 		        $this->send_verification_code();

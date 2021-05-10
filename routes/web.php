@@ -17,6 +17,11 @@ include('web_builder.php');
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('Login','ProfileController@login_view')->name('Login');
+Route::post('Logout','ProfileController@logout')->name('Logout');
+Route::get('/', function () {
+    return view('auth.register');
+});
 
 // Auth::routes();
 Auth::routes(['verify' => true]);
@@ -25,9 +30,6 @@ Auth::routes(['verify' => true]);
     return back();
 })->middleware('auth'); */
 
-Route::get('/', function () {
-    return view('auth.register');
-});
 
 //mybrandroutes
 Route::post('myprofile/upload_brand_photos)', 'ProfileController@upload_brand_photos')->name('upload_brand_photos');
@@ -49,8 +51,7 @@ Route::get('/email/verify', function () {
 
 Route::get('thank-you','ProfileController@thankyou')->name('thank-you');
 Route::get('verify','ProfileController@verify_email')->name('verify');
-Route::post('Login','ProfileController@login_view')->name('Login');
-Route::post('Logout','ProfileController@logout')->name('Logout');
+
 Route::get('/homes', 'ProfileController@view_dashboard')->name('homes');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
