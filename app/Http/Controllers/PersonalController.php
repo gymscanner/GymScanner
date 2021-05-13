@@ -640,7 +640,7 @@ class PersonalController extends Controller
     public function my_branding()
     {
 
-         $countryArray = array(
+        $countryArray = array(
             'AD'=>array('name'=>'ANDORRA','code'=>'376'),
             'AE'=>array('name'=>'UNITED ARAB EMIRATES','code'=>'971'),
             'AF'=>array('name'=>'AFGHANISTAN','code'=>'93'),

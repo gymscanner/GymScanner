@@ -62,14 +62,24 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-12 mb-2">
-							<div class="embed-responsive embed-responsive-16by9">
-								<iframe class="embed-responsive-item" width="260" height="100" src="https://www.youtube.com/embed/r-H61ROtwOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-								</iframe>
-							</div>
-						</div>
-					</div>
-					
+                        @foreach($youtube as $key => $v)
+	                        <div class="col-lg-12 mb-2">
+	                            <div class="embed-responsive embed-responsive-16by9">
+	                                <iframe class="embed-responsive-item" width="260" height="100" src="{{ $v->name }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+	                                </iframe>                                    
+	                            </div>
+	                        </div>
+	                        <br>
+	                        <div class="col-lg-12 text-right mb-4">
+								<a href="javascript:void(0)" class="edit_brand_links" data-value="{{ $v->id }}" data-param-value="{{ $v->name }}">
+									<i class="fa fa-pencil" style="font-size: 18px; font-weight: bold; color: blue;"></i>
+								</a>
+								<a href="javascript:void(0)" class="delete_brand_links" data-value="{{ $v->id }}">
+									<i class="fa fa-times" style="font-size: 18px; font-weight: bold; color: red;"></i>
+								</a>
+	                        </div>
+                        @endforeach
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -91,7 +101,7 @@
 
 				<hr>
 
-				<div class="row uploaded_photos">
+				<!-- <div class="row uploaded_photos">
 					<div class="col-md-4 image_div my-2">
 						<input type="checkbox" class="image_check float-right" value="">
 						<img src="{{ asset('img/images/10.jpg') }}" class="image w-100" alt="Image">
@@ -116,7 +126,7 @@
 						<input type="checkbox" class="image_check float-right" value="">
 						<img src="{{ asset('img/images/10.jpg') }}" class="image w-100" alt="Image">
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 			<div class="layout-spacing">
@@ -232,6 +242,66 @@
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary">Save Changes</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!--edit video links-->
+		<div class="modal fade" id="EditBrandsLinksModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Edit link</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<form action="{{ route('update_brand_links')}}" method="post" >
+						<div class="modal-body">
+							
+							@csrf
+							<div class="form-group">
+								<label>Link</label>
+								<input type="text" class="form-control brand_link" name="link" id="edit_brand_links">
+								<input type="hidden" name="brand_link_id" id="brand_link_id">
+							</div>
+							
+						</div>
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Save Changes</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!--delete video links-->
+		<div class="modal fade" id="DeleteBrandsLinksModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Delete link</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<!-- Modal body -->
+					<form action="{{ route('delete_brand_links')}}" method="post" >
+						<div class="modal-body">
+							@csrf
+							<div class="form-group">
+								<label>Link</label>
+								<input type="hidden" name="brand_link_id" id="brand_link_id_for_delete">
+							</div>
+							
+						</div>
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Yes</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 						</div>
 					</form>
 				</div>
@@ -362,5 +432,238 @@
 
 @section('footer_scripts')
 
+<script>
+	$('.upload_brand_photos').click(function(){
+        $('#UploadBrandPhotosModal').modal('show');  
+    });
+
+    Dropzone.options.dropzone = {
+        maxFilesize: 12,
+
+        renameFile: function (file) {
+
+            var dt = new Date();
+
+            var time = dt.getTime();
+
+            return time + file.name;
+
+        },
+
+        // acceptedFiles: ".jpeg,.jpg,.png,.gif",
+
+        dictDefaultMessage: "<i class='far fa-image' style='font-size: 50px;margin-bottom: 15px;color: #393939;font-weight: 600;font-family: 'Nunito';'></i><h5 style='font-size: 26px;color: #393939;font-weight: 600;font-family: 'Nunito';'>Select files here to upload</h5> <br><span>( File type: PDF,PNG,JPG,JPEG )</span>",
+
+        addRemoveLinks: true,
+
+        timeout: 50000,
+
+        removedfile: function (file) {
+
+            var name = file.upload.filename;
+
+            $.ajax({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+
+                },
+
+                type: 'POST',
+
+                url: '{{ route("brand_photos_delete") }}',
+
+                data: {filename: name},
+
+                success: function (data) {
+
+                    console.log("File has been successfully removed!!");
+                    getBrandingData();
+
+                },
+
+                error: function (e) {
+
+                    console.log(e);
+
+                }
+
+            });
+
+            var fileRef;
+
+            return (fileRef = file.previewElement) != null ?
+
+                fileRef.parentNode.removeChild(file.previewElement) : void 0;
+
+        },
+
+        success: function (file, response) {
+
+            getBrandingData();
+
+        },
+
+        error: function (file, response) {
+            return (ref = file.previewElement) != null ?
+                ref.removeChild(file.previewElement) : void 0;
+        }
+    };
+
+    function getBrandingData()
+    {
+        $.ajax({
+            
+            url : "{{ route('getBrandingData') }}",
+            dataType : 'json',
+            cache : false,
+            async : true,
+            success:function(data){
+                let images = data.images;
+                let avatar = data.avatar;
+
+                let html = '';
+                let i;
+                
+                if(images.length > 0)
+                {
+
+                    for(i=0; i < images.length; i++)
+                    {
+
+                        let path_html = 'upload/brands/'+images[i].image_path;
+                        let path = "{{ asset('') }}"+path_html;
+
+                        html +='<div class="col-sm-12 col-md-4 mb-2">'+
+                                '<input type="checkbox" class="check_brand_image" data="'+images[i].image_path+'" style="margin-left: 13px;margin-top: 13px;position: absolute;"><img style="width:100%;height:200px;" src="'+path+'" class="w-100 shadow-1-strong rounded mb-4" alt="">'+
+                                '</div>';
+                    }
+
+                }
+                else
+                {
+                    html ='<div class="col-lg-12 mb-4">'+
+                                '<p style="font-size:20px;">No photo found...</p>'+
+                                '</div>';
+                }
+
+                if(avatar == null)
+                {
+                    // let path_html1 = 'upload/brands/'+avatar.name;
+                    // let path1 = "{{ asset('') }}"+'/'+path_html1;
+                    // $('.avatar_img').attr('src',path1);
+                    
+                }
+                else
+                {
+                    let path_html1 = 'upload/brands/'+avatar.name;
+                    let path1 = "{{ asset('') }}"+path_html1;
+                    $('.avatar_img').attr('src',path1);
+                }
+
+                $('.show_branding_images').html(html);
+            }
+        })
+    }
+    
+    getBrandingData();
+
+    $(document).on('click','.check_brand_image',function(){
+        $(this).attr('checked',true);
+    });
+
+    $('.del_brand_photos').click(function(){
+        let upload_images = [];
+        $.each($(".check_brand_image:checked"), function(){
+            upload_images.push($(this).attr('data'));
+        });
+
+        if(upload_images.length > 0)
+        {
+            $('#DeleteImagesModal').modal('show');
+        }
+
+        else
+        {
+            $('#AuthDeleteImageModal').modal('show');
+        }
+    });
+
+    $('.delete_photos').click(function(){
+     	let upload_images = [];
+
+        $.each($(".check_brand_image:checked"), function(){
+            upload_images.push($(this).attr('data'));
+        });
+
+        let token = '{{ csrf_token() }}';
+
+        $.ajax({
+            url : "{{ route('delete_brand_photos') }}",
+            method : "post",
+            
+            data : { _token : token , id : upload_images},
+
+            success:function(data)
+            {
+                $('#DeleteImagesModal').modal('hide');
+                getBrandingData();
+            }   
+        });
+    });
+
+    //edit brand image
+    $('.change_brand_image').click(function(){
+        $('.brand_image').trigger('click');
+    });
+
+    function UploadImage(input) {
+        $('#upload-image-form').trigger('submit');
+    }
+
+    $('#upload-image-form').submit(function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: '{{ route("submit_brand_image") }}',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success:function(){
+                
+                getBrandingData();
+                
+            } 
+        });
+    });
+
+    $('.change_brand_name').click(function(){
+        let v = $(this).attr('data-name');
+        $('.brand_name').val(v);
+        $('#BrandNameModal').modal('show');
+    });
+
+    $('.add_brand_links').click(function(){
+        $('#AddBrandsLinksModal').modal('show');
+    });
+
+    $('.edit_brand_links').click(function(){
+    	var value_of_brandlink = $(this).attr('data-value');
+    	var link = $(this).attr('data-param-value');
+    	
+        $('#EditBrandsLinksModal').modal('show');
+        $('#brand_link_id').val(value_of_brandlink);
+        $('#edit_brand_links').val(link);
+    });
+
+    $('.delete_brand_links').click(function(){
+    	var value_of_brandlink = $(this).attr('data-value');
+        $('#DeleteBrandsLinksModal').modal('show');
+        $('#brand_link_id_for_delete').val(value_of_brandlink);
+    });
+</script>
 
 @endsection
