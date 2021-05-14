@@ -31,7 +31,27 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function redirectTo() {
+      $role = auth()->user()->role; 
+      switch ($role) {
+        case 1:
+          return '/admin';
+          break;
+        case 2:
+          return '/myprofile';
+          break;
+        case 3:
+          return '/personal_myprofile';
+          break;
+
+        default:
+          return '/'; 
+        break;
+      }
+    }
+
 
     /**
      * Create a new controller instance.
@@ -40,17 +60,18 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function login(Request $request)
-    {  
+    {
         $inputVal = $request->all();
        
-        $this->validate($request, [
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        
         if(auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password']))){
             if (auth()->user()->role == 1) {
 		        $this->send_verification_code();
