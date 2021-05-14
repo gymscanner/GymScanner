@@ -20,7 +20,7 @@ class CreateCountriesTable extends Migration
             $table->string('nicename');
             $table->string('iso3')->nullable();
             $table->integer('numcode')->nullable();
-            $table->integer('phonecode');
+            $table->integer('phonecode')->nullable();
         });
     }
 
