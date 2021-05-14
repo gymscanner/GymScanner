@@ -1393,7 +1393,6 @@ $first_notification = DB::table('notifications')
 	
 	public function login_view()
 	{
-	
 	    return view('auth.login');
 	}
 	

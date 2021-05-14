@@ -16,10 +16,10 @@ class Gym
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role == 2) {
+        if(auth()->check() && auth()->user()->role == 2) {
             return $next($request);
         }
 
-        return redirect('myprofile')->with('error',"Only gym can access!");
+        return redirect()->route('login')->with('error',"Sorry. Access denied.");
     }
 }

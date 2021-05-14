@@ -18,15 +18,10 @@ class Trainer
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( $request->user() ){
-            
+        if(auth()->check() && auth()->user()->role == 3) {
             return $next($request);
-            // user is logged in
-        } else {
-            // user is not logged in
-            return redirect(RouteServiceProvider::HOME);
         }
 
-
+        return redirect()->route('login')->with('error',"Sorry. Access denied.");
     }
 }

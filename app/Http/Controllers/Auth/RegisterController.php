@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Session;
+use DB;
+use Exception;
 
 class RegisterController extends Controller
 {
@@ -58,11 +60,14 @@ class RegisterController extends Controller
     {
         return Validator::make(
             $data, [
-            'name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'name'                  => ['required', 'string', 'max:255'],
+                'last_name'             => ['required', 'string', 'max:255'],
+                'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password'              => ['required', 'string', 'min:8', 'confirmed'],
+                'website'               => ['required', 'string', 'url'],
+                'country'               => ['required', 'string', 'max:255'],
+                'role'                  => ['required', 'integer', 'in:1,2,3'],
+                'g-recaptcha-response'  => ['required'],
             ]
         );
     }
@@ -76,37 +81,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        DB::beginTransaction();
 
-        $user = User::create(
-                [
-                'external_id' => 'iii',
-                'name' => $data['name'],
-                'last_name' => $data['last_name'],
-                'website' => $data['website'],
-                'country' => $data['country'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'role' => $data['role'],
-                ]
-        );   
+        try {
+            $user = User::create([
+                'external_id'   => 'iii',
+                'name'          => $data['name'],
+                'last_name'     => $data['last_name'],
+                'website'       => $data['website'],
+                'country'       => $data['country'],
+                'email'         => $data['email'],
+                'password'      => Hash::make($data['password']),
+                'role'          => $data['role'],
+            ]);
 
-        $u = 'i-'.(100000 + $user->id);
+            $user->external_id = $u = 'i-'.(100000 + $user->id);
+            $user->update();
 
-        $user->external_id = $u;
-        
-        $user->update();
+            Session::put('myregrole', $data['role']);
+            Session::put('myregname', $data['name']);
+            Session::put('myreglname', $data['last_name']);
+            Session::put('myregemail', $data['email']);
+            Session::put('myregexternal', $u);
 
-         Session::put('myregrole', $data['role']);
-         Session::put('myregname', $data['name']);
-         Session::put('myreglname', $data['last_name']);
-         Session::put('myregemail', $data['email']);
-         Session::put('myregexternal', $u);
-         
-
-	    
-        return $user;   
-		  
+            DB::commit();
+            return $user;
+        } catch (Exception $e) {
+            DB::rollBack();
+            dd($e);
+        }
     }
-	
-	
+
 }

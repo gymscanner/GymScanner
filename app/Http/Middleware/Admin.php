@@ -16,11 +16,10 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-    
         if(auth()->user()->role == 1){
             return $next($request);
         }
    
-        return redirect('admin')->with('error',"Only admin can access!");
+        return redirect()->route('login')->with('error',"Sorry. Access denied.");
     }
 }
