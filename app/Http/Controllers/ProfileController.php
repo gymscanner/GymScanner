@@ -2143,9 +2143,9 @@ $first_notification = DB::table('notifications')
 
                 'user_id' => auth()->user()->id,
                 
-                'about' => $request->about,
+                'about' => @$request->about,
 
-                'select_country' => $request->select_country_type,
+                'select_country' => @$request->select_country_type,
                 
                 'countries' => @json_encode($request->selected_counrties),
 
