@@ -2126,9 +2126,9 @@ $first_notification = DB::table('notifications')
 
             DB::table('brands_info')->where('user_id',auth()->user()->id)->update([
                 
-                'about' => $request->about,
+                'about' => @$request->about,
 
-                'select_country' => $request->select_country_type,
+                'select_country' => @$request->select_country_type,
 
                 'countries' => @json_encode($request->selected_counrties),
 
