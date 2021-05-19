@@ -896,7 +896,7 @@ $first_notification = DB::table('notifications')
 
     public function touristpass_save(Request $request){
         $membership = new Touristpass;
-        $membership->price      =   $request->price;
+        $membership->price      =   $request->price . $request->currency;
         $membership->duration   =   $request->duration;
         $membership->facility    =   $request->facility;
         $membership->user_id    =   auth()->user()->id;

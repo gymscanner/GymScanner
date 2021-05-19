@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-4 form-group mb-4">
                         <label for="currency">Currency <span class="text-danger">*</span></label>
-                        <select class="form-control" id="currency" required="">
+                        <select class="form-control" id="currency" required="" name="currency">
                             <option value="" selected="" disabled="">Select...</option>
                             <option>USD($)</option>
                             <option>Euro(€)</option>
@@ -57,8 +57,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="duration">Duration<span class="text-danger">*</span></label>
-                    {{-- <input type="text" class="form-control" id="formGroupExampleInput"  placeholder="Example: 1 day" name="duration" required> --}}
-                    <select class="form-control" id="currency" required="">
+                    <select class="form-control" id="duration" required="" name="duration">
                         <option value="" selected="" disabled="">Select...</option>
                         <option>1 day</option>
                         <option>2 days</option>
@@ -88,7 +87,7 @@
                                         <i data-feather="edit"></i>Edit
                                     </a>
                                 </div>
-                                <p style="text-align:center; color:black;background-color:gray;"> Price:   {{$temp->price}}</p>
+                                <p style="text-align:center; color:black;background-color:gray;"> Price:   {{$temp->price.$temp->currency}}</p>
                                 <p style="text-align:center;background-color:black;color:white;">Duration: {{$temp->duration}}</p>
                                 <p style="text-align:center;background-color:lightblue;color:black;">Facility: {{$temp->facility}}</p>
                                 <a href="{{ route('touristpass.delete',$temp->id)}}" style="color:black;">
