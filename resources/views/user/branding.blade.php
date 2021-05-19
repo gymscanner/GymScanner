@@ -137,8 +137,9 @@
                         @foreach($youtube as $key => $v)
 	                        <div class="col-lg-12 mb-2">
 	                            <div class="embed-responsive embed-responsive-16by9">
-	                                <iframe class="embed-responsive-item" width="260" height="100" src="{{ $v->name }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-	                                </iframe>                                    
+	                                <video width="260" height="100" controls autoplay>
+		                                <source src="{{ $v->name }}" type="video/mp4">
+		                            </video>                         
 	                            </div>
 	                        </div>
 	                        <br>
