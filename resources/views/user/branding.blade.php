@@ -144,10 +144,10 @@
 	                        <br>
 	                        <div class="col-lg-12 text-right mb-4">
 								<a href="javascript:void(0)" class="edit_brand_links" data-value="{{ $v->id }}" data-param-value="{{ $v->name }}" style="color: green;" title="Edit">
-									<i data-feather="edit" style="height: 3rem; width: auto!important;"></i>
+									<i data-feather="edit" style="height: 2rem; width: auto!important;"></i>
 								</a>
 								<a href="javascript:void(0)" class="delete_brand_links" data-value="{{ $v->id }}" style="color: red; cursor: pointer;" title="Delete">
-									<i data-feather="trash" style="height: 3rem; width: auto!important;"></i>
+									<i data-feather="trash" style="height: 2rem; width: auto!important;"></i>
 								</a>
 	                        </div>
                         @endforeach
@@ -165,7 +165,7 @@
 
 						<div class="tooltips mt-2">
                             <i class="fa fa-question-circle"></i>&nbsp;&nbsp;
-                            <span class="tooltiptext">These images will be used in your profile in Gymscanner Apps and Website. <br>The maximum size of photo should be 1024 pixel.</span>
+                            <span class="tooltiptext">These images will be used in your profile in Gymscanner Apps and Website. <br>The maximum size of photo should be 1024 X 512 pixels.</span>
                         </div>
 					</div>
 					
@@ -189,8 +189,8 @@
 					<form action="{{route('save_brand_info')}}" method="post">
 						@csrf
 						<div style="margin-top:-10px;!important" class="">
-							<h5 class="ml-1"><b>About the GYM</b></h5>
-							<textarea class="form-control" name="about" placeholder="About me" rows="4" required>{{ @$about->about }}</textarea>
+							<h5 class="ml-1"><b>About the Gym</b></h5>
+							<textarea class="form-control" name="about" placeholder="About the Gym" rows="4" required>{{ @$about->about }}</textarea>
 						</div>
 						<br>
 						
@@ -251,17 +251,22 @@
 							@csrf
 							<div class="form-group">
 								<label>Link</label>
-								<input type="text" class="form-control brand_link" name="link">
+								<input type="text" class="form-control brand_link youtube_link" name="link">
 								
 							</div>
 							
 						</div>
 						<!-- Modal footer -->
-						<div class="modal-footer">
+						<div class="modal-footer" style="display: none;">
 							<button type="submit" class="btn btn-primary">Save Changes</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 						</div>
 					</form>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary-temp">Save Changes</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -282,17 +287,22 @@
 							@csrf
 							<div class="form-group">
 								<label>Link</label>
-								<input type="text" class="form-control brand_link" name="link" id="edit_brand_links">
+								<input type="text" class="form-control brand_link youtube_link" name="link" id="edit_brand_links">
 								<input type="hidden" name="brand_link_id" id="brand_link_id">
 							</div>
 							
 						</div>
 						<!-- Modal footer -->
-						<div class="modal-footer">
+						<div class="modal-footer" style="display: none;">
 							<button type="submit" class="btn btn-primary">Save Changes</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 						</div>
 					</form>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary-temp">Save Changes</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -706,6 +716,63 @@
         $('#DeleteBrandsLinksModal').modal('show');
         $('#brand_link_id_for_delete').val(value_of_brandlink);
     });
+
+    function validateYouTubeUrlInAdd(flag)
+	{
+	    var url = $('.youtube_link').val();
+        if (url) {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+            var match = url.match(regExp);
+            if (match && match[2].length == 11) {
+            	if (flag == 1) {
+            		$('#AddBrandsLinksModal .btn-primary').click();	
+            	}else{
+            		$('#EditBrandsLinksModal .btn-primary').click();
+            	}
+            }
+            else {
+                var mes = "Please put correct YouTube link.";
+	            var title = 'Warning!';
+	            toastr.options = {
+				  	"closeButton": true,
+				  	"debug": false,
+				  	"newestOnTop": false,
+				  	"progressBar": false,
+				  	"positionClass": "toast-top-right",
+				  	"onclick": null,
+				  	"showDuration": "5000",
+				  	"hideDuration": "5000",
+				  	"timeOut": "5000",
+				  	"extendedTimeOut": "1000",
+				};
+	            toastr.warning(mes, title); //info, success, warning, error
+            }
+        }else{
+        	var mes = "Please put correct YouTube link.";
+            var title = 'Warning!';
+            toastr.options = {
+			  	"closeButton": true,
+			  	"debug": false,
+			  	"newestOnTop": false,
+			  	"progressBar": false,
+			  	"positionClass": "toast-top-right",
+			  	"onclick": null,
+			  	"showDuration": "5000",
+			  	"hideDuration": "5000",
+			  	"timeOut": "5000",
+			  	"extendedTimeOut": "1000",
+			};
+            toastr.warning(mes, title); //info, success, warning, error
+        }
+	}
+
+	$('#AddBrandsLinksModal .btn-primary-temp').click(function(e) {
+		validateYouTubeUrlInAdd(1);
+	});
+
+	$('#EditBrandsLinksModal .btn-primary-temp').click(function(e) {
+		validateYouTubeUrlInAdd(2);
+	});
 </script>
 
 @endsection
