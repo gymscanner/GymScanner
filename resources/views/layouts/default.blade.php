@@ -32,6 +32,9 @@
     <link href="{{ asset('mytemp/assets/css/components/cards/card.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('mytemp/plugins/loading-bar/loading-bar.min.css') }}">
     <script type="text/javascript" src="{{ asset('mytemp/plugins/loading-bar/loading-bar.min.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('mytemp/jquery-toast-plugin/jquery.toast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('mytemp/jquery-toast-plugin/toastr.min.css') }}">
     
     <style>
 
@@ -422,21 +425,14 @@
                                 @endif
                                 <i data-feather="rotate-cw"></i> Change Password</a>
                             </div>
-                            <!--
-                            <div class="dropdown-item">
-                                <a class="" href="auth_lockscreen.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Lock Screen</a>
-                            </div>-->
-                            <div class="dropdown-item">
-                                <!--<a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                   
-                                    {{ __('Logout') }}</a>
-                                    
-                                    {{ SESSION('user') }}            
-                                <form id="logout-form" action="{{ route('logout') }}" method="get" style="display: none;">
-                                    @csrf
-                                </form>-->
 
+                            <div class="dropdown-item">
+                                <a href="{{ route('myaccount.status') }}">
+                                    <i data-feather="user"></i> My account
+                                </a>
+                            </div>
+                            
+                            <div class="dropdown-item">
                                 <a class="" href="{{ route('Logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                    
@@ -818,6 +814,12 @@
     <!-- END GLOBAL MANDATORY STYLES -->
     <script src="{{ asset('mytemp/assets/js/scrollspyNav.js') }}"></script>
     <script src="{{ asset('mytemp/plugins/font-icons/feather/feather.min.js') }}"></script>
+
+
+    <script src="{{ asset('mytemp/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
+    <script src="{{ asset('mytemp/jquery-toast-plugin/toastr.min.js') }}"></script>
+
+
     <script type="text/javascript">
         feather.replace();
     </script>

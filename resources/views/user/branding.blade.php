@@ -196,37 +196,8 @@
 						
 						<h5 class=""><b>Insert Google Location:</b></h5>
 						
-						<div class="w-100">
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27814.411819952653!2d47.96435710602138!3d29.376101453940137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf9c83ce455983%3A0xc3ebaef5af09b90e!2sKuwait%20City%2C%20Kuwait!5e0!3m2!1sen!2sbd!4v1619965282697!5m2!1sen!2sbd" width="100%" height="350" style="border:1px solid #d8d8d8; border-radius: 10px" allowfullscreen="" loading="lazy"></iframe>
-						</div>
-						
-						<?php
-							$show_countries  = 'none';
-							if(@$about->select_country == 'selected')
-							{
-								$show_countries  = 'block';
-							}
-							// print_r(@json_decode($about->countries));
-							function check_country($arr,$code)
-							{
-								foreach($arr as $v)
-								{
-									if($v == $code)
-									{
-										return true;
-										break;
-									}
-								}
-								return false;
-							}
-						?>
-						<div class="row pl-4 show_countries" style="display:{{ $show_countries }}">
-							<div class="col-md-12">
-								<select class="form-control tagging" multiple="multiple" name="selected_counrties[]">
-									<option>Country</option>
-								</select>
-							</div>
-						</div>
+						<textarea name="google_location" class="form-control" placeholder="Google Location" rows="4" required>{{ @$about->google_location }}</textarea>
+						<br>
 						<button class="btn btn-primary" type="submit">Save Changes</button>
 					</form>
 				</div>
