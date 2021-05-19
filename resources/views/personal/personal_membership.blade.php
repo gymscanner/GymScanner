@@ -237,15 +237,15 @@ Membership Plans @parent
                                                     <p style="text-align:center; color:#393939;"> {{ $v }}</p><hr style="border-top: 3px solid #f1f2f3!important;">
                                             <?php } } ?>
 
-                                            <div class="row" style="justify-content: center;">
+                                            <div class="col-lg-12 d-flex" style="justify-content: center;">
                                                 <a class="personal_membership_id" data-value="{{ $temp->id }}" style="color: green;" title="Edit">
-                                                    <i data-feather="edit" style="height: 3rem; width: auto!important;"></i>
-                                                </a>&nbsp;&nbsp;
+                                                    <i data-feather="edit" style="height: 2rem; width: auto!important;"></i>
+                                                </a>
 
-                                                <button type="button" class="btn btn-dark" style="font-weight:600;">{{ $temp->currency }}{{ $temp->price - $temp->discount }}</button>&nbsp;&nbsp;
+                                                <button type="button" class="btn btn-dark" style="font-weight:600;">{{ $temp->currency }}{{ $temp->price - $temp->discount }}</button>
 
-                                                <a onclick="return confirm_delete()" href="{{ route('personal_membership.delete',$temp->id)}}" style="color: red; cursor: pointer;" title="Delete">
-                                                    <i data-feather="trash" style="height: 3rem; width: auto!important;"></i>
+                                                <a onclick="return confirm_delete()" href="{{ route('personal_membership.delete', $temp->id)}}" style="color: red; cursor: pointer;" title="Delete">
+                                                    <i data-feather="trash" style="height: 2rem; width: auto!important;"></i>
                                                 </a>
                                             </div>
                                         </div>
