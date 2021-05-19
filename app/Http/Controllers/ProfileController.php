@@ -2130,7 +2130,9 @@ $first_notification = DB::table('notifications')
 
                 'select_country' => @$request->select_country_type,
 
-                'countries' => @json_encode($request->selected_counrties),
+                'countries' => @json_encode(@$request->selected_counrties),
+
+                'google_location' => @$request->google_location,
 
                 'updated_at' => date('Y-m-d h:i:s')
 
@@ -2147,7 +2149,9 @@ $first_notification = DB::table('notifications')
 
                 'select_country' => @$request->select_country_type,
                 
-                'countries' => @json_encode($request->selected_counrties),
+                'countries' => @json_encode(@$request->selected_counrties),
+
+                'google_location' => @$request->google_location,
 
                 'created_at' => date('Y-m-d h:i:s')
 
@@ -2190,10 +2194,53 @@ $first_notification = DB::table('notifications')
 
     }
 
+    /**
+     * render the status page for deactivate account
+     *
+     * @since 2021-05-18
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function status()
+    {
+        $userid = auth()->user()->id;
+        if (@$userid) {
+            $loggedin_user = User::where('id', $userid)->first();
+        }else{
+            $loggedin_user = [];
+        }
 
-    
+        return view('user/status', compact('loggedin_user'));
+    }
 
+    /**
+     * update account status.
+     *
+     * @since 2021-05-18
+     * @author Nemanja
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function change_myaccount_status(Request $request)
+    {
+        if (@$request->userid) {
+            $userRecord = User::where('id', $request->userid)->first();
+            if (@$userRecord) {
+                if (@$request->status == 1) {
+                    $userRecord->active = 1;
+                    $userRecord->update();
 
-    
-    
+                    return response()->json(['msg' => 'Your Account is activated now.']);
+                }else{
+                    $userRecord->active = 2;
+                    $userRecord->update();
+
+                    return response()->json(['msg' => 'Your Account is Deactivated now.']);
+                }
+            }else{
+                return response()->json(['msg' => 'Not found user account.']);
+            }
+        }
+    }
 }

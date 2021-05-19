@@ -56,6 +56,14 @@ Route::post('myprofile/submit_brand_name)', 'ProfileController@submit_brand_name
 Route::post('myprofile/save_brand_info)', 'ProfileController@save_brand_info')->name('save_brand_info');
 Route::post('myprofile/submit_brand_image)', 'ProfileController@submit_brand_image')->name('submit_brand_image');
 Route::get('myprofile/branding', 'ProfileController@branding')->name('branding.index');
+
+
+// deactivate account 
+Route::get('myaccount/status', 'ProfileController@status')->name('myaccount.status');
+Route::post('myaccount/change_myaccount_status', 'ProfileController@change_myaccount_status')->name('myaccount.change_myaccount_status');
+
+
+
 // Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 // Route::resource('users', 'UsersController');
 
