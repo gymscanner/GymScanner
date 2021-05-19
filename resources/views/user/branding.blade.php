@@ -23,7 +23,7 @@
 
     .tooltips .tooltiptext {
         visibility: hidden;
-        width: 25rem;
+        width: 30rem;
         background-color: black;
         color: #fff;
         text-align: center;
@@ -137,9 +137,11 @@
                         @foreach($youtube as $key => $v)
 	                        <div class="col-lg-12 mb-2">
 	                            <div class="embed-responsive embed-responsive-16by9">
-	                                <video width="260" height="100" controls autoplay>
-		                                <source src="{{ $v->name }}" type="video/mp4">
-		                            </video>                         
+	                                <!-- <video width="260" height="100" controls autoplay>
+		                                <source src="{{ $v->name }}" type="video/mp4">https://www.youtube.com/embed/tgbNymZ7vqY
+		                            </video>  <br> -->
+		                            <iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+									</iframe>                       
 	                            </div>
 	                        </div>
 	                        <br>
@@ -162,7 +164,7 @@
 				<div class="row">
 					
 					<div class="col-lg-6 d-flex">
-						<h3 class="font-size:15px;color:#393939;font-weight:600;">Photos</h3>
+						<h3 class="font-size:15px;color:#393939;font-weight:600;">Photos&nbsp;</h3>
 
 						<div class="tooltips mt-2">
                             <i class="fa fa-question-circle"></i>&nbsp;&nbsp;
