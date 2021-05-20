@@ -733,7 +733,7 @@
             var match = url.match(regExp);
             if (match && match[2].length == 11) {
             	const videoId = getId(url);
-				const videoEmbedlink = "https:://www.youtube.com/embed/"+ videoId;
+				const videoEmbedlink = "https://www.youtube.com/embed/"+ videoId;
 				
             	if (flag == 1) {
             		$('.youtube_link').val(videoEmbedlink);

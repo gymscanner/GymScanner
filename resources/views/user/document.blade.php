@@ -23,75 +23,37 @@ Documents @parent
         padding: 0 10px;
     }
 </style>
+<div class="row layout-top-spacing w-100">
+    <div class="statbox widget box box-shadow w-100">
+        <div class="widget-header">                                
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                    <h4 style="font-size: 26px;color: #393939;font-weight: 600;font-family: 'Nunito';">Document Upload</h4>
+                </div>
+            </div>
+        </div>
+        <div class="widget-content widget-content-area">
+            <form  action="{{ route('upload_document')}}" method="post" enctype="multipart/form-data" class="dropzone" id="dropzone">
+            @csrf
+                <div class="form-group">
+                    <label for="formGroupExampleInput">
+                        @if(auth()->user()->role==2)
 
-        <!--<div class="container"> -->
+                            Please upload your Gym License :
 
-            <div class="row layout-top-spacing w-100">
+                        @elseif(auth()->user()->role==3)
 
-                <!-- <div id="basic" class="col-lg-12 col-sm-12 col-12 layout-spacing"> -->
-                    <div class="statbox widget box box-shadow w-100">
-                       
-                        <div class="widget-header">                                
-                            <div class="row">
-                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <h4 style="font-size: 26px;color: #393939;font-weight: 600;font-family: 'Nunito';">Document Upload</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-content widget-content-area">
-                            <form  action="{{ route('upload_document')}}" method="post" enctype="multipart/form-data" class="dropzone" id="dropzone">
-                            @csrf
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">
-                                    @if(auth()->user()->role==2)
+                            Please upload your Personal ID :
 
-                                        Please upload your Gym License :
-
-                                    @elseif(auth()->user()->role==3)
-
-                                        Please upload your Personal ID :
-
-                                    @endif
-                                    </label>
-                                     <!--<a href="{{($document)?URL::asset('upload/documents/'.$document->document_path):''}}" target="_blank">{{($document)?$document->document_path:'No document uploaded'}}</a>-->
-                                </div>
-                                
-                            </form>
-
-                            <div class="row mt-5 photo_uploading_section">
-                                <div class="col-md-6">
-                                    <h5>Uploading</h5>
-                                    <div class="mt-3">
-                                        <i class="fa fa-images fa-2x"></i>
-                                        <p class="d-inline filename">Photo.jpg <span>(2.0 MB)</span></p>
-                                        <a href="#!"><i class="fa fa-trash"></i></a>
-                                        <div class="ldBar" data-stroke="data:ldbar/res,gradient(0,1,#f99,#ff9)" data-value="50"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Uploading</h5>
-                                    <div class="mt-3">
-                                        <i class="fa fa-images fa-2x"></i>
-                                        <p class="d-inline filename">Photo.jpg <span>(2.0 MB)</span></p>
-                                        <a href="#!"><i class="fa fa-trash"></i></a>
-                                        <div class="ldBar" data-stroke="data:ldbar/res,gradient(0,1,#f99,#ff9)" data-value="50"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                <!-- </div> -->
+                        @endif
+                    </label>
+                     <!--<a href="{{($document)?URL::asset('upload/documents/'.$document->document_path):''}}" target="_blank">{{($document)?$document->document_path:'No document uploaded'}}</a>-->
+                </div>
                 
-           
-            
-
-           
-            
-        <!-- </div> -->
-    
-
+            </form>
+        </div>
+    </div>
+</div>
 @stop
 @section('footer_scripts')
 <script type="text/javascript">
