@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-4 form-group mb-4">
                         <label for="currency">Currency <span class="text-danger">*</span></label>
-                        <select class="form-control" id="currency" required="" name="currency">
+                        <select class="form-control" id="currency" required="" name="currency" style="font-style: normal!important;; font-family: Nunito;">
                             <option value="" selected="" disabled="">Select...</option>
                             <option>USD($)</option>
                             <option>Euro(€)</option>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="duration">Duration<span class="text-danger">*</span></label>
-                    <select class="form-control" id="duration" required="" name="duration">
+                    <select class="form-control" id="duration" required="" name="duration" style="font-style: normal!important;; font-family: Nunito;">
                         <option value="" selected="" disabled="">Select...</option>
                         <option>1 day</option>
                         <option>2 days</option>
