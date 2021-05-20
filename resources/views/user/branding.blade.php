@@ -290,7 +290,7 @@
 							@csrf
 							<div class="form-group">
 								<label>Link</label>
-								<input type="text" class="form-control brand_link youtube_link" name="link" id="edit_brand_links">
+								<input type="text" class="form-control brand_link youtube_edit_link" name="link" id="edit_brand_links">
 								<input type="hidden" name="brand_link_id" id="brand_link_id">
 							</div>
 							
@@ -722,14 +722,24 @@
 
     function validateYouTubeUrlInAdd(flag)
 	{
-	    var url = $('.youtube_link').val();
+		if (flag == 1) {
+			var url = $('.youtube_link').val();	
+		}else{
+			var url = $('.youtube_edit_link').val();
+		}
+	    
         if (url) {
             var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
             var match = url.match(regExp);
             if (match && match[2].length == 11) {
+            	const videoId = getId(url);
+				const videoEmbedlink = "https:://www.youtube.com/embed/"+ videoId;
+				
             	if (flag == 1) {
+            		$('.youtube_link').val(videoEmbedlink);
             		$('#AddBrandsLinksModal .btn-primary').click();	
             	}else{
+            		$('.youtube_edit_link').val(videoEmbedlink);
             		$('#EditBrandsLinksModal .btn-primary').click();
             	}
             }
@@ -767,6 +777,15 @@
 			};
             toastr.warning(mes, title); //info, success, warning, error
         }
+	}
+
+	function getId(url) {
+	    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+	    const match = url.match(regExp);
+
+	    return (match && match[2].length === 11)
+	      ? match[2]
+	      : null;
 	}
 
 	$('#AddBrandsLinksModal .btn-primary-temp').click(function(e) {
