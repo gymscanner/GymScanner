@@ -88,8 +88,15 @@ Bank @parent
                                             <p style="text-align:center;background-color:gray;color:black;">Account Number: {{$temp->bank_number}}</p>
                                             <p style="text-align:center;background-color:gray;color:black;"> Bank Swift Code: {{$temp->swift_code}}</p>
                                             <p style="text-align:center;background-color:gray;color:black;">IBAN: {{$temp->iban}}</p>
-                                            <a href="{{ route('myprofile.bank.delete',$temp->id)}}" style="color:black;">
-                                            <button type="button" class="btn btn-block btn-sm btn-warning">Delete</button>
+                                            <a onclick="event.preventDefault(); document.getElementById('delete-form-{{$temp->id}}').submit();" style="color:black; cursor: pointer;">
+
+                                                <form id="delete-form-{{$temp->id}}" action="{{ route('myprofile.bank.delete', $temp->id) }}" method="POST" style="display: none;">
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    @csrf
+                                                </form>
+
+                                                <button type="button" class="btn btn-block btn-sm btn-warning">Delete</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

@@ -244,9 +244,14 @@ Membership Plans @parent
 
                                                 <button type="button" class="btn btn-dark" style="font-weight:600;">{{ $temp->currency }}{{ $temp->price - $temp->discount }}</button>
 
-                                                <a onclick="return confirm_delete()" href="{{ route('personal_membership.delete', $temp->id)}}" style="color: red; cursor: pointer;" title="Delete">
+                                                <a onclick="return confirm_delete()" style="color: red; cursor: pointer;" title="Delete">
                                                     <i data-feather="trash" style="height: 2rem; width: auto!important;"></i>
                                                 </a>
+
+                                                <form id="delete-form" action="{{ route('personal_membership.delete', $temp->id) }}" method="POST" style="display: none;">
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    @csrf
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -428,6 +433,7 @@ Membership Plans @parent
 
         function confirm_delete() {
             if(confirm('Are you sure you want to delete this plan?')) {
+                $('#delete-form').submit();
                 return true;
             }
             return false;

@@ -90,8 +90,14 @@
                                 <p style="text-align:center; color:black;background-color:gray;"> Price:   {{$temp->price.$temp->currency}}</p>
                                 <p style="text-align:center;background-color:black;color:white;">Duration: {{$temp->duration}}</p>
                                 <p style="text-align:center;background-color:lightblue;color:black;">Facility: {{$temp->facility}}</p>
-                                <a href="{{ route('touristpass.delete',$temp->id)}}" style="color:black;">
-                                <button type="button" class="btn btn-block btn-sm btn-warning">Delete</button></a>
+                                <a style="color:black; cursor: pointer;" onclick="event.preventDefault(); document.getElementById('delete-form-{{$temp->id}}').submit();">
+
+                                    <form id="delete-form-{{$temp->id}}" action="{{ route('touristpass.delete', $temp->id) }}" method="POST" style="display: none;">
+                                        <input type="hidden" name="_method" value="delete">
+                                        @csrf
+                                    </form>
+                                    <button type="button" class="btn btn-block btn-sm btn-warning">Delete</button>
+                                </a>
                             </div>
                         </div>
                     </div>
