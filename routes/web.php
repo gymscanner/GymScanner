@@ -33,40 +33,6 @@ Route::get('/', function () {
     }
     return view('auth.register');
 });
-
-// Auth::routes();
-Auth::routes(['verify' => true]);
-
-/* Route::get('/', function () {
-    return back();
-})->middleware('auth'); */
-
-
-//mybrandroutes
-Route::post('myprofile/upload_brand_photos)', 'ProfileController@upload_brand_photos')->name('upload_brand_photos');
-Route::post('myprofile/brand_photos_delete)', 'ProfileController@brand_photos_delete')->name('brand_photos_delete');
-Route::post('myprofile/submit_brand_links)', 'ProfileController@submit_brand_links')->name('submit_brand_links');
-Route::post('myprofile/submit_brand_certificates)', 'ProfileController@submit_brand_certificates')->name('submit_brand_certificates');
-Route::post('myprofile/update_brand_links)', 'ProfileController@update_brand_certificates')->name('update_brand_links');
-Route::post('myprofile/delete_brand_links)', 'ProfileController@delete_brand_certificates')->name('delete_brand_links');
-
-Route::get('myprofile/getBrandingData)', 'ProfileController@getBrandingData')->name('getBrandingData');
-Route::post('myprofile/delete_brand_photos)', 'ProfileController@delete_brand_photos')->name('delete_brand_photos');
-Route::post('myprofile/submit_brand_name)', 'ProfileController@submit_brand_name')->name('submit_brand_name');
-Route::post('myprofile/save_brand_info)', 'ProfileController@save_brand_info')->name('save_brand_info');
-Route::post('myprofile/submit_brand_image)', 'ProfileController@submit_brand_image')->name('submit_brand_image');
-Route::get('myprofile/branding', 'ProfileController@branding')->name('branding.index');
-
-
-// deactivate account 
-Route::get('myaccount/status', 'ProfileController@status')->name('myaccount.status');
-Route::post('myaccount/change_myaccount_status', 'ProfileController@change_myaccount_status')->name('myaccount.change_myaccount_status');
-
-
-
-// Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-// Route::resource('users', 'UsersController');
-
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -88,11 +54,65 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-// Route::group(['middleware' => 'verified'], function () {
-    // Route::group(['middleware' => 'auth'], function () {
+Auth::routes(['verify' => true]);
+
+
+Route::group(['middleware' => 'loggedin'], function () {
+    //mybrandroutes
+    Route::post('myprofile/upload_brand_photos)', 'ProfileController@upload_brand_photos')->name('upload_brand_photos');
+    Route::post('myprofile/brand_photos_delete)', 'ProfileController@brand_photos_delete')->name('brand_photos_delete');
+    Route::post('myprofile/submit_brand_links)', 'ProfileController@submit_brand_links')->name('submit_brand_links');
+    Route::post('myprofile/submit_brand_certificates)', 'ProfileController@submit_brand_certificates')->name('submit_brand_certificates');
+    Route::post('myprofile/update_brand_links)', 'ProfileController@update_brand_certificates')->name('update_brand_links');
+    Route::post('myprofile/delete_brand_links)', 'ProfileController@delete_brand_certificates')->name('delete_brand_links');
+
+    Route::get('myprofile/getBrandingData)', 'ProfileController@getBrandingData')->name('getBrandingData');
+    Route::post('myprofile/delete_brand_photos)', 'ProfileController@delete_brand_photos')->name('delete_brand_photos');
+    Route::post('myprofile/submit_brand_name)', 'ProfileController@submit_brand_name')->name('submit_brand_name');
+    Route::post('myprofile/save_brand_info)', 'ProfileController@save_brand_info')->name('save_brand_info');
+    Route::post('myprofile/submit_brand_image)', 'ProfileController@submit_brand_image')->name('submit_brand_image');
+    Route::get('myprofile/branding', 'ProfileController@branding')->name('branding.index');
+
+
+    // deactivate account 
+    Route::get('myaccount/status', 'ProfileController@status')->name('myaccount.status');
+    Route::post('myaccount/change_myaccount_status', 'ProfileController@change_myaccount_status')->name('myaccount.change_myaccount_status');
+
+    Route::get('contact_us','ProfileController@contact_us')->name('profile.contact_us');
+    Route::post('contact_us','ProfileController@contact_us_mail')->name('profile.contact_us_mail');
+
+    Route::get('myprofile/changepass', 'ProfileController@change_pass')->name('myprofile.changepass');
+    Route::post('myprofile/save_pass)', 'ProfileController@save_pass')->name('myprofile.save_pass');
+    //membership
+    Route::get('membership', 'ProfileController@membership_index')->name('membership.index');
+
+    //added by Nemanja
+    Route::get('membership/getPlaninfor', 'ProfileController@getGym_membership')->name('membership.getGym_membership');
+        
+    Route::post('profile/membership', 'ProfileController@membership')->name('membership');
+    Route::get('profile/membership/edit/{id}', 'ProfileController@membership_edit')->name('membership.edit');
+    Route::post('profile/membership_update', 'ProfileController@membership_update')->name('membership_update');
+    Route::get('profile/membership/delete/{id}', 'ProfileController@membership_del')->name('membership.delete');
+    //bank
+    Route::get('myprofile/bank', 'ProfileController@bank')->name('myprofile.bank');
+    Route::post('myprofile/bank', 'ProfileController@bank_update')->name('myprofile.bank.update');
+    Route::get('myprofile/bank_delete/{id}', 'ProfileController@bank_delete')->name('myprofile.bank.delete');
+
+    Route::get('myprofile/document', 'ProfileController@document')->name('myprofile.document');
+    Route::post('myprofile/upload_document)', 'ProfileController@upload_document')->name('upload_document');
+    Route::post('myprofile/document_delete)', 'ProfileController@document_delete')->name('document_delete');
+
+    Route::get('myprofile/sumbit_admin','ProfileController@submit_admin')->name('myprofile.sumbit_admin');
+    Route::get('profile/send_notification_admin', 'ProfileController@send_notification_admin')->name('send_notification_admin');
+
+
+    //approve_complete_profile
+    Route::post('profile/approve_complete_profile', 'ProfileController@approve_complete_profile')->name('profilecontroller.approve_complete_profile');
+});
+    
+
 Route::group(['middleware' => 'gym'], function () {
     Route::get('myprofile', 'ProfileController@index')->name('myprofile')->middleware('verified');
-    // Route::get('myprofile', 'ProfileController@index')->name('myprofile');
     //avatar
     Route::post('profile/avatar', 'ProfileController@avatar')->name('avatar');
     //company
@@ -152,9 +172,6 @@ Route::group(['middleware' => 'admin'], function () {
     });
 });
 
-Route::get('contact_us','ProfileController@contact_us')->name('profile.contact_us');
-Route::post('contact_us','ProfileController@contact_us_mail')->name('profile.contact_us_mail');
-
 Route::group(['middleware' => 'trainer'], function () {
     //personal trainer
     Route::get('personal_myprofile', 'PersonalController@index')->name('personal_myprofile');
@@ -185,40 +202,10 @@ Route::group(['middleware' => 'trainer'], function () {
 
      //my branding
     Route::get('personal_myprofile/my_branding', 'PersonalController@my_branding')->name('personal_myprofile.my_branding');
-
 });
 
-
-Route::get('myprofile/changepass', 'ProfileController@change_pass')->name('myprofile.changepass');
-Route::post('myprofile/save_pass)', 'ProfileController@save_pass')->name('myprofile.save_pass');
-//membership
-Route::get('membership', 'ProfileController@membership_index')->name('membership.index');
-
-//added by Nemanja
-Route::get('membership/getPlaninfor', 'ProfileController@getGym_membership')->name('membership.getGym_membership');
-    
-Route::post('profile/membership', 'ProfileController@membership')->name('membership');
-Route::get('profile/membership/edit/{id}', 'ProfileController@membership_edit')->name('membership.edit');
-Route::post('profile/membership_update', 'ProfileController@membership_update')->name('membership_update');
-Route::get('profile/membership/delete/{id}', 'ProfileController@membership_del')->name('membership.delete');
-//bank
-Route::get('myprofile/bank', 'ProfileController@bank')->name('myprofile.bank');
-Route::post('myprofile/bank', 'ProfileController@bank_update')->name('myprofile.bank.update');
-Route::get('myprofile/bank_delete/{id}', 'ProfileController@bank_delete')->name('myprofile.bank.delete');
-
-Route::get('myprofile/document', 'ProfileController@document')->name('myprofile.document');
-Route::post('myprofile/upload_document)', 'ProfileController@upload_document')->name('upload_document');
-Route::post('myprofile/document_delete)', 'ProfileController@document_delete')->name('document_delete');
-
-Route::get('myprofile/sumbit_admin','ProfileController@submit_admin')->name('myprofile.sumbit_admin');
-Route::get('profile/send_notification_admin', 'ProfileController@send_notification_admin')->name('send_notification_admin');
-
-
-//approve_complete_profile
-Route::post('profile/approve_complete_profile', 'ProfileController@approve_complete_profile')->name('profilecontroller.approve_complete_profile');
-
 Route::get('/route-cache', function() {
-     Artisan::call('cache:clear');
+    Artisan::call('cache:clear');
     echo '<h1>Cache facade value cleared</h1>';
 
     Artisan::call('route:clear');
@@ -230,4 +217,4 @@ Route::get('/route-cache', function() {
     Artisan::call('config:cache');
     return '<h1>Clear Config cleared</h1>';
 
- });
+});
