@@ -211,7 +211,7 @@
 
             <ul class="navbar-item flex-row ml-md-auto">
 
-                <li class="nav-item dropdown language-dropdown">
+                <!-- <li class="nav-item dropdown language-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('mytemp/assets/img/england2.png') }}" class="flag-width" alt="flag"  style="width:25px;height:19px;">
                     </a>
@@ -219,7 +219,7 @@
                        <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{ asset('mytemp/assets/img/romanian.png') }}" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Romanian</span></a>
                         <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{ asset('mytemp/assets/img/england2.png') }}" class="flag-width" alt="flag" style="width:25px!important;"> <span class="align-self-center">&nbsp;English</span></a>
                     </div>
-                </li>
+                </li> -->
 
                 <!--<li class="nav-item dropdown message-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="messageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
