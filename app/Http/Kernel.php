@@ -136,6 +136,8 @@ class Kernel extends HttpKernel
 
         'admin_verify' => \App\Http\Middleware\AdminVerify::class,
 
+        'loggedin' => \App\Http\Middleware\LoggedIn::class,
+
     ];
 
 }
