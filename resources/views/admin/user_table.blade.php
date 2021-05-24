@@ -60,13 +60,32 @@ Users @parent
                                             @endif
                                         </td>
                                         <td>
+                                            <a href="{{ route('admin.user_edit',$temp->id)}}" class="mr-3"  data-toggle="tooltip" data-placement="top" title="edit"> 
+                                                <i  data-feather="edit-3"></i> 
+                                            </a>
+                                            <a href="{{ route('admin.user_change_pass',$temp->id)}}" class="mr-3"  data-toggle="tooltip" data-placement="top" title="Change Password"> 
+                                                <i data-feather="refresh-ccw"></i> 
+                                            </a>
 
-                                        <a href="{{ route('admin.user_edit',$temp->id)}}" class="mr-3"  data-toggle="tooltip" data-placement="top" title="edit"> <i  data-feather="edit-3"></i> </a>
-                                            <a href="{{ route('admin.user_change_pass',$temp->id)}}" class="mr-3"  data-toggle="tooltip" data-placement="top" title="Change Password"> <i data-feather="refresh-ccw"></i> </a>
-                                            @if($temp->role == 2) <a href="{{ route('admin.gym_delete', $temp->id)}}"  data-toggle="tooltip" data-placement="top" title="delete"> <i data-feather="trash-2"></i> </a>
-                                            @else <a href="{{ route('admin.user_delete', $temp->id)}}"  data-toggle="tooltip" data-placement="top" title="delete"> <i data-feather="trash-2"></i> </a>
+                                            @if($temp->role == 2) 
+                                                <a data-toggle="tooltip" data-placement="top" title="delete" style="color:black; cursor: pointer;" onclick="event.preventDefault(); document.getElementById('delete-form-{{$temp->id}}').submit();"> 
+                                                    <i data-feather="trash-2"></i> 
+                                                </a>
+
+                                                <form id="delete-form-{{$temp->id}}" action="{{ route('admin.gym_delete', $temp->id) }}" method="POST" style="display: none;">
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    @csrf
+                                                </form>
+                                            @else 
+                                                <a data-toggle="tooltip" data-placement="top" title="delete" style="color:black; cursor: pointer;" onclick="event.preventDefault(); document.getElementById('delete-userform-{{$temp->id}}').submit();"> 
+                                                    <i data-feather="trash-2"></i> 
+                                                </a>
+
+                                                <form id="delete-userform-{{$temp->id}}" action="{{ route('admin.user_delete', $temp->id) }}" method="POST" style="display: none;">
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    @csrf
+                                                </form>
                                             @endif
-
                                         </td>
                                     </tr>
                                     @endif

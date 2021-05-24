@@ -92,11 +92,11 @@ Route::group(['middleware' => 'loggedin'], function () {
     Route::post('profile/membership', 'ProfileController@membership')->name('membership');
     Route::get('profile/membership/edit/{id}', 'ProfileController@membership_edit')->name('membership.edit');
     Route::post('profile/membership_update', 'ProfileController@membership_update')->name('membership_update');
-    Route::get('profile/membership/delete/{id}', 'ProfileController@membership_del')->name('membership.delete');
+    Route::delete('profile/membership/delete/{id}', 'ProfileController@membership_del')->name('membership.delete');
     //bank
     Route::get('myprofile/bank', 'ProfileController@bank')->name('myprofile.bank');
     Route::post('myprofile/bank', 'ProfileController@bank_update')->name('myprofile.bank.update');
-    Route::get('myprofile/bank_delete/{id}', 'ProfileController@bank_delete')->name('myprofile.bank.delete');
+    Route::delete('myprofile/bank_delete/{id}', 'ProfileController@bank_delete')->name('myprofile.bank.delete');
 
     Route::get('myprofile/document', 'ProfileController@document')->name('myprofile.document');
     Route::post('myprofile/upload_document)', 'ProfileController@upload_document')->name('upload_document');
@@ -129,7 +129,7 @@ Route::group(['middleware' => 'gym'], function () {
     
     Route::get('myprofile/touristpass', 'ProfileController@touristpass')->name('myprofile.touristpass');
     Route::post('myprofile/publish_tourist', 'ProfileController@touristpass_save')->name('publish_tourist');
-    Route::get('myprofile/touristpass/delete/{id}', 'ProfileController@touristpass_delete')->name('touristpass.delete');
+    Route::delete('myprofile/touristpass/delete/{id}', 'ProfileController@touristpass_delete')->name('touristpass.delete');
 });
 
 Route::group(['middleware' => 'admin'], function () {
@@ -144,14 +144,14 @@ Route::group(['middleware' => 'admin'], function () {
         Route::get('admin/edit/{id}', 'AdminController@edit')->name('admin.user_edit');
         Route::get('admin/change_pass/{id}', 'AdminController@change_pass')->name('admin.user_change_pass');
         Route::post('admin/save_pass', 'AdminController@save_pass')->name('admin.save_pass');
-        Route::get('admin/delete/{id}', 'AdminController@destroy')->name('admin.user_delete');
-        Route::get('admin/gym_delete/{id}', 'AdminController@gym_destroy')->name('admin.gym_delete');
+        Route::delete('admin/delete/{id}', 'AdminController@destroy')->name('admin.user_delete');
+        Route::delete('admin/gym_delete/{id}', 'AdminController@gym_destroy')->name('admin.gym_delete');
         Route::post('admin/update_gym', 'AdminController@update_gym')->name('admin.update_gym');
         Route::post('admin/update_personal', 'AdminController@update_personal')->name('admin.update_personal');
         
         Route::get('admin/membership', 'AdminController@membership')->name('admin.membership');
         Route::get('admin/membership_edit/{id}', 'AdminController@membership_edit')->name('admin.membership_edit');
-        Route::get('admin/membership_delete/{id}', 'AdminController@membership_delete')->name('admin.membership_delete');
+        Route::delete('admin/membership_delete/{id}', 'AdminController@membership_delete')->name('admin.membership_delete');
         Route::post('admin/update_membership', 'AdminController@update_membership')->name('admin.update_membership');
 
         Route::get('admin/document', 'AdminController@document')->name('admin.document');
@@ -161,12 +161,12 @@ Route::group(['middleware' => 'admin'], function () {
 
         Route::get('admin/tourist', 'AdminController@tourist')->name('admin.tourist');
         Route::get('admin/tourist_edit/{id}', 'AdminController@tourist_edit')->name('admin.tourist_edit');
-        Route::get('admin/tourist_delete/{id}', 'AdminController@tourist_delete')->name('admin.tourist_delete');
+        Route::delete('admin/tourist_delete/{id}', 'AdminController@tourist_delete')->name('admin.tourist_delete');
         Route::post('admin/update_tourist', 'AdminController@update_tourist')->name('admin.update_tourist');
 
         Route::get('admin/bank', 'AdminController@bank')->name('admin.bank');
         Route::get('admin/bank_edit/{id}', 'AdminController@bank_edit')->name('admin.bank_edit');
-        Route::get('admin/bank_delete/{id}', 'AdminController@bank_delete')->name('admin.bank_delete');
+        Route::delete('admin/bank_delete/{id}', 'AdminController@bank_delete')->name('admin.bank_delete');
         Route::post('admin/update_bank', 'AdminController@update_bank')->name('admin.update_bank');
 
     });
@@ -191,14 +191,14 @@ Route::group(['middleware' => 'trainer'], function () {
     Route::get('personal_membership/getPlaninfor', 'PersonalController@getPersonal_membership')->name('personal_membership.getPersonal_membership');
 
     Route::post('personal_membership/update_personal_membership', 'PersonalController@update_personal_membership')->name('update_personal_membership');
-    Route::get('personal_profile/membership/delete/{id}', 'PersonalController@personal_membership_del')->name('personal_membership.delete');
+    Route::delete('personal_profile/membership/delete/{id}', 'PersonalController@personal_membership_del')->name('personal_membership.delete');
     //banner
     Route::post('personal_profile/banner', 'PersonalController@banner')->name('personal_banner');
-    Route::get('personal_profile/banner/delete/{id}', 'PersonalController@banner_del')->name('personal_banner.delete');
+    Route::delete('personal_profile/banner/delete/{id}', 'PersonalController@banner_del')->name('personal_banner.delete');
     //bank account
     Route::get('personal_profile/bank', 'PersonalController@bank')->name('personal_profile.bank');
     Route::post('personal_profile/bank', 'PersonalController@bank_update')->name('personal_profile.bank.update');
-    Route::get('personal_profile/bank_delete/{id}', 'PersonalController@bank_delete')->name('personal_profile.bank.delete');
+    Route::delete('personal_profile/bank_delete/{id}', 'PersonalController@bank_delete')->name('personal_profile.bank.delete');
 
      //my branding
     Route::get('personal_myprofile/my_branding', 'PersonalController@my_branding')->name('personal_myprofile.my_branding');
