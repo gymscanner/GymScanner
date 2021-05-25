@@ -291,228 +291,241 @@ class PersonalController extends Controller
 
         if(!empty($request->avatar))
         {
+            DB::beginTransaction();
+        
+            try {
+                if(@getImageSize($request->avatar)[0] != 300 || @getImageSize($request->avatar)[1] != 300)
+                    return back()->with('danger','Image must be in 300px*300px');
+                    
+                $imageName = time().'.'.$request->avatar->extension();  
+                $request->avatar->move(public_path('upload/avatar'), $imageName);
+                $path = "upload/avatar/".$imageName;
+                $avatar = Personal_avatar::where('user_id',auth()->user()->id)->first();
+                if($avatar){
+                    $avatar->avatar = $path;
+                    $avatar->user_id = auth()->user()->id;
+                    $avatar->save();
+                }else{
+                    $avatar_data = new personal_avatar();
+                    $avatar_data->avatar = $path;
+                    $avatar_data->user_id = auth()->user()->id;
+                    $avatar_data->save();
+                }
 
-            if(@getImageSize($request->avatar)[0] != 300 || @getImageSize($request->avatar)[1] != 300)
-                return back()->with('danger','Image must be in 300px*300px');
-                
-            $imageName = time().'.'.$request->avatar->extension();  
-            $request->avatar->move(public_path('upload/avatar'), $imageName);
-            $path = "upload/avatar/".$imageName;
-            $avatar = Personal_avatar::where('user_id',auth()->user()->id)->first();
-            if($avatar){
-                $avatar->avatar = $path;
-                $avatar->user_id = auth()->user()->id;
-                $avatar->save();
-            }else{
-                $avatar_data = new personal_avatar();
-                $avatar_data->avatar = $path;
-                $avatar_data->user_id = auth()->user()->id;
-                $avatar_data->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+
+                throw $e;
             }
 
             return back()->with('success_img','Profile image has updated');
         }
         else
         {
-
             return back()->with('danger','Please choose a profile image');
         }
     }
     //company
     public function personal_company(Request $request){
+        DB::beginTransaction();
         
-    if(auth()->user()->role!=1){
+        try {
+            if(auth()->user()->role!=1){
 
-        $first_notification = DB::table('notifications')
-            ->where('user_id',auth()->user()->id)
-            ->where('name','COMPLETE_PROFILE')
-            ->get();
-            if(!empty($first_notification)){
-
-                $admins = DB::table('users')->where('role', 1)->get();
-                //save into db notifiactions
-
-                foreach($admins as $key => $v)
-                {
-
-                    DB::table("notifications")->insert([
+                $first_notification = DB::table('notifications')
+                    ->where('user_id',auth()->user()->id)
+                    ->where('name','COMPLETE_PROFILE')
+                    ->get();
                     
-                    'user_id' => auth()->user()->id,
-                    'show_to' => $v->id,
-                    'name' => 'UPDATE_PROFILE',
-                    'value' => 'has updated profile'
-                    
-                    ]);
+                if(!empty($first_notification)){
 
+                    $admins = DB::table('users')->where('role', 1)->get();
+                    //save into db notifiactions
+
+                    foreach($admins as $key => $v)
+                    {
+
+                        DB::table("notifications")->insert([
+                        
+                            'user_id' => auth()->user()->id,
+                            'show_to' => $v->id,
+                            'name' => 'UPDATE_PROFILE',
+                            'value' => 'has updated profile'
+                        
+                        ]);
+
+                    }
+               
                 }
-           
             }
-    }
 
+            $company = Trainer::where('user_id', auth()->user()->id)->first();
+           
+            if($company){
+                $company->company_name      =   $request->company_name;
+                $company->country           =   $request->country;
+                $company->website           =   $request->website;
+                $company->email             =   $request->email;
+                $company->phone_number_code      =   $request->phone_number_code;
+                $company->phone_number_country      =   $request->phone_number_country;
+                $company->phone_number      =   $request->phone_number;
+                $company->gender            =   $request->gender;
+                $company->session           =   $request->session;
+                $company->personal_training =   $request->personal_training;
+                $company->group_training    =   $request->group_training;
+                $company->nutrition         =   $request->nutrition;
+                $company->boxing            =   $request->boxing;
+                $company->yoga              =   $request->yoga;
+                $company->meditation        =   $request->meditation;
+                $company->pilates           =   $request->pilates;
+                $company->stretching        =   $request->stretching;
+                $company->ballet            =   $request->ballet;
+                $company->one_training      =   $request->one_training;
+                $company->facebook          =   $request->facebook;
+                $company->instagram         =   $request->instagram;
+                $company->twitter           =   $request->twitter;
+                $company->youtube_link      =   $request->youtube_link;
+                $company->user_id           =   auth()->user()->id;
+                $company->save();
+            }else{
+                $company_data = new Trainer();
+                $company_data->company_name      =   $request->company_name;
+                $company_data->country           =   $request->country;
+                $company_data->website           =   $request->website;
+                $company_data->email             =   $request->email;
+                $company_data->phone_number_code      =   $request->phone_number_code;
+                $company_data->phone_number_country      =   $request->phone_number_country;            
+                $company_data->phone_number      =   $request->phone_number;            
+                $company_data->gender            =   $request->gender;
+                $company_data->session           =  $request->session;
+                $company_data->personal_training =  $request->personal_training;
+                $company_data->group_training    =  $request->group_training;
+                $company_data->nutrition         =  $request->nutrition;
+                $company_data->one_training      =  $request->one_training;
+                $company_data->boxing            =   $request->boxing;
+                $company_data->yoga              =   $request->yoga;
+                $company_data->meditation        =   $request->meditation;
+                $company_data->pilates           =   $request->pilates;
+                $company_data->stretching        =   $request->stretching;
+                $company_data->ballet            =   $request->ballet;
+                $company_data->facebook          =  $request->facebook;
+                $company_data->instagram         =  $request->instagram;
+                $company_data->twitter           =  $request->twitter;
+                $company_data->youtube_link      =   $request->youtube_link;
+                $company_data->user_id           =   auth()->user()->id;
+                $company_data->save();
+            }
 
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
 
-        $company = Trainer::where('user_id', auth()->user()->id)->first();
-       
-        if($company){
-            $company->company_name      =   $request->company_name;
-            //$company->telephone         =   $request->telephone;
-            $company->country           =   $request->country;
-            $company->website           =   $request->website;
-            $company->email             =   $request->email;
-            $company->phone_number_code      =   $request->phone_number_code;
-            $company->phone_number_country      =   $request->phone_number_country;
-            $company->phone_number      =   $request->phone_number;
-            $company->gender            =   $request->gender;
-            $company->session           =   $request->session;
-            $company->personal_training =   $request->personal_training;
-            $company->group_training    =   $request->group_training;
-            $company->nutrition         =   $request->nutrition;
-            $company->boxing            =   $request->boxing;
-            $company->yoga              =   $request->yoga;
-            $company->meditation        =   $request->meditation;
-            $company->pilates           =   $request->pilates;
-            $company->stretching        =   $request->stretching;
-            $company->ballet            =   $request->ballet;
-            $company->one_training      =   $request->one_training;
-            $company->facebook          =   $request->facebook;
-            $company->instagram         =   $request->instagram;
-            $company->twitter           =   $request->twitter;
-//            $company->youtube           =   $request->youtube;
-            $company->youtube_link      =   $request->youtube_link;
-            $company->user_id           =   auth()->user()->id;
-            $company->save();
-        }else{
-            $company_data = new Trainer();
-            $company_data->company_name      =   $request->company_name;
-            //$company_data->telephone         =   $request->telephone;
-            $company_data->country           =   $request->country;
-            $company_data->website           =   $request->website;
-            $company_data->email             =   $request->email;
-            $company_data->phone_number_code      =   $request->phone_number_code;
-            $company_data->phone_number_country      =   $request->phone_number_country;            
-            $company_data->phone_number      =   $request->phone_number;            
-            $company_data->gender            =   $request->gender;
-            $company_data->session           =  $request->session;
-            $company_data->personal_training =  $request->personal_training;
-            $company_data->group_training    =  $request->group_training;
-            $company_data->nutrition         =  $request->nutrition;
-            $company_data->one_training      =  $request->one_training;
-            $company_data->boxing            =   $request->boxing;
-            $company_data->yoga              =   $request->yoga;
-            $company_data->meditation        =   $request->meditation;
-            $company_data->pilates           =   $request->pilates;
-            $company_data->stretching        =   $request->stretching;
-            $company_data->ballet            =   $request->ballet;
-            $company_data->facebook          =  $request->facebook;
-            $company_data->instagram         =  $request->instagram;
-            $company_data->twitter           =  $request->twitter;
-//            $company_data->youtube           =   $request->youtube;
-            $company_data->youtube_link      =   $request->youtube_link;
-            $company_data->user_id           =   auth()->user()->id;
-            $company_data->save();
+            throw $e;
         }
-	    // Mail::send([], [], function($message) {
-        //     $message->from('vendors@gymscanner.com', 'GymScannerNotification');
-        //     $message->to('admin@gymscanner.com','admin')->subject("Notification")
-		// 	->setBody("<head><meta http-equiv='Content-Language' content='en-us'>
-        //            <meta http-equiv='Content-Type' content='text/html; charset=windows-1252'>
-        //            </head><h1>'".auth()->user()->email."'New profile submited!</h1>", 'text/html');;
-        // });
+	    
         return back()->with('success','Changes saved successfully');
     }
     //membership
     public function personal_membership(Request $request){
+        DB::beginTransaction();
         
+        try {
+            if(auth()->user()->role!=1){
 
-        if(auth()->user()->role!=1){
+                $first_notification = DB::table('notifications')
+                ->where('user_id',auth()->user()->id)
+                ->where('name','COMPLETE_PROFILE')
+                ->get();
 
-            $first_notification = DB::table('notifications')
-            ->where('user_id',auth()->user()->id)
-            ->where('name','COMPLETE_PROFILE')
-            ->get();
+                if(!empty($first_notification)){
 
-            if(!empty($first_notification)){
+                    $admins = DB::table('users')->where('role', 1)->get();
+                    //save into db notifiactions
 
-                $admins = DB::table('users')->where('role', 1)->get();
-                //save into db notifiactions
-
-                // added by Nemanja
-                foreach($admins as $key => $v)
-                {
-                    if (@$request->membership_plan_id) {
-                        DB::table("notifications")->insert([
-                    
-                            'user_id' => auth()->user()->id,
-                            'show_to' => $v->id,
-                            'name' => 'UPDATE_MEMBERSHIP',
-                            'value' => 'has updated a membership plan'
+                    // added by Nemanja
+                    foreach($admins as $key => $v)
+                    {
+                        if (@$request->membership_plan_id) {
+                            DB::table("notifications")->insert([
                         
-                        ]);
-                    }else{
-                        DB::table("notifications")->insert([
-                        
-                            'user_id' => auth()->user()->id,
-                            'show_to' => $v->id,
-                            'name' => 'NEW_MEMBERSHIP',
-                            'value' => 'has submitted new membership plan'
-                        
-                        ]);
+                                'user_id' => auth()->user()->id,
+                                'show_to' => $v->id,
+                                'name' => 'UPDATE_MEMBERSHIP',
+                                'value' => 'has updated a membership plan'
+                            
+                            ]);
+                        }else{
+                            DB::table("notifications")->insert([
+                            
+                                'user_id' => auth()->user()->id,
+                                'show_to' => $v->id,
+                                'name' => 'NEW_MEMBERSHIP',
+                                'value' => 'has submitted new membership plan'
+                            
+                            ]);
+                        }
                     }
                 }
+
             }
 
-        }
+            $perk = explode(PHP_EOL, $request->perk);
+            // added by Nemanja
+            if (@$request->membership_plan_id) {
+                $membership = Personal_Membership::find($request->membership_plan_id);
 
-        $perk = explode(PHP_EOL, $request->perk);
-        // added by Nemanja
-        if (@$request->membership_plan_id) {
-            $membership = Personal_Membership::find($request->membership_plan_id);
+                $membership->price      =   $request->price;
+                $membership->currency      =   $request->currency;
+                $membership->duration   =   $request->duration;
+                $membership->service    =   $request->service;
+                $membership->perk       =   @json_encode($perk);
+                $membership->discount       =   $request->discount;
+                if($request->featured == "featured"){
+                    $membership->featured    =   $request->featured;
+                }else{
+                    $membership->featured    = "none";
+                }
+                if($request->app == "app"){
+                    $membership->app    =   $request->app;
+                }else{
+                    $membership->app    = "computer";
+                }
+                $membership->user_id    =   auth()->user()->id;
 
-            $membership->price      =   $request->price;
-            $membership->currency      =   $request->currency;
-            $membership->duration   =   $request->duration;
-            $membership->service    =   $request->service;
-            $membership->perk       =   @json_encode($perk);
-            $membership->discount       =   $request->discount;
-            if($request->featured == "featured"){
-                $membership->featured    =   $request->featured;
+                $membership->update();
             }else{
-                $membership->featured    = "none";
-            }
-            if($request->app == "app"){
-                $membership->app    =   $request->app;
-            }else{
-                $membership->app    = "computer";
-            }
-            $membership->user_id    =   auth()->user()->id;
+                $membership = new Personal_Membership;    
 
-            $membership->update();
-        }else{
-            $membership = new Personal_Membership;    
+                $membership->price      =   $request->price;
+                $membership->currency      =   $request->currency;
+                $membership->duration   =   $request->duration;
+                $membership->service    =   $request->service;
+                $membership->perk       =   @json_encode($perk);
+                $membership->discount       =   $request->discount;
+                if($request->featured == "featured"){
+                    $membership->featured    =   $request->featured;
+                }else{
+                    $membership->featured    = "none";
+                }
+                if($request->app == "app"){
+                    $membership->app    =   $request->app;
+                }else{
+                    $membership->app    = "computer";
+                }
+                $membership->user_id    =   auth()->user()->id;
 
-            $membership->price      =   $request->price;
-            $membership->currency      =   $request->currency;
-            $membership->duration   =   $request->duration;
-            $membership->service    =   $request->service;
-            $membership->perk       =   @json_encode($perk);
-            $membership->discount       =   $request->discount;
-            if($request->featured == "featured"){
-                $membership->featured    =   $request->featured;
-            }else{
-                $membership->featured    = "none";
+                $membership->save();
             }
-            if($request->app == "app"){
-                $membership->app    =   $request->app;
-            }else{
-                $membership->app    = "computer";
-            }
-            $membership->user_id    =   auth()->user()->id;
 
-            $membership->save();
-        }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }  
 
         return back()->with('success','Changes saved successfully');
-
     }
 
 
@@ -540,67 +553,70 @@ class PersonalController extends Controller
     }
 
     public function update_personal_membership (Request $request){
-
-        if(auth()->user()->role!=1){
-
-            $first_notification = DB::table('notifications')
-            ->where('user_id',auth()->user()->id)
-            ->where('name','COMPLETE_PROFILE')
-            ->get();
-
-            if(!empty($first_notification)){
-
-                 $admins = DB::table('users')->where('role', 1)->get();
-                //save into db notifiactions
-
-                foreach($admins as $key => $v)
-                {
-
-                    DB::table("notifications")->insert([
-                    
-                    'user_id' => auth()->user()->id,
-                    'show_to' => $v->id,
-                    'name' => 'UPDATE_MEMBERSHIP',
-                    'value' => 'has updated a membership plan'
-                    
-                    ]);
-
-                }
-                
-            }
+        DB::beginTransaction();
         
-        }
+        try {
+            if(auth()->user()->role!=1){
+
+                $first_notification = DB::table('notifications')
+                ->where('user_id',auth()->user()->id)
+                ->where('name','COMPLETE_PROFILE')
+                ->get();
+
+                if(!empty($first_notification)){
+
+                     $admins = DB::table('users')->where('role', 1)->get();
+                    //save into db notifiactions
+
+                    foreach($admins as $key => $v)
+                    {
+
+                        DB::table("notifications")->insert([
+                        
+                        'user_id' => auth()->user()->id,
+                        'show_to' => $v->id,
+                        'name' => 'UPDATE_MEMBERSHIP',
+                        'value' => 'has updated a membership plan'
+                        
+                        ]);
+
+                    }
+                    
+                }
+            
+            }
 
             $perk = explode(PHP_EOL, $request->perk);
 
-        $membership = Personal_Membership::find($request->id);
+            $membership = Personal_Membership::find($request->id);
 
-        $membership->price      =   $request->price;
-        $membership->currency   =   $request->currency;
-        $membership->duration   =   $request->duration;
-        $membership->service    =   $request->service;
-        $membership->perk       =   @json_encode($perk);
-        $membership->discount   =   $request->discount;
-        if($request->featured == "featured"){
-            $membership->featured    =   $request->featured;
-        }else{
-            $membership->featured    = "none";
-        }
-        if($request->app == "app") {
-            $membership->app    =   $request->app;
-        }else{
-            $membership->app    = "computer";
-        }
-        $membership->user_id    =   auth()->user()->id;
-        $membership->save();
+            $membership->price      =   $request->price;
+            $membership->currency   =   $request->currency;
+            $membership->duration   =   $request->duration;
+            $membership->service    =   $request->service;
+            $membership->perk       =   @json_encode($perk);
+            $membership->discount   =   $request->discount;
+            if($request->featured == "featured"){
+                $membership->featured    =   $request->featured;
+            }else{
+                $membership->featured    = "none";
+            }
+            if($request->app == "app") {
+                $membership->app    =   $request->app;
+            }else{
+                $membership->app    = "computer";
+            }
+            $membership->user_id    =   auth()->user()->id;
+            $membership->save();
 
-        //  $membership = Personal_Membership::where('user_id',auth()->user()->id)->get();
-         
-        // return view('personal.personal_membership')->with('membership', $membership)->with('success','Changes saved successfully');
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }  
 
         return redirect('personal_membership')->with('success','Changes saved successfully');
-        
-
     }
 
     public function personal_membership_del($id){
@@ -614,15 +630,25 @@ class PersonalController extends Controller
         return view('personal.bank')->with('bank', $bank);
     }
     public function bank_update(Request $request){
-        $bank = new Bank();
-        $bank->bank_name = $request->bank_name;
-        $bank->bank_number = $request->bank_number;
-        $bank->swift_code = $request->swift_code;
-        $bank->holder_name = $request->holder_name;
-        $bank->iban = $request->iban;
-        $bank->user_id = auth()->user()->id;
-        $bank->save();
+        DB::beginTransaction();
+        
+        try {
+            $bank = new Bank();
+            $bank->bank_name = $request->bank_name;
+            $bank->bank_number = $request->bank_number;
+            $bank->swift_code = $request->swift_code;
+            $bank->holder_name = $request->holder_name;
+            $bank->iban = $request->iban;
+            $bank->user_id = auth()->user()->id;
+            $bank->save();
 
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+        
         return back()->with('success','Changes saved successfully');
     }
     public function bank_delete($id){
