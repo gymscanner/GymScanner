@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ImageUpload;
 use Illuminate\Http\Request;
 use App\Models\Banner;
+use Illuminate\Support\Facades\DB;
+
 class ImageUploadController extends Controller
 {
     public function upload()
@@ -14,13 +16,24 @@ class ImageUploadController extends Controller
 
     public function store(Request $request)
     {
-        $image = $request->file('file');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('upload'), $imageName);
+        DB::beginTransaction();
+        
+        try {
+            $image = $request->file('file');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('upload'), $imageName);
 
-        $imageUpload = new Banner();
-        $imageUpload->image_path = $imageName;
-        $imageUpload->save();
+            $imageUpload = new Banner();
+            $imageUpload->image_path = $imageName;
+            $imageUpload->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+            
         return response()->json(['success' => $imageName]);
     }
 

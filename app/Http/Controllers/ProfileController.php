@@ -344,7 +344,6 @@ class ProfileController extends Controller
             'ZM'=>array('name'=>'ZAMBIA','code'=>'260'),
             'ZW'=>array('name'=>'ZIMBABWE','code'=>'263')
         );
-	//$this->send_email( "Login Success ", "Notification" );
 
         sort($countryArray);
 
@@ -364,17 +363,17 @@ class ProfileController extends Controller
     }
 
     public function getUserIpAddr(){
-    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
-        //ip from share internet
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-        //ip pass from proxy
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    }else{
-        $ip = $_SERVER['REMOTE_ADDR'];
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            //ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            //ip pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
-    return $ip;
-}
 
     public function membership_index(){
         $membership = Membership::where('user_id',auth()->user()->id)->get();
@@ -397,25 +396,34 @@ class ProfileController extends Controller
 
         if(!empty($request->avatar))
         {
+            DB::beginTransaction();
+        
+            try {
+                if(getImageSize($request->avatar)[0] != 300 || getImageSize($request->avatar)[1] != 300)
+                    return back()->with('danger','Image must be in 300px*300px');
 
-            if(getImageSize($request->avatar)[0] != 300 || getImageSize($request->avatar)[1] != 300)
-                return back()->with('danger','Image must be in 300px*300px');
+                $imageName = time().'.'.$request->avatar->extension();
+                $request->avatar->move(public_path('upload/avatar'), $imageName);
+                $path = "upload/avatar/".$imageName;
+                $avatar = Avatar::where('user_id',auth()->user()->id)->first();
+                if($avatar){
+                    $avatar->avatar = $path;
+                    $avatar->user_id = auth()->user()->id;
+                    $avatar->save();
+                }else{
+                    $avatar_data = new Avatar();
+                    $avatar_data->avatar = $path;
+                    $avatar_data->user_id = auth()->user()->id;
+                    $avatar_data->save();
+                }
 
-            $imageName = time().'.'.$request->avatar->extension();
-            $request->avatar->move(public_path('upload/avatar'), $imageName);
-            $path = "upload/avatar/".$imageName;
-            $avatar = Avatar::where('user_id',auth()->user()->id)->first();
-            if($avatar){
-                $avatar->avatar = $path;
-                $avatar->user_id = auth()->user()->id;
-                $avatar->save();
-            }else{
-                $avatar_data = new Avatar();
-                $avatar_data->avatar = $path;
-                $avatar_data->user_id = auth()->user()->id;
-                $avatar_data->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+
+                throw $e;
             }
-         
+
             return back()->with('success_img','Profile image has updated');
         }
         else
@@ -437,371 +445,371 @@ class ProfileController extends Controller
 
     //company
     public function company(Request $request) {
-
-
-
-
-if(auth()->user()->role!=1){
-
-$first_notification = DB::table('notifications')
-        ->where('user_id',auth()->user()->id)
-        ->where('name','COMPLETE_PROFILE')
-        ->get();
-
-        if(!empty($first_notification)){
-
-            $admins = DB::table('users')->where('role', 1)->get();
-            //save into db notifiactions
-
-            foreach($admins as $key => $v)
-            {
-
-                DB::table("notifications")->insert([
-                
-                'user_id' => auth()->user()->id,
-                'show_to' => $v->id,
-                'name' => 'UPDATE_PROFILE',
-                'value' => 'has updated profile'
-                
-                ]);
-
-            }
-            
-               
-
-        }
-
-}
-
-
-
-
-        if($request->hasfile('file')) {
-            
-            $image = $request->file('file');
-            if(getImageSize($image)[0] != 1280 || getImageSize($image)[1] != 780)
-                return response()->json(['error' => 'Error msg'], 404); // Status code here
-
-                
-            $imageName = $image->getClientOriginalName();
-            $image->move(public_path('upload'), $imageName);
-    
-            $imageUpload = new Banner();
-            $imageUpload->image_path = $imageName;
-            $imageUpload->user_id = auth()->user()->id;
-            $imageUpload->save();
-        } 
-
-        $company = Company::where('user_id', auth()->user()->id)->first();
-
-        if($request->all_check =="all") {
-
-                $mon_from   =   "0";
-                $mon_to     =   "24";
-
-                $tue_from   =   "0";
-                $tue_to     =   "24";
-           
-                $wed_from   =   "0";
-                $wed_to     =   "24";
-            
-                $thu_from   =   "0";
-                $thu_to     =   "24";
-            
-                $fri_from   =   "0";
-                $fri_to     =   "24";
-            
-                $sat_from   =   "0";
-                $sat_to     =   "24";
-            
-                $sun_from   =   "0";
-                $sun_to     =   "24";
-
-                $week_date   =   array("Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday");
-        }else if($request->has('week_date')){
-            if(in_array('Monday',$request->week_date)){
-                $mon_from = $request->mon_from;
-                $mon_to =   $request->mon_to;
-            }else{
-                $mon_from   =   "from";
-                $mon_to     =   "to";
-            }
-            if(in_array('Tuesday',$request->week_date)){
-                $tue_from = $request->tue_from;
-                $tue_to =   $request->tue_to;
-            }else{
-                $tue_from   =   "from";
-                $tue_to     =   "to";
-            }
-            if(in_array('Wednesday',$request->week_date)){
-                $wed_from = $request->wed_from;
-                $wed_to =   $request->wed_to;
-            }else{
-                $wed_from   =   "from";
-                $wed_to     =   "to";
-            }
-            if(in_array('Thursday',$request->week_date)){
-                $thu_from = $request->thu_from;
-                $thu_to =   $request->thu_to;
-            }else{
-                $thu_from   =   "from";
-                $thu_to     =   "to";
-            }
-            if(in_array('Friday',$request->week_date)){
-                $fri_from = $request->fri_from;
-                $fri_to =   $request->fri_to;
-            }else{
-                $fri_from   =   "from";
-                $fri_to     =   "to";
-            }
-            if(in_array('Saturday',$request->week_date)){
-                $sat_from = $request->sat_from;
-                $sat_to =   $request->sat_to;
-            }else{
-                $sat_from   =   "from";
-                $sat_to     =   "to";
-            }
-            if(in_array('Sunday',$request->week_date)){
-                $sun_from = $request->sun_from;
-                $sun_to =   $request->sun_to;
-            }else{
-                $sun_from   =   "from";
-                $sun_to     =   "to";
-            }
-        }
-        else {
-            
-            $mon_from   =   "from";
-            $mon_to     =   "to";
-
-            $tue_from   =   "from";
-            $tue_to     =   "to";
-       
-            $wed_from   =   "from";
-            $wed_to     =   "to";
+        DB::beginTransaction();
         
-            $thu_from   =   "from";
-            $thu_to     =   "to";
-        
-            $fri_from   =   "from";
-            $fri_to     =   "to";
-        
-            $sat_from   =   "from";
-            $sat_to     =   "to";
-        
-            $sun_from   =   "from";
-            $sun_to     =   "to";
-        }
-        
-        if($company){
-            $company->company_name  =   $request->company_name;
-            $company->address       =   $request->address;
-            $company->country       =   $request->country;
-            $company->website       =   $request->website;
-            $company->email         =   $request->email;
-            $company->phone_number_code  =   $request->phone_number_code;
-            $company->phone_number_country      =   $request->phone_number_country;            
-            $company->phone_number  =   $request->phone_number;
-            $company->contact       =   $request->about;
-            $company->message       =   $request->message;
-            $company->Bodybuilding  = $request->Bodybuilding;
-            $company->Bootcamp      = $request->Bootcamp;
-            $company->EMS           = $request->EMS;
-            $company->Gym           = $request->Gym;
-            $company->Gymnastics    = $request->Gymnastics;
-            $company->KickBoxing    = $request->KickBoxing;
-            $company->MartialArts   = $request->MartialArts;
-            $company->PersonalFitness    = $request->PersonalFitness;
-            $company->Spinning      =   $request->Spinning;
-            $company->weightlift    =   $request->weightlift;
-            $company->yoga          =   $request->yoga;
-            $company->pilates       =   $request->pilates;
-            $company->mma           =   $request->mma;
-            $company->boxing        =   $request->boxing;
-            $company->karate        =   $request->karate;
-            $company->crosstraing   =   $request->crosstraing;
-            if($request->all_check){
-                @$company->week_date     =   json_encode($week_date);
-            }else if($request->has('week_date')){
-                @$company->week_date     =   json_encode($request->week_date);
-            } else {    
-                @$company->week_date     =    json_encode([""]);
-            }
-            $company->mon_from      =   $mon_from;
-            $company->mon_to        =   $mon_to;
-            $company->tue_from      =   $tue_from;
-            $company->tue_to        =   $tue_to;
-            $company->wed_from      =   $wed_from;
-            $company->wed_to        =   $wed_to;
-            $company->thu_from      =   $thu_from;
-            $company->thu_to        =   $thu_to;
-            $company->fri_from      =   $fri_from;
-            $company->fri_to        =   $fri_to;
-            $company->sat_from      =   $sat_from;
-            $company->sat_to        =   $sat_to;
-            $company->sun_from      =   $sun_from;
-            $company->sun_to        =   $sun_to;
-            $company->facebook      =   $request->facebook;
-            $company->twitter       =   $request->twitter;
-            $company->instagram     =   $request->instagram;
-            $company->youtube       =   $request->youtube;
-            $company->all_check     =   $request->all_check;
-            $company->user_id       =   auth()->user()->id;
-            $company->save();
-        }else{
-            $company_data = new Company();
-            $company_data->company_name  = $request->company_name;
-            $company_data->address       = $request->address;
-            $company_data->country       = $request->country;
-            $company_data->website       = $request->website;
-            $company_data->email         = $request->email;
-            $company_data->phone_number_code  =   $request->phone_number_code;
-            $company_data->phone_number_country      =   $request->phone_number_country;            
-            $company_data->phone_number  = $request->phone_number;            
-            $company_data->contact       = $request->about;
-            $company_data->message       = $request->message;
-            $company_data->Bodybuilding  = $request->Bodybuilding;
-            $company_data->Bootcamp      = $request->Bootcamp;
-            $company_data->EMS           = $request->EMS;
-            $company_data->Gym           = $request->Gym;
-            $company_data->Gymnastics    = $request->Gymnastics;
-            $company_data->KickBoxing    = $request->KickBoxing;
-            $company_data->MartialArts   = $request->MartialArts;
-            $company_data->PersonalFitness    = $request->PersonalFitness;
-            $company_data->Spinning      =   $request->Spinning;
-            $company_data->weightlift    =   $request->weightlift;
-            $company_data->yoga          =   $request->yoga;
-            $company_data->pilates       =   $request->pilates;
-            $company_data->mma           =   $request->mma;
-            $company_data->boxing        =   $request->boxing;
-            $company_data->karate        =   $request->karate;
-            $company_data->crosstraing   =   $request->crosstraing;
-            if($request->all_check){
-                @$company_data->week_date     =   json_encode($week_date);
-            }else if($request->has('week_date')){
-                @$company->week_date     =   json_encode($request->week_date);
-            } else {    
-                @$company->week_date     =    json_encode([""]);
-            }
-            $company_data->mon_from      =   $mon_from;
-            $company_data->mon_to        =   $mon_to;
-            $company_data->tue_from      =   $tue_from;
-            $company_data->tue_to        =   $tue_to;
-            $company_data->wed_from      =   $wed_from;
-            $company_data->wed_to        =   $wed_to;
-            $company_data->thu_from      =   $thu_from;
-            $company_data->thu_to        =   $thu_to;
-            $company_data->fri_from      =   $fri_from;
-            $company_data->fri_to        =   $fri_to;
-            $company_data->sat_from      =   $sat_from;
-            $company_data->sat_to        =   $sat_to;
-            $company_data->sun_from      =   $sun_from;
-            $company_data->sun_to        =   $sun_to;
-            $company_data->facebook      =   $request->facebook;
-            $company_data->twitter       =   $request->twitter;
-            $company_data->instagram     =   $request->instagram;
-            $company_data->youtube       =   $request->youtube;
-            $company_data->all_check     =   $request->all_check;
-            $company_data->user_id       =   auth()->user()->id;
-            $company_data->save();
-        }
-	    // Mail::send([], [], function($message) {
-        //     $message->from('vendors@gymscanner.com', 'GymScannerNotification');
-        //     $message->to('admin@gymscanner.com','admin')->subject("Notification")
-		// 	->setBody("<head><meta http-equiv='Content-Language' content='en-us'>
-        //            <meta http-equiv='Content-Type' content='text/html; charset=windows-1252'>
-        //            </head><h1>'".auth()->user()->email."'New profile submited!</h1>", 'text/html');
-        // });
+        try {
+            if(auth()->user()->role!=1){
 
-        return back()->with('success','Changes saved successfully');
-    }
-    //membership
-    public function membership(Request $request){
+                $first_notification = DB::table('notifications')
+                    ->where('user_id',auth()->user()->id)
+                    ->where('name','COMPLETE_PROFILE')
+                    ->get();
 
-        if(auth()->user()->role!=1){
+                if(!empty($first_notification)){
 
-            $first_notification = DB::table('notifications')
-            ->where('user_id',auth()->user()->id)
-            ->where('name','COMPLETE_PROFILE')
-            ->get();
+                    $admins = DB::table('users')->where('role', 1)->get();
+                    //save into db notifiactions
 
-            if(!empty($first_notification)){
+                    foreach($admins as $key => $v)
+                    {
 
-                $admins = DB::table('users')->where('role', 1)->get();
-                //save into db notifiactions
-
-                // added by Nemanja
-                foreach($admins as $key => $v)
-                {
-                    if (@$request->membership_plan_id) {
-                        DB::table("notifications")->insert([
-                    
-                            'user_id' => auth()->user()->id,
-                            'show_to' => $v->id,
-                            'name' => 'UPDATE_MEMBERSHIP',
-                            'value' => 'has updated a membership plan'
-                        
-                        ]);
-                    }else{
                         DB::table("notifications")->insert([
                         
-                            'user_id' => auth()->user()->id,
-                            'show_to' => $v->id,
-                            'name' => 'NEW_MEMBERSHIP',
-                            'value' => 'has submitted new membership plan'
+                        'user_id' => auth()->user()->id,
+                        'show_to' => $v->id,
+                        'name' => 'UPDATE_PROFILE',
+                        'value' => 'has updated profile'
                         
                         ]);
                     }
                 }
             }
+
+            if($request->hasfile('file')) {
+                
+                $image = $request->file('file');
+                if(getImageSize($image)[0] != 1280 || getImageSize($image)[1] != 780)
+                    return response()->json(['error' => 'Error msg'], 404); // Status code here
+
+                    
+                $imageName = $image->getClientOriginalName();
+                $image->move(public_path('upload'), $imageName);
+        
+                $imageUpload = new Banner();
+                $imageUpload->image_path = $imageName;
+                $imageUpload->user_id = auth()->user()->id;
+                $imageUpload->save();
+            } 
+
+            $company = Company::where('user_id', auth()->user()->id)->first();
+
+            if($request->all_check =="all") {
+
+                    $mon_from   =   "0";
+                    $mon_to     =   "24";
+
+                    $tue_from   =   "0";
+                    $tue_to     =   "24";
+               
+                    $wed_from   =   "0";
+                    $wed_to     =   "24";
+                
+                    $thu_from   =   "0";
+                    $thu_to     =   "24";
+                
+                    $fri_from   =   "0";
+                    $fri_to     =   "24";
+                
+                    $sat_from   =   "0";
+                    $sat_to     =   "24";
+                
+                    $sun_from   =   "0";
+                    $sun_to     =   "24";
+
+                    $week_date   =   array("Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday","Sunday");
+            }else if($request->has('week_date')){
+                if(in_array('Monday',$request->week_date)){
+                    $mon_from = $request->mon_from;
+                    $mon_to =   $request->mon_to;
+                }else{
+                    $mon_from   =   "from";
+                    $mon_to     =   "to";
+                }
+                if(in_array('Tuesday',$request->week_date)){
+                    $tue_from = $request->tue_from;
+                    $tue_to =   $request->tue_to;
+                }else{
+                    $tue_from   =   "from";
+                    $tue_to     =   "to";
+                }
+                if(in_array('Wednesday',$request->week_date)){
+                    $wed_from = $request->wed_from;
+                    $wed_to =   $request->wed_to;
+                }else{
+                    $wed_from   =   "from";
+                    $wed_to     =   "to";
+                }
+                if(in_array('Thursday',$request->week_date)){
+                    $thu_from = $request->thu_from;
+                    $thu_to =   $request->thu_to;
+                }else{
+                    $thu_from   =   "from";
+                    $thu_to     =   "to";
+                }
+                if(in_array('Friday',$request->week_date)){
+                    $fri_from = $request->fri_from;
+                    $fri_to =   $request->fri_to;
+                }else{
+                    $fri_from   =   "from";
+                    $fri_to     =   "to";
+                }
+                if(in_array('Saturday',$request->week_date)){
+                    $sat_from = $request->sat_from;
+                    $sat_to =   $request->sat_to;
+                }else{
+                    $sat_from   =   "from";
+                    $sat_to     =   "to";
+                }
+                if(in_array('Sunday',$request->week_date)){
+                    $sun_from = $request->sun_from;
+                    $sun_to =   $request->sun_to;
+                }else{
+                    $sun_from   =   "from";
+                    $sun_to     =   "to";
+                }
+            }
+            else {
+                
+                $mon_from   =   "from";
+                $mon_to     =   "to";
+
+                $tue_from   =   "from";
+                $tue_to     =   "to";
+           
+                $wed_from   =   "from";
+                $wed_to     =   "to";
+            
+                $thu_from   =   "from";
+                $thu_to     =   "to";
+            
+                $fri_from   =   "from";
+                $fri_to     =   "to";
+            
+                $sat_from   =   "from";
+                $sat_to     =   "to";
+            
+                $sun_from   =   "from";
+                $sun_to     =   "to";
+            }
+            
+            if($company){
+                $company->company_name  =   $request->company_name;
+                $company->address       =   $request->address;
+                $company->country       =   $request->country;
+                $company->website       =   $request->website;
+                $company->email         =   $request->email;
+                $company->phone_number_code  =   $request->phone_number_code;
+                $company->phone_number_country      =   $request->phone_number_country;            
+                $company->phone_number  =   $request->phone_number;
+                $company->contact       =   $request->about;
+                $company->message       =   $request->message;
+                $company->Bodybuilding  = $request->Bodybuilding;
+                $company->Bootcamp      = $request->Bootcamp;
+                $company->EMS           = $request->EMS;
+                $company->Gym           = $request->Gym;
+                $company->Gymnastics    = $request->Gymnastics;
+                $company->KickBoxing    = $request->KickBoxing;
+                $company->MartialArts   = $request->MartialArts;
+                $company->PersonalFitness    = $request->PersonalFitness;
+                $company->Spinning      =   $request->Spinning;
+                $company->weightlift    =   $request->weightlift;
+                $company->yoga          =   $request->yoga;
+                $company->pilates       =   $request->pilates;
+                $company->mma           =   $request->mma;
+                $company->boxing        =   $request->boxing;
+                $company->karate        =   $request->karate;
+                $company->crosstraing   =   $request->crosstraing;
+                if($request->all_check){
+                    @$company->week_date     =   json_encode($week_date);
+                }else if($request->has('week_date')){
+                    @$company->week_date     =   json_encode($request->week_date);
+                } else {    
+                    @$company->week_date     =    json_encode([""]);
+                }
+                $company->mon_from      =   $mon_from;
+                $company->mon_to        =   $mon_to;
+                $company->tue_from      =   $tue_from;
+                $company->tue_to        =   $tue_to;
+                $company->wed_from      =   $wed_from;
+                $company->wed_to        =   $wed_to;
+                $company->thu_from      =   $thu_from;
+                $company->thu_to        =   $thu_to;
+                $company->fri_from      =   $fri_from;
+                $company->fri_to        =   $fri_to;
+                $company->sat_from      =   $sat_from;
+                $company->sat_to        =   $sat_to;
+                $company->sun_from      =   $sun_from;
+                $company->sun_to        =   $sun_to;
+                $company->facebook      =   $request->facebook;
+                $company->twitter       =   $request->twitter;
+                $company->instagram     =   $request->instagram;
+                $company->youtube       =   $request->youtube;
+                $company->all_check     =   $request->all_check;
+                $company->user_id       =   auth()->user()->id;
+                $company->save();
+            }else{
+                $company_data = new Company();
+                $company_data->company_name  = $request->company_name;
+                $company_data->address       = $request->address;
+                $company_data->country       = $request->country;
+                $company_data->website       = $request->website;
+                $company_data->email         = $request->email;
+                $company_data->phone_number_code  =   $request->phone_number_code;
+                $company_data->phone_number_country      =   $request->phone_number_country;            
+                $company_data->phone_number  = $request->phone_number;            
+                $company_data->contact       = $request->about;
+                $company_data->message       = $request->message;
+                $company_data->Bodybuilding  = $request->Bodybuilding;
+                $company_data->Bootcamp      = $request->Bootcamp;
+                $company_data->EMS           = $request->EMS;
+                $company_data->Gym           = $request->Gym;
+                $company_data->Gymnastics    = $request->Gymnastics;
+                $company_data->KickBoxing    = $request->KickBoxing;
+                $company_data->MartialArts   = $request->MartialArts;
+                $company_data->PersonalFitness    = $request->PersonalFitness;
+                $company_data->Spinning      =   $request->Spinning;
+                $company_data->weightlift    =   $request->weightlift;
+                $company_data->yoga          =   $request->yoga;
+                $company_data->pilates       =   $request->pilates;
+                $company_data->mma           =   $request->mma;
+                $company_data->boxing        =   $request->boxing;
+                $company_data->karate        =   $request->karate;
+                $company_data->crosstraing   =   $request->crosstraing;
+                if($request->all_check){
+                    @$company_data->week_date     =   json_encode($week_date);
+                }else if($request->has('week_date')){
+                    @$company->week_date     =   json_encode($request->week_date);
+                } else {    
+                    @$company->week_date     =    json_encode([""]);
+                }
+                $company_data->mon_from      =   $mon_from;
+                $company_data->mon_to        =   $mon_to;
+                $company_data->tue_from      =   $tue_from;
+                $company_data->tue_to        =   $tue_to;
+                $company_data->wed_from      =   $wed_from;
+                $company_data->wed_to        =   $wed_to;
+                $company_data->thu_from      =   $thu_from;
+                $company_data->thu_to        =   $thu_to;
+                $company_data->fri_from      =   $fri_from;
+                $company_data->fri_to        =   $fri_to;
+                $company_data->sat_from      =   $sat_from;
+                $company_data->sat_to        =   $sat_to;
+                $company_data->sun_from      =   $sun_from;
+                $company_data->sun_to        =   $sun_to;
+                $company_data->facebook      =   $request->facebook;
+                $company_data->twitter       =   $request->twitter;
+                $company_data->instagram     =   $request->instagram;
+                $company_data->youtube       =   $request->youtube;
+                $company_data->all_check     =   $request->all_check;
+                $company_data->user_id       =   auth()->user()->id;
+                $company_data->save();
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
         }
 
-        $perk = explode(PHP_EOL, $request->perk);
-        // added by Nemanja
-        if (@$request->membership_plan_id) {
-            $membership = Membership::find($request->membership_plan_id);
+        return back()->with('success','Changes saved successfully');
+    }
+    //membership
+    public function membership(Request $request){
+        DB::beginTransaction();
+        
+        try {
+            if(auth()->user()->role!=1){
 
-            $membership->price      =   $request->price;
-            $membership->currency      =   $request->currency;
-            $membership->duration   =   $request->duration;
-            $membership->service    =   $request->service;
-            $membership->perk       =   @json_encode($perk);
-            $membership->discount       =   $request->discount;
-            if($request->featured == "featured"){
-                $membership->featured    =   $request->featured;
-            }else{
-                $membership->featured    = "none";
-            }
-            if($request->app == "app"){
-                $membership->app    =   $request->app;
-            }else{
-                $membership->app    = "computer";
-            }
-            $membership->user_id    =   auth()->user()->id;
+                $first_notification = DB::table('notifications')
+                ->where('user_id',auth()->user()->id)
+                ->where('name','COMPLETE_PROFILE')
+                ->get();
 
-            $membership->update();
-        }else{
-            $membership = new Membership;    
+                if(!empty($first_notification)){
 
-            $membership->price      =   $request->price;
-            $membership->currency      =   $request->currency;
-            $membership->duration   =   $request->duration;
-            $membership->service    =   $request->service;
-            $membership->perk       =   @json_encode($perk);
-            $membership->discount       =   $request->discount;
-            if($request->featured == "featured"){
-                $membership->featured    =   $request->featured;
-            }else{
-                $membership->featured    = "none";
-            }
-            if($request->app == "app"){
-                $membership->app    =   $request->app;
-            }else{
-                $membership->app    = "computer";
-            }
-            $membership->user_id    =   auth()->user()->id;
+                    $admins = DB::table('users')->where('role', 1)->get();
+                    //save into db notifiactions
 
-            $membership->save();
+                    // added by Nemanja
+                    foreach($admins as $key => $v)
+                    {
+                        if (@$request->membership_plan_id) {
+                            DB::table("notifications")->insert([
+                        
+                                'user_id' => auth()->user()->id,
+                                'show_to' => $v->id,
+                                'name' => 'UPDATE_MEMBERSHIP',
+                                'value' => 'has updated a membership plan'
+                            
+                            ]);
+                        }else{
+                            DB::table("notifications")->insert([
+                            
+                                'user_id' => auth()->user()->id,
+                                'show_to' => $v->id,
+                                'name' => 'NEW_MEMBERSHIP',
+                                'value' => 'has submitted new membership plan'
+                            
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            $perk = explode(PHP_EOL, $request->perk);
+            // added by Nemanja
+            if (@$request->membership_plan_id) {
+                $membership = Membership::find($request->membership_plan_id);
+
+                $membership->price      =   $request->price;
+                $membership->currency      =   $request->currency;
+                $membership->duration   =   $request->duration;
+                $membership->service    =   $request->service;
+                $membership->perk       =   @json_encode($perk);
+                $membership->discount       =   $request->discount;
+                if($request->featured == "featured"){
+                    $membership->featured    =   $request->featured;
+                }else{
+                    $membership->featured    = "none";
+                }
+                if($request->app == "app"){
+                    $membership->app    =   $request->app;
+                }else{
+                    $membership->app    = "computer";
+                }
+                $membership->user_id    =   auth()->user()->id;
+
+                $membership->update();
+            }else{
+                $membership = new Membership;    
+
+                $membership->price      =   $request->price;
+                $membership->currency      =   $request->currency;
+                $membership->duration   =   $request->duration;
+                $membership->service    =   $request->service;
+                $membership->perk       =   @json_encode($perk);
+                $membership->discount       =   $request->discount;
+                if($request->featured == "featured"){
+                    $membership->featured    =   $request->featured;
+                }else{
+                    $membership->featured    = "none";
+                }
+                if($request->app == "app"){
+                    $membership->app    =   $request->app;
+                }else{
+                    $membership->app    = "computer";
+                }
+                $membership->user_id    =   auth()->user()->id;
+
+                $membership->save();
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
         }
 
         return back()->with('success','Changes saved successfully');;
@@ -831,60 +839,61 @@ $first_notification = DB::table('notifications')
     }
 
     public function membership_update(Request $request){
-
-        if(auth()->user()->role!=1){
-
-            $first_notification = DB::table('notifications')
-            ->where('user_id',auth()->user()->id)
-            ->where('name','COMPLETE_PROFILE')
-            ->get();
-
-            if(!empty($first_notification)){
-
-                 $admins = DB::table('users')->where('role', 1)->get();
-                //save into db notifiactions
-
-                foreach($admins as $key => $v)
-                {
-
-                    DB::table("notifications")->insert([
-                    
-                    'user_id' => auth()->user()->id,
-                    'show_to' => $v->id,
-                    'name' => 'UPDATE_MEMBERSHIP',
-                    'value' => 'has updated a membership plan'
-                    
-                    ]);
-
-                }
-                
-           
-
-            }
+        DB::beginTransaction();
         
+        try {
+            if(auth()->user()->role!=1){
+
+                $first_notification = DB::table('notifications')
+                    ->where('user_id',auth()->user()->id)
+                    ->where('name','COMPLETE_PROFILE')
+                    ->get();
+
+                if(!empty($first_notification)){
+
+                     $admins = DB::table('users')->where('role', 1)->get();
+                    //save into db notifiactions
+
+                    foreach($admins as $key => $v)
+                    {
+
+                        DB::table("notifications")->insert([
+                        
+                        'user_id' => auth()->user()->id,
+                        'show_to' => $v->id,
+                        'name' => 'UPDATE_MEMBERSHIP',
+                        'value' => 'has updated a membership plan'
+                        
+                        ]);
+
+                    }
+                }
+            
+            }
+
+            $membership = Membership::find($request->id);
+
+            $membership->price      =   $request->price;
+            $membership->duration   =   $request->duration;
+            $membership->service    =   $request->service;
+            $membership->perk       =   $request->perk;
+            if($request->app == "app") {
+                $membership->app    =   $request->app;
+            }else{
+                $membership->app    = "computer";
+            }
+            $membership->user_id    =   auth()->user()->id;
+            $membership->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
         }
-
-        $membership = Membership::find($request->id);
-
-        $membership->price      =   $request->price;
-        $membership->duration   =   $request->duration;
-        $membership->service    =   $request->service;
-        $membership->perk       =   $request->perk;
-        if($request->app == "app") {
-            $membership->app    =   $request->app;
-        }else{
-            $membership->app    = "computer";
-        }
-        $membership->user_id    =   auth()->user()->id;
-        $membership->save();
-
-        //  $membership = Membership::where('user_id',auth()->user()->id)->get();
-        // return view('user.membership')->with('membership', $membership);
 
         return redirect('profile/membership_update')->with('success','Changes saved successfully');
-
     }
-
 
     public function membership_del($id){
         $membership = Membership::find($id);
@@ -892,15 +901,23 @@ $first_notification = DB::table('notifications')
         return back()->with('success','Membership plan has deleted successfully');
     }
 
-
-
     public function touristpass_save(Request $request){
-        $membership = new Touristpass;
-        $membership->price      =   $request->price . $request->currency;
-        $membership->duration   =   $request->duration;
-        $membership->facility    =   $request->facility;
-        $membership->user_id    =   auth()->user()->id;
-        $membership->save();
+        DB::beginTransaction();
+        
+        try {
+            $membership = new Touristpass;
+            $membership->price      =   $request->price . $request->currency;
+            $membership->duration   =   $request->duration;
+            $membership->facility    =   $request->facility;
+            $membership->user_id    =   auth()->user()->id;
+            $membership->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
 
         return back()->with('success','Changes saved successfully');
     }
@@ -919,19 +936,29 @@ $first_notification = DB::table('notifications')
     }
 
     public function upload_document(Request $request) {
-        if($request->hasfile('file')) {
-            
-            $document = $request->file('file');
+        DB::beginTransaction();
+        
+        try {
+            if($request->hasfile('file')) {
                 
-            $documentName = $document->getClientOriginalName();
-            $document->move(public_path('upload/documents'), $documentName);
-            $doc = Document::where('user_id', auth()->user()->id);
-            $doc->delete();
-            
-            $document_data = new Document();
-            $document_data->user_id = auth()->user()->id;
-            $document_data->document_path = $documentName;
-            $document_data->save();
+                $document = $request->file('file');
+                    
+                $documentName = $document->getClientOriginalName();
+                $document->move(public_path('upload/documents'), $documentName);
+                $doc = Document::where('user_id', auth()->user()->id);
+                $doc->delete();
+                
+                $document_data = new Document();
+                $document_data->user_id = auth()->user()->id;
+                $document_data->document_path = $documentName;
+                $document_data->save();
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
         }
         
         return back();
@@ -949,30 +976,31 @@ $first_notification = DB::table('notifications')
     }
 
     public function document() {
-
-    //    print_r(NotificationHelper::getCurrentUser());
-    //    die();
-	$document = Document::where('user_id', auth()->user()->id)->first();
-    
+    	$document = Document::where('user_id', auth()->user()->id)->first();
    
         return view('user.document')->with('document', $document);
-
-    
     }
-
-
-    
 
     //image banner
     public function banner(Request $request){
-        $imageName = time().'.'.$request->image_name->extension();  
-        $request->image_name->move(public_path('upload/banner'), $imageName);
-        $path = "upload/banner/".$imageName;
+        DB::beginTransaction();
+        
+        try {
+            $imageName = time().'.'.$request->image_name->extension();  
+            $request->image_name->move(public_path('upload/banner'), $imageName);
+            $path = "upload/banner/".$imageName;
 
-        $banner_data = new Banner();
-        $banner_data->user_id = auth()->user()->id;
-        $banner_data->image_path  =     $path;
-        $banner_data->save();
+            $banner_data = new Banner();
+            $banner_data->user_id = auth()->user()->id;
+            $banner_data->image_path  =     $path;
+            $banner_data->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
 
         return back();
     }
@@ -989,14 +1017,25 @@ $first_notification = DB::table('notifications')
     }
 
     public function bank_update(Request $request){
-        $bank = new Bbank();
-        $bank->bank_name = $request->bank_name;
-        $bank->bank_number = $request->bank_number;
-        $bank->swift_code = $request->swift_code;
-        $bank->holder_name = $request->holder_name;
-        $bank->iban = $request->iban;
-        $bank->user_id = auth()->user()->id;
-        $bank->save();
+        DB::beginTransaction();
+        
+        try {
+            $bank = new Bbank();
+            $bank->bank_name = $request->bank_name;
+            $bank->bank_number = $request->bank_number;
+            $bank->swift_code = $request->swift_code;
+            $bank->holder_name = $request->holder_name;
+            $bank->iban = $request->iban;
+            $bank->user_id = auth()->user()->id;
+            $bank->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
+            
         return back()->with('success','Changes saved successfully');
     }
 
@@ -1062,292 +1101,297 @@ $first_notification = DB::table('notifications')
     }
 
     public function send_notification_admin() {
+        DB::beginTransaction();
+        
+        try {
+            $admins = DB::table('users')->where('role', 1)->get();
+            //save into db notifiactions
 
-        $admins = DB::table('users')->where('role', 1)->get();
-        //save into db notifiactions
-
-        foreach($admins as $key => $v)
-        {
+            foreach($admins as $key => $v)
+            {
+                DB::table("notifications")->insert([
+                    'user_id' => auth()->user()->id,
+                    'show_to' => $v->id,
+                    'name' => 'COMPLETE_PROFILE',
+                    'value' => 'has completed profile'
+                ]);
+            }
 
             DB::table("notifications")->insert([
-            
-            'user_id' => auth()->user()->id,
-            'show_to' => $v->id,
-            'name' => 'COMPLETE_PROFILE',
-            'value' => 'has completed profile'
-            
+                'user_id' => auth()->user()->id,
+                'show_to' => auth()->user()->id,
+                'name' => 'COMPLETE_PROFILE',
+                'value' => 'Your request was successfully submitted'
             ]);
 
-        }
+            $countr = [
+                
+                'ax' => 'Aaland Islands',
+                'af' => 'Afghanistan',
+                'al' => 'Albania',
+                'dz' => 'Algeria',
+                'as' => 'American Samoa',
+                'ad' => 'Andorra',
+                'ao' => 'Angola',
+                'ai'=> 'Anguilla',                       
+                'aq'=> 'Antarctica',                         
+                'ag'=> 'Antigua and Barbuda',
+                'ar'=> 'Argentina',                         
+                'am'=> 'Armenia',                      
+                'aw'=> 'Aruba',                      
+                'au'=> 'Australia',
+                'at'=> 'Austria',                      
+                'az'=> 'Azerbaijan',
+                'bs'=> 'Bahamas, The',
+                'bh'=> 'Bahrain',  
+                'bd'=> 'Bangladesh',                         
+                'bb'=> 'Barbados',                         
+                'by'=> 'Belarus',                         
+                'be'=> 'Belgium',                         
+                'bz'=> 'Belize',                         
+                'bj'=> 'Benin',                         
+                'bm'=> 'Bermuda',                         
+                'bt'=> 'Bhutan',                         
+                'bo'=> 'Bolivia',                         
+                'bq'=> 'Bonaire, Sint Eustatius and Saba',                         
+                'ba'=> 'Bosnia and Herzegovina',                         
+                'bw'=> 'Botswana',                         
+                'bv'=> 'Bouvet Island ',                        
+                'br'=> 'Brazil',                         
+                'io'=> 'British Indian Ocean Territory',                         
+                'vg'=> 'British Virgin Islands',                         
+                'bn'=> 'Brunei',                         
+                'bg'=> 'Bulgaria',                         
+                'bf'=> 'Burkina Faso',                       
+                'bi'=> 'Burundi',                         
+                'kh'=> 'Cambodia',                         
+                'cm'=> 'Cameroon',                         
+                'ca'=> 'Canada',                         
+                'ic'=> 'Canary Islands',                         
+                'cv'=> 'Cape Verde',                         
+                'ky'=> 'Cayman Islands',                         
+                'cf'=> 'Central African Republic',                         
+                'td'=> 'Chad',                         
+                'cl'=> 'Chile',                         
+                'cn'=> 'China',                         
+                'cx'=> 'Christmas Island',                         
+                'cc'=> 'Cocos (Keeling) Islands',                         
+                'co'=> 'Colombia',                         
+                'km'=> 'Comoros',                         
+                'cg'=> 'Congo',                         
+                'ck'=> 'Cook Islands',                         
+                'cr'=> 'Costa Rica',                         
+                'hr'=> 'Croatia',                         
+                'cw'=> 'Cura�ao',                         
+                'cy'=> 'Cyprus',                         
+                'cz'=> 'Czech Republic',                         
+                'cd'=> 'Democratic Republic of the Congo',                         
+                'dk'=> 'Denmark',                         
+                'dj'=> 'Djibouti',                         
+                'dm'=> 'Dominica',                         
+                'do'=> 'Dominican Republi',                  
+                'tl'=> 'East Timor',                         
+                'ec'=> 'Ecuador',                         
+                'eg'=> 'Egypt',                         
+                'sv'=> 'El Salvador',                         
+                'gq'=> 'Equatorial Guinea',                         
+                'er'=> 'Eritrea',                         
+                'ee'=> 'Estonia',                         
+                'et'=> 'Ethiopia',                         
+                'fk'=> 'Falkland Islands (Malvinas)',                         
+                'fo'=> 'Faroe Islands',                         
+                'fj'=> 'Fiji',                         
+                'fi'=> 'Finland',                         
+                'fr'=> 'France',                         
+                'gf'=> 'French Guiana',                         
+                'pf'=> 'French Polynesia',                     
+                'tf'=> 'French Southern/Antarctic Lands',                         
+                'ga'=> 'Gabon',                         
+                'gm'=> 'Gambia',                         
+                'ge'=> 'Georgia',                         
+                'de'=> 'Germany',                         
+                'gh'=> 'Ghana',                         
+                'gi'=> 'Gibraltar',                         
+                'gr'=> 'Greece',                         
+                'gl'=> 'Greenland',                         
+                'gd'=> 'Grenada',                         
+                'gp'=> 'Guadeloupe',                         
+                'gu'=> 'Guam',                         
+                'gt'=> 'Guatemala',                         
+                'gg'=> 'Guernsey',                         
+                'gn'=> 'Guinea',                         
+                'gw'=> 'Guinea-Bissau',
+                'gy'=> 'Guyana',                         
+                'ht'=> 'Haiti',                         
+                'hm'=> 'Heard and McDonald Islands',                         
+                'hn'=> 'Honduras',                         
+                'hk'=> 'Hong Kong',                         
+                'hu'=> 'Hungary',                         
+                'is'=> 'Iceland',                         
+                'in'=> 'India',                         
+                'id'=> 'Indonesia',                         
+                'iq'=> 'Iraq',                         
+                'ie'=> 'Ireland',                         
+                'il'=> 'Israel',                         
+                'it'=> 'Italy',                         
+                'ci'=> 'Ivory Coast',                        
+                'jm'=> 'Jamaica',                         
+                'jp'=> 'Japan',                         
+                'je'=> 'Jersey',                         
+                'jo'=> 'Jordan',                         
+                'kz'=> 'Kazakhstan',                         
+                'ke'=> 'Kenya',                         
+                'ki'=> 'Kiribati',                         
+                'kr'=> 'Korea, South',                         
+                'xk'=> 'Kosovo',                         
+                'kw'=> 'Kuwait',                              
+                'kg'=> 'Kyrgyzstan',                          
+                'la'=> 'Lao Peoples Democratic Republic',     
+                'lv'=> 'Latvia',                         
+                'lb'=> 'Lebanon',                         
+                'ls'=> 'Lesotho',                         
+                'lr'=> 'Liberia',                         
+                'li'=> 'Liechtenstein',                         
+                'lt'=> 'Lithuania',                         
+                'lu'=> 'Luxembourg',                         
+                'mo'=> 'Macau',                         
+                'mk'=> 'Macedonia',                         
+                'mg'=> 'Madagascar',                         
+                'mw'=> 'Malawi',                         
+                'my'=> 'Malaysia',                         
+                'mv'=> 'Maldives',                         
+                'ml'=> 'Mali',                         
+                'mt'=> 'Malta',                         
+                'im'=> 'Man, Isle of',                         
+                'mh'=> 'Marshall Islands',                         
+                'mq'=> 'Martinique',                         
+                'mr'=> 'Mauritania',                         
+                'mu'=> 'Mauritius',                         
+                'yt'=> 'Mayotte',                         
+                'mx'=> 'Mexico',                         
+                'fm'=> 'Micronesia',                         
+                'md'=> 'Moldova, Republic of',                         
+                'mc'=> 'Monaco',                         
+                'mn'=> 'Mongolia',                         
+                'ms'=> 'Monserrat',                         
+                'me'=> 'Montenegro',                         
+                'ma'=> 'Morocco',                         
+                'mz'=> 'Mozambique',                         
+                'mm'=> 'Myanmar (Burma)',                      
+                'na'=> 'Namibia',                         
+                'nr'=> 'Nauru',                         
+                'np'=> 'Nepal',                         
+                'nl'=> 'Netherlands',                         
+                'nc'=> 'New Caledonia',                         
+                'nz'=> 'New Zealand',                         
+                'ni'=> 'Nicaragua',                         
+                'ne'=> 'Niger',                         
+                'ng'=> 'Nigeria',                         
+                'nu'=> 'Niue',                         
+                'nf'=> 'Norfolk Island',                         
+                'mp'=> 'Northern Mariana Islands',                         
+                'no'=> 'Norway',                         
+                'om'=> 'Oman',                         
+                'pk'=> 'Pakistan',                         
+                'pw'=> 'Palau',                         
+                'ps'=> 'Palestinian territory, ocupied',                         
+                'pa'=> 'Panama',                         
+                'pg'=> 'Papua New Guinea',                         
+                'py'=> 'Paraguay',                         
+                'pe'=> 'Peru',                         
+                'ph'=> 'Philippines',                         
+                'pn'=> 'Pitcairn',                         
+                'pl'=> 'Poland',                         
+                'pt'=> 'Portugal',                         
+                'pr'=> 'Puerto Rico',                         
+                'qa'=> 'Qatar',
+                're'=> 'Reunion',                         
+                'ro'=> 'Romania',                         
+                'ru'=> 'Russia',                         
+                'rw'=> 'Rwanda',                         
+                'lc'=> 'Saint Lucia',                         
+                'mf'=> 'Saint Martin',                         
+                'ws'=> 'Samoa',                         
+                'sm'=> 'San Marino',                         
+                'st'=> 'Sao Tome and Principe',                         
+                'sa'=> 'Saudi Arabia',                         
+                'sn'=> 'Senegal',                         
+                'rs'=> 'Serbia',                         
+                'sc'=> 'Seychelles',                         
+                'sl'=> 'Sierra Leone',
+                'sg'=> 'Singapore',                         
+                'sx'=> 'Sint Maarten',                         
+                'sk'=> 'Slovakia',                         
+                'si'=> 'Slovenia',                         
+                'sb'=> 'Solomon Islands',                         
+                'so'=> 'Somalia',                         
+                'za'=> 'South Africa ',                        
+                'gs'=> 'South Georgia/Sandwich Islands',                         
+                'es'=> 'Spain',                         
+                'lk'=> 'Sri Lanka',                         
+                'sh'=> 'St. Helena',                         
+                'kn'=> 'St. Kitts and Nevis',                         
+                'pm'=> 'St. Pierre and Miquelon',                         
+                'vc'=> 'St. Vincent and the Grenadines',                         
+                'sr'=> 'Suriname',                         
+                'sj'=> 'Svalbard/Jan Mayen Islands',
+                'sz'=> 'Swaziland',                         
+                'se'=> 'Sweden',                         
+                'ch'=> 'Switzerland',                         
+                'tw'=> 'Taiwan',                         
+                'tj'=> 'Tajikistan',                         
+                'tz'=> 'Tanzania, United Republic of',
+                'th'=> 'Thailand',                         
+                'tg'=> 'Togo',                         
+                'tk'=> 'Tokelau',                         
+                'to'=> 'Tonga',                         
+                'tt'=> 'Trinidad and Tobago',
+                'tn'=> 'Tunisia',                         
+                'tr'=> 'Turkey',                         
+                'tm'=> 'Turkmenistan',                         
+                'tc'=> 'Turks and Caicos Islands',
+                'tv'=> 'Tuvalu',                         
+                'um'=> 'U.S. Minor Outlying Islands',                         
+                'ug'=> 'Uganda',                         
+                'ua'=> 'Ukraine',                         
+                'ae'=> 'United Arab Emirates',                         
+                'gb'=> 'United Kingdom',                         
+                'us'=> 'United States of America',                         
+                'uy'=> 'Uruguay',                  
+                'uz'=> 'Uzbekistan',                         
+                'vu'=> 'Vanuatu',                         
+                'va'=> 'Vatican City State (Holy See)',
+                've'=> 'Venezuela',                         
+                'vn'=> 'Vietnam',                         
+                'vi'=> 'Virgin Islands',                         
+                'wf'=> 'Wallis and Futuna Islands',                         
+                'eh'=> 'Western Sahara',                         
+                'ye'=> 'Yemen',                
+                'zm'=> 'Zambia',                         
+                'zw'=> 'Zimbabwe'                    
+            ];
 
-        DB::table("notifications")->insert([
-            'user_id' => auth()->user()->id,
-            'show_to' => auth()->user()->id,
-            'name' => 'COMPLETE_PROFILE',
-            'value' => 'Your request was successfully submitted'
-        ]);
-
-        $countr = [
-            
-            'ax' => 'Aaland Islands',
-            'af' => 'Afghanistan',
-            'al' => 'Albania',
-            'dz' => 'Algeria',
-            'as' => 'American Samoa',
-            'ad' => 'Andorra',
-            'ao' => 'Angola',
-            'ai'=> 'Anguilla',                       
-            'aq'=> 'Antarctica',                         
-            'ag'=> 'Antigua and Barbuda',
-            'ar'=> 'Argentina',                         
-            'am'=> 'Armenia',                      
-            'aw'=> 'Aruba',                      
-            'au'=> 'Australia',
-            'at'=> 'Austria',                      
-            'az'=> 'Azerbaijan',
-            'bs'=> 'Bahamas, The',
-            'bh'=> 'Bahrain',  
-            'bd'=> 'Bangladesh',                         
-            'bb'=> 'Barbados',                         
-            'by'=> 'Belarus',                         
-            'be'=> 'Belgium',                         
-            'bz'=> 'Belize',                         
-            'bj'=> 'Benin',                         
-            'bm'=> 'Bermuda',                         
-            'bt'=> 'Bhutan',                         
-            'bo'=> 'Bolivia',                         
-            'bq'=> 'Bonaire, Sint Eustatius and Saba',                         
-            'ba'=> 'Bosnia and Herzegovina',                         
-            'bw'=> 'Botswana',                         
-            'bv'=> 'Bouvet Island ',                        
-            'br'=> 'Brazil',                         
-            'io'=> 'British Indian Ocean Territory',                         
-            'vg'=> 'British Virgin Islands',                         
-            'bn'=> 'Brunei',                         
-            'bg'=> 'Bulgaria',                         
-            'bf'=> 'Burkina Faso',                       
-            'bi'=> 'Burundi',                         
-            'kh'=> 'Cambodia',                         
-            'cm'=> 'Cameroon',                         
-            'ca'=> 'Canada',                         
-            'ic'=> 'Canary Islands',                         
-            'cv'=> 'Cape Verde',                         
-            'ky'=> 'Cayman Islands',                         
-            'cf'=> 'Central African Republic',                         
-            'td'=> 'Chad',                         
-            'cl'=> 'Chile',                         
-            'cn'=> 'China',                         
-            'cx'=> 'Christmas Island',                         
-            'cc'=> 'Cocos (Keeling) Islands',                         
-            'co'=> 'Colombia',                         
-            'km'=> 'Comoros',                         
-            'cg'=> 'Congo',                         
-            'ck'=> 'Cook Islands',                         
-            'cr'=> 'Costa Rica',                         
-            'hr'=> 'Croatia',                         
-            'cw'=> 'Cura�ao',                         
-            'cy'=> 'Cyprus',                         
-            'cz'=> 'Czech Republic',                         
-            'cd'=> 'Democratic Republic of the Congo',                         
-            'dk'=> 'Denmark',                         
-            'dj'=> 'Djibouti',                         
-            'dm'=> 'Dominica',                         
-            'do'=> 'Dominican Republi',                  
-            'tl'=> 'East Timor',                         
-            'ec'=> 'Ecuador',                         
-            'eg'=> 'Egypt',                         
-            'sv'=> 'El Salvador',                         
-            'gq'=> 'Equatorial Guinea',                         
-            'er'=> 'Eritrea',                         
-            'ee'=> 'Estonia',                         
-            'et'=> 'Ethiopia',                         
-            'fk'=> 'Falkland Islands (Malvinas)',                         
-            'fo'=> 'Faroe Islands',                         
-            'fj'=> 'Fiji',                         
-            'fi'=> 'Finland',                         
-            'fr'=> 'France',                         
-            'gf'=> 'French Guiana',                         
-            'pf'=> 'French Polynesia',                     
-            'tf'=> 'French Southern/Antarctic Lands',                         
-            'ga'=> 'Gabon',                         
-            'gm'=> 'Gambia',                         
-            'ge'=> 'Georgia',                         
-            'de'=> 'Germany',                         
-            'gh'=> 'Ghana',                         
-            'gi'=> 'Gibraltar',                         
-            'gr'=> 'Greece',                         
-            'gl'=> 'Greenland',                         
-            'gd'=> 'Grenada',                         
-            'gp'=> 'Guadeloupe',                         
-            'gu'=> 'Guam',                         
-            'gt'=> 'Guatemala',                         
-            'gg'=> 'Guernsey',                         
-            'gn'=> 'Guinea',                         
-            'gw'=> 'Guinea-Bissau',
-            'gy'=> 'Guyana',                         
-            'ht'=> 'Haiti',                         
-            'hm'=> 'Heard and McDonald Islands',                         
-            'hn'=> 'Honduras',                         
-            'hk'=> 'Hong Kong',                         
-            'hu'=> 'Hungary',                         
-            'is'=> 'Iceland',                         
-            'in'=> 'India',                         
-            'id'=> 'Indonesia',                         
-            'iq'=> 'Iraq',                         
-            'ie'=> 'Ireland',                         
-            'il'=> 'Israel',                         
-            'it'=> 'Italy',                         
-            'ci'=> 'Ivory Coast',                        
-            'jm'=> 'Jamaica',                         
-            'jp'=> 'Japan',                         
-            'je'=> 'Jersey',                         
-            'jo'=> 'Jordan',                         
-            'kz'=> 'Kazakhstan',                         
-            'ke'=> 'Kenya',                         
-            'ki'=> 'Kiribati',                         
-            'kr'=> 'Korea, South',                         
-            'xk'=> 'Kosovo',                         
-            'kw'=> 'Kuwait',                              
-            'kg'=> 'Kyrgyzstan',                          
-            'la'=> 'Lao Peoples Democratic Republic',     
-            'lv'=> 'Latvia',                         
-            'lb'=> 'Lebanon',                         
-            'ls'=> 'Lesotho',                         
-            'lr'=> 'Liberia',                         
-            'li'=> 'Liechtenstein',                         
-            'lt'=> 'Lithuania',                         
-            'lu'=> 'Luxembourg',                         
-            'mo'=> 'Macau',                         
-            'mk'=> 'Macedonia',                         
-            'mg'=> 'Madagascar',                         
-            'mw'=> 'Malawi',                         
-            'my'=> 'Malaysia',                         
-            'mv'=> 'Maldives',                         
-            'ml'=> 'Mali',                         
-            'mt'=> 'Malta',                         
-            'im'=> 'Man, Isle of',                         
-            'mh'=> 'Marshall Islands',                         
-            'mq'=> 'Martinique',                         
-            'mr'=> 'Mauritania',                         
-            'mu'=> 'Mauritius',                         
-            'yt'=> 'Mayotte',                         
-            'mx'=> 'Mexico',                         
-            'fm'=> 'Micronesia',                         
-            'md'=> 'Moldova, Republic of',                         
-            'mc'=> 'Monaco',                         
-            'mn'=> 'Mongolia',                         
-            'ms'=> 'Monserrat',                         
-            'me'=> 'Montenegro',                         
-            'ma'=> 'Morocco',                         
-            'mz'=> 'Mozambique',                         
-            'mm'=> 'Myanmar (Burma)',                      
-            'na'=> 'Namibia',                         
-            'nr'=> 'Nauru',                         
-            'np'=> 'Nepal',                         
-            'nl'=> 'Netherlands',                         
-            'nc'=> 'New Caledonia',                         
-            'nz'=> 'New Zealand',                         
-            'ni'=> 'Nicaragua',                         
-            'ne'=> 'Niger',                         
-            'ng'=> 'Nigeria',                         
-            'nu'=> 'Niue',                         
-            'nf'=> 'Norfolk Island',                         
-            'mp'=> 'Northern Mariana Islands',                         
-            'no'=> 'Norway',                         
-            'om'=> 'Oman',                         
-            'pk'=> 'Pakistan',                         
-            'pw'=> 'Palau',                         
-            'ps'=> 'Palestinian territory, ocupied',                         
-            'pa'=> 'Panama',                         
-            'pg'=> 'Papua New Guinea',                         
-            'py'=> 'Paraguay',                         
-            'pe'=> 'Peru',                         
-            'ph'=> 'Philippines',                         
-            'pn'=> 'Pitcairn',                         
-            'pl'=> 'Poland',                         
-            'pt'=> 'Portugal',                         
-            'pr'=> 'Puerto Rico',                         
-            'qa'=> 'Qatar',
-            're'=> 'Reunion',                         
-            'ro'=> 'Romania',                         
-            'ru'=> 'Russia',                         
-            'rw'=> 'Rwanda',                         
-            'lc'=> 'Saint Lucia',                         
-            'mf'=> 'Saint Martin',                         
-            'ws'=> 'Samoa',                         
-            'sm'=> 'San Marino',                         
-            'st'=> 'Sao Tome and Principe',                         
-            'sa'=> 'Saudi Arabia',                         
-            'sn'=> 'Senegal',                         
-            'rs'=> 'Serbia',                         
-            'sc'=> 'Seychelles',                         
-            'sl'=> 'Sierra Leone',
-            'sg'=> 'Singapore',                         
-            'sx'=> 'Sint Maarten',                         
-            'sk'=> 'Slovakia',                         
-            'si'=> 'Slovenia',                         
-            'sb'=> 'Solomon Islands',                         
-            'so'=> 'Somalia',                         
-            'za'=> 'South Africa ',                        
-            'gs'=> 'South Georgia/Sandwich Islands',                         
-            'es'=> 'Spain',                         
-            'lk'=> 'Sri Lanka',                         
-            'sh'=> 'St. Helena',                         
-            'kn'=> 'St. Kitts and Nevis',                         
-            'pm'=> 'St. Pierre and Miquelon',                         
-            'vc'=> 'St. Vincent and the Grenadines',                         
-            'sr'=> 'Suriname',                         
-            'sj'=> 'Svalbard/Jan Mayen Islands',
-            'sz'=> 'Swaziland',                         
-            'se'=> 'Sweden',                         
-            'ch'=> 'Switzerland',                         
-            'tw'=> 'Taiwan',                         
-            'tj'=> 'Tajikistan',                         
-            'tz'=> 'Tanzania, United Republic of',
-            'th'=> 'Thailand',                         
-            'tg'=> 'Togo',                         
-            'tk'=> 'Tokelau',                         
-            'to'=> 'Tonga',                         
-            'tt'=> 'Trinidad and Tobago',
-            'tn'=> 'Tunisia',                         
-            'tr'=> 'Turkey',                         
-            'tm'=> 'Turkmenistan',                         
-            'tc'=> 'Turks and Caicos Islands',
-            'tv'=> 'Tuvalu',                         
-            'um'=> 'U.S. Minor Outlying Islands',                         
-            'ug'=> 'Uganda',                         
-            'ua'=> 'Ukraine',                         
-            'ae'=> 'United Arab Emirates',                         
-            'gb'=> 'United Kingdom',                         
-            'us'=> 'United States of America',                         
-            'uy'=> 'Uruguay',                  
-            'uz'=> 'Uzbekistan',                         
-            'vu'=> 'Vanuatu',                         
-            'va'=> 'Vatican City State (Holy See)',
-            've'=> 'Venezuela',                         
-            'vn'=> 'Vietnam',                         
-            'vi'=> 'Virgin Islands',                         
-            'wf'=> 'Wallis and Futuna Islands',                         
-            'eh'=> 'Western Sahara',                         
-            'ye'=> 'Yemen',                
-            'zm'=> 'Zambia',                         
-            'zw'=> 'Zimbabwe'                    
-        ];
-
-        foreach($countr as $key => $v)
-        {
-            if($key == auth()->user()->country)
+            foreach($countr as $key => $v)
             {
-                auth()->user()->country = $v;
-                break;
+                if($key == auth()->user()->country)
+                {
+                    auth()->user()->country = $v;
+                    break;
+                }
             }
-        }
 
-        $data["type"] = (auth()->user()->role == 2) ? "Gym" : "Trainer";
-        
-         
-        Mail::to('vendors@gymscanner.com')->send(new NotificationMail($data));
-        //send mail to admin
+            $data["type"] = (auth()->user()->role == 2) ? "Gym" : "Trainer";
+            
+             
+            Mail::to('vendors@gymscanner.com')->send(new NotificationMail($data));
+            //send mail to admin
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
         
         return back();
 
@@ -1382,7 +1426,6 @@ $first_notification = DB::table('notifications')
             'email' => $email,
             'external_id' => $external_id
         ];
-
        
         Mail::to('vendors@gymscanner.com')->send(new SendSignupMail($details));
 
@@ -1412,13 +1455,15 @@ $first_notification = DB::table('notifications')
 
     public function approve_complete_profile(Request $req)
     {
+        DB::beginTransaction();
+        
+        try {
+            DB::table('notifications')
+                    ->where('user_id', $req->user_id)
+                    ->where('name', 'COMPLETE_PROFILE')
+                    ->update(['is_active' => 0]);
 
-        DB::table('notifications')
-                ->where('user_id', $req->user_id)
-                ->where('name', 'COMPLETE_PROFILE')
-                ->update(['is_active' => 0]);
-
-        //save into db notifiactions
+            //save into db notifiactions
             DB::table("notifications")->insert([
                 'user_id' => auth()->user()->id,
                 'show_to' => $req->user_id,
@@ -1426,7 +1471,12 @@ $first_notification = DB::table('notifications')
                 'value' => 'Your account is live'
             ]); 
 
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
 
+            throw $e;
+        }            
     }
 
     public function mybrand()
@@ -1957,30 +2007,36 @@ $first_notification = DB::table('notifications')
     }
 
     public function upload_brand_photos(Request $request) {
-
-        // dd($request);
+        DB::beginTransaction();
         
-        if($request->hasfile('file')) {
-            
-            $document = $request->file('file');
+        try {
+            if($request->hasfile('file')) {
                 
-            $documentName = $document->getClientOriginalName();
-            $document->move(public_path('upload/brands'), $documentName);
-            
-           
-            DB::table('brands_images')->insert([
-
-                'user_id' => auth()->user()->id,
+                $document = $request->file('file');
+                    
+                $documentName = $document->getClientOriginalName();
+                $document->move(public_path('upload/brands'), $documentName);
                 
-                'image_path' => $documentName,
+               
+                DB::table('brands_images')->insert([
 
-                'created_at' => date('Y-m-d h:i:s')
+                    'user_id' => auth()->user()->id,
+                    
+                    'image_path' => $documentName,
 
-            ]);
+                    'created_at' => date('Y-m-d h:i:s')
+
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
         }
         
         return back();
-
     }
 
     public function brand_photos_delete(Request $request)
@@ -1996,43 +2052,55 @@ $first_notification = DB::table('notifications')
     }
 
     public function submit_brand_links(Request $request) {
+        DB::beginTransaction();
         
-        DB::table('brands_social_data')->insert([
+        try {
+            DB::table('brands_social_data')->insert([
 
-            'user_id' => auth()->user()->id,
-            
-            'name' => $request->link,
+                'user_id' => auth()->user()->id,
+                
+                'name' => $request->link,
 
-            'type' => 'youtube',
+                'type' => 'youtube',
 
-            'created_at' => date('Y-m-d h:i:s')
+                'created_at' => date('Y-m-d h:i:s')
 
-        ]);
+            ]);
 
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
+        }
         
         return back();
-
     }
 
     public function submit_brand_certificates(Request $request) {
+        DB::beginTransaction();
         
-        DB::table('brands_social_data')->insert([
+        try {
+            DB::table('brands_social_data')->insert([
+                'user_id' => auth()->user()->id,
+                
+                'name' => $request->name,
 
-            'user_id' => auth()->user()->id,
-            
-            'name' => $request->name,
+                'certificate_date' => $request->certificate_date,
 
-            'certificate_date' => $request->certificate_date,
+                'type' => 'certificate',
 
-            'type' => 'certificate',
+                'created_at' => date('Y-m-d h:i:s')
+            ]);
 
-            'created_at' => date('Y-m-d h:i:s')
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
 
-        ]);
-
+            throw $e;
+        }
         
         return back();
-
     }
 
     public function update_brand_certificates(Request $request) {
@@ -2093,105 +2161,121 @@ $first_notification = DB::table('notifications')
 
     public function submit_brand_name(Request $request)
     {
+        DB::beginTransaction();
+        
+        try {
+            DB::table('brands_social_data')
+                ->where('user_id',auth()->user()->id)
+                ->where('type','name')->delete();
 
-        DB::table('brands_social_data')
-        ->where('user_id',auth()->user()->id)
-        ->where('type','name')->delete();
+            DB::table('brands_social_data')->insert([
+                'user_id' => auth()->user()->id,
+                'name' => $request->brand_name,
+                'type' => 'name',
+                'created_at' => date('Y-m-d h:i:s')
+            ]);
 
-        DB::table('brands_social_data')->insert([
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
 
-            'user_id' => auth()->user()->id,
-            
-            'name' => $request->brand_name,
-
-            'type' => 'name',
-
-            'created_at' => date('Y-m-d h:i:s')
-
-        ]);
-
+            throw $e;
+        }
         
         return back();
-
-
     }
 
     public function save_brand_info(Request $request)
     {
         
         $row = DB::table('brands_info')->where('user_id',auth()->user()->id)->first();
+        DB::beginTransaction();
+        
+        try {
+            if(!empty($row)){
 
-        if(!empty($row)){
 
+                DB::table('brands_info')->where('user_id',auth()->user()->id)->update([
+                    
+                    'about' => @$request->about,
 
-            DB::table('brands_info')->where('user_id',auth()->user()->id)->update([
-                
-                'about' => @$request->about,
+                    'select_country' => @$request->select_country_type,
 
-                'select_country' => @$request->select_country_type,
+                    'countries' => @json_encode(@$request->selected_counrties),
 
-                'countries' => @json_encode(@$request->selected_counrties),
+                    'google_location' => @$request->google_location,
 
-                'google_location' => @$request->google_location,
+                    'updated_at' => date('Y-m-d h:i:s')
 
-                'updated_at' => date('Y-m-d h:i:s')
+                ]);
 
-            ]);
+            }
+            else
+            {
+                DB::table('brands_info')->insert([
 
-        }
-        else
-        {
-            DB::table('brands_info')->insert([
+                    'user_id' => auth()->user()->id,
+                    
+                    'about' => @$request->about,
 
-                'user_id' => auth()->user()->id,
-                
-                'about' => @$request->about,
+                    'select_country' => @$request->select_country_type,
+                    
+                    'countries' => @json_encode(@$request->selected_counrties),
 
-                'select_country' => @$request->select_country_type,
-                
-                'countries' => @json_encode(@$request->selected_counrties),
+                    'google_location' => @$request->google_location,
 
-                'google_location' => @$request->google_location,
+                    'created_at' => date('Y-m-d h:i:s')
 
-                'created_at' => date('Y-m-d h:i:s')
+                ]);
+            }
 
-            ]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
         }
         
         return back();
-
     }
 
     public function submit_brand_image(Request $request)
     {
-
-        if($request->hasfile('file')) {
-            
-            $document = $request->file('file');
+        DB::beginTransaction();
+        
+        try {
+            if($request->hasfile('file')) {
                 
-            $documentName = $document->getClientOriginalName();
-            $document->move(public_path('upload/brands'), $documentName);
-            
-            DB::table('brands_social_data')
-            ->where('user_id',auth()->user()->id)
-            ->where('type','image')->delete();
-
-            DB::table('brands_social_data')->insert([
-
-                'user_id' => auth()->user()->id,
+                $document = $request->file('file');
+                    
+                $documentName = $document->getClientOriginalName();
+                $document->move(public_path('upload/brands'), $documentName);
                 
-                'name' => $documentName,
+                DB::table('brands_social_data')
+                    ->where('user_id',auth()->user()->id)
+                    ->where('type','image')->delete();
 
-                'type' => 'image',
+                DB::table('brands_social_data')->insert([
 
-                'created_at' => date('Y-m-d h:i:s')
+                    'user_id' => auth()->user()->id,
+                    
+                    'name' => $documentName,
 
-            ]);
+                    'type' => 'image',
+
+                    'created_at' => date('Y-m-d h:i:s')
+
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            throw $e;
         }
 
         return true;
-        
-
     }
 
     /**
