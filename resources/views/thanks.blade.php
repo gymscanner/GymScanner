@@ -74,7 +74,7 @@
 
                                        
 
-                                        <form class="d-inline" method="POST" action="{{ route('Logout') }}">
+                                        <form class="d-inline" method="POST" action="{{ route('logout') }}">
 
                                             @csrf
 
