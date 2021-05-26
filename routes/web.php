@@ -17,8 +17,8 @@ include('web_builder.php');
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('Login','ProfileController@login_view')->name('Login');
-Route::post('Logout','ProfileController@logout')->name('Logout');
+Route::get('login','ProfileController@login_view')->name('login');
+Route::post('logout','ProfileController@logout')->name('logout');
 Route::get('/', function () {
     if (auth()->check()) {
         if (auth()->user()->role == 1) {
