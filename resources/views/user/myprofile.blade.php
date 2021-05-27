@@ -437,7 +437,7 @@
                                     @foreach($country_array as $code => $country):
                                     <?php $countryName = ucwords(strtolower($country["name"])); ?>
                                     
-                                    <option value="{{ $country['code'] }}" data="{{ $countryName }}" {{($company_data)?(($company_data->phone_number_country==$countryName)?'selected':''):''}}>{{ $countryName }} </option>
+                                    <option value="{{ $country['phonecode'] }}" data="{{ $countryName }}" {{($company_data)?(($company_data->phone_number_country==$countryName)?'selected':''):''}}>{{ $countryName }} </option>
                                     
                                     @endforeach
                                 </select>
