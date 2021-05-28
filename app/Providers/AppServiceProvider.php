@@ -32,14 +32,7 @@ class AppServiceProvider extends ServiceProvider
         \View::composer('*', function($view){
             if (auth()->user()) {
                 $view->with(['uuid' => auth()->user()->external_id]);
-                if ($avatar = Avatar::where('user_id',auth()->user()->id)->first()) 
-                    $view->with(['avatar_img' => $avatar->avatar]);
-                else if ($avatar = Personal_avatar::where('user_id',auth()->user()->id)->first())
-                    $view->with(['avatar_img' => $avatar->avatar]);
             }
         });
-
-        // Paginator::useBootstrap();
-        // use Illuminate\Pagination\Paginator;
     }
 }
